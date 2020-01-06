@@ -40,8 +40,7 @@
 #define FLASH_BASE_ADDR 0x08000000
 #define CONFIG_OPTION 0xc0000000
 
-quadspi_nor_config_t flashConfig;
-serial_nor_config_option_t configOption;
+quadspi_nor_config_t flashConfig = {.pageSize = 0x400};
 
 /*  Initialize Flash Programming Functions
  *    Parameter:      adr:  Device Base Address
@@ -53,6 +52,7 @@ serial_nor_config_option_t configOption;
 int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
 
   memset((void *)&flashConfig, 0U, sizeof(quadspi_nor_config_t));
+  serial_nor_config_option_t configOption;
   configOption.option0.U = CONFIG_OPTION;
   status_t status = quadspi_nor_get_config(&flashConfig, &configOption);
 
