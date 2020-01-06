@@ -192,8 +192,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\FlashPrg.c</PathWithFileName>
-      <FilenameWithoutPath>FlashPrg.c</FilenameWithoutPath>
+      <PathWithFileName>.\FlashPrg_w25q_nosfdp_v1.c</PathWithFileName>
+      <FilenameWithoutPath>FlashPrg_w25q_nosfdp_v1.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
