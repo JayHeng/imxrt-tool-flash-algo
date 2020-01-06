@@ -34,6 +34,7 @@
 #include "FlashOS.H"        // FlashOS Structures
 #include <string.h>
 #include "bl_api.h"
+#include "MIMXRT685S_cm33.h"
 
 /** local definitions **/
 
@@ -87,6 +88,23 @@ const unsigned char rawData[512] = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
+void configBootClk(void)
+{
+    // Power on OSPI RAM as needed
+    if (SYSCTL0->PERICFGENABLE0 & SYSCTL0_PERICFGENABLE0_OSPI_OTFAD_EN_MASK)
+    {
+        // Power on OSPI RAM
+        SYSCTL0->PDRUNCFG1_CLR = (SYSCTL0_PDRUNCFG1_OSPI_SRAM_APD_MASK | SYSCTL0_PDRUNCFG1_OSPI_SRAM_PPD_MASK);
+    }
+
+    // Set IRC48M as clock source, core run at 48MHz
+    CLKCTL0->SYSCPUAHBCLKDIV = 0u;
+    CLKCTL0->SYSTICKFCLKSEL = 0u;
+    CLKCTL0->SYSTICKFCLKDIV = 0u;
+    CLKCTL0->MAINCLKSELA = 3u; //MAINCLKSELA_48M_60M_IRC;
+    CLKCTL0->MAINCLKSELB = 0u; //MAINCLKSELB_SYSCLK;
+}
+
 /*  Initialize Flash Programming Functions
  *    Parameter:      adr:  Device Base Address
  *                    clk:  Clock Frequency (Hz)
@@ -96,6 +114,7 @@ const unsigned char rawData[512] = {
 
 int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
 
+  configBootClk();
   memset((void *)&flashConfig, 0U, sizeof(quadspi_nor_config_t));
   memcpy((void *)&flashConfig, (const void *)rawData, 512);
 
