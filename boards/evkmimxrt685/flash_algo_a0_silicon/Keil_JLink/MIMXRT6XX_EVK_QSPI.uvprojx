@@ -383,9 +383,9 @@
           <GroupName>Program Functions</GroupName>
           <Files>
             <File>
-              <FileName>FlashPrg_w25q_nosfdp_v1.2.c</FileName>
+              <FileName>FlashPrg_w25q_nosfdp_v2.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashPrg_w25q_nosfdp_v1.2.c</FilePath>
+              <FilePath>.\FlashPrg_w25q_nosfdp_v2.c</FilePath>
             </File>
           </Files>
         </Group>
