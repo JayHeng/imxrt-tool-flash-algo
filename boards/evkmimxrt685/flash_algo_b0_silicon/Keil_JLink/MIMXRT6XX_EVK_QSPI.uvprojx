@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\out\</OutputDirectory>
-          <OutputName>MIMXRT6XX_EVK_QSPI</OutputName>
+          <OutputName>MIMXRT6XX_B0_EVK_QSPI</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -336,7 +336,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls> -Wno-pedantic -Wno-padded -Wno-cast-align  -Wno-missing-variable-declarations -Wno-unused-parameter  -Wno-missing-prototypes  -Wno-covered-switch-default -Wno-missing-braces </MiscControls>
-              <Define></Define>
+              <Define>BOOTLOADER_HOST</Define>
               <Undefine></Undefine>
               <IncludePath>.</IncludePath>
             </VariousControls>

@@ -33,31 +33,32 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
-#include "quadspi_nor_flash.h"
+#include "flexspi_nor_flash.h"
 
 
 ////////////////////////////////////////////////////////////////////////////////
 // Definitions
 ////////////////////////////////////////////////////////////////////////////////
 
-//!@brief QuadSPI Flash driver API Interface
+//!@brief FLEXSPI Flash driver API Interface
 typedef struct
 {
     uint32_t version;
-    status_t (*init)(quadspi_nor_config_t *config);
-    status_t (*set_property)(quadspi_nor_config_t *config, uint32_t property_tag, uint32_t property);
-    status_t (*page_program)(quadspi_nor_config_t *config, uint32_t dstAddr, const uint32_t *src);
-    status_t (*erase_all)(quadspi_nor_config_t *config);
-    status_t (*wait_busy)(quadspi_nor_config_t *config, bool isParallelMode, uint32_t address);
-    status_t (*erase)(quadspi_nor_config_t *config, uint32_t start, uint32_t length);
-    status_t (*erase_sector)(quadspi_nor_config_t *config, uint32_t address);
-    status_t (*erase_block)(quadspi_nor_config_t *config, uint32_t address);
-    status_t (*get_config)(quadspi_nor_config_t *config, serial_nor_config_option_t *option);
-    status_t (*read)(quadspi_nor_config_t *config, uint32_t *dst, uint32_t start, uint32_t bytes);
-    status_t (*hw_reset)(quadspi_nor_config_t *config);
-    status_t (*xfer)(quadspi_xfer_t *xfer);
-    status_t (*update_lut)(uint32_t seqIndex, const uint32_t *lutBase, uint32_t numberOfSeq);
-} quadspi_nor_flash_driver_t;
+    status_t (*init)(uint32_t instance, flexspi_nor_config_t *config);
+    status_t (*page_program)(uint32_t instance, flexspi_nor_config_t *config, uint32_t dstAddr, const uint32_t *src);
+    status_t (*erase_all)(uint32_t instance, flexspi_nor_config_t *config);
+    //    status_t (*wait_busy)(uint32_t instance, flexspi_nor_config_t *config, bool isParallelMode, uint32_t address);
+    status_t (*erase)(uint32_t instance, flexspi_nor_config_t *config, uint32_t start, uint32_t length);
+    status_t (*erase_sector)(uint32_t instance, flexspi_nor_config_t *config, uint32_t address);
+    status_t (*erase_block)(uint32_t instance, flexspi_nor_config_t *config, uint32_t address);
+    status_t (*get_config)(uint32_t instance, flexspi_nor_config_t *config, serial_nor_config_option_t *option);
+    status_t (*read)(uint32_t instance, flexspi_nor_config_t *config, uint32_t *dst, uint32_t start, uint32_t bytes);
+    //    status_t (*hw_reset)(uint32_t instance, flexspi_nor_config_t *config);
+    status_t (*xfer)(uint32_t instance, flexspi_xfer_t *xfer);
+    status_t (*update_lut)(uint32_t instance, uint32_t seqIndex, const uint32_t *lutBase, uint32_t numberOfSeq);
+    status_t (*set_clock_source)(uint32_t clockSrc);
+    void (*config_clock)(uint32_t instance, uint32_t freqOption, uint32_t sampleClkMode);
+} flexspi_nor_flash_driver_t;
 
 //!@brief OTP driver API Interface
 typedef struct
@@ -81,20 +82,21 @@ typedef struct
 //! @ingroup context
 typedef struct BootloaderTree
 {
-    void (*runBootloader)(void *arg);                       //!< Function to start the bootloader executing.
-    const uint32_t  reserved0;                              //!< Reserved
-    const char *copyright;                                  //!< Copyright string.
-    const uint32_t *reserved1;                              //!< Reserved
-    const uint32_t *reserved2;                              //!< Reserved
-    const uint32_t *reserved3;                              //!< Reserved
-    const uint32_t *reserved4;                              //!< Reserved
-    const quadspi_nor_flash_driver_t *qspiNorDriver;        //!< QuadSPI NOR FLASH Driver API.
-    const ocotp_driver_t *otpDriver;                        //!< OTP driver API.
+    void (*runBootloader)(void *arg); //!< Function to start the bootloader executing.
+    uint32_t version;                 //!< Bootloader version number.
+    const char *copyright;            //!< Copyright string.
+    const uint32_t reserved0;
+    const uint32_t reserved1;
+    const uint32_t reserved2;
+    const uint32_t reserved3;
+    const flexspi_nor_flash_driver_t *flexspiNorDriver; //!< FlexSPI NOR FLASH Driver API.
+    const ocotp_driver_t *otpDriver;                    //!< OTP driver API.
+    const uint32_t reserved4;
 } bootloader_tree_t;
 
 
 /* ROM API Tree address */
-#define g_bootloaderTree ((bootloader_tree_t*)(0x13001220))
+#define g_bootloaderTree ((bootloader_tree_t*)(0x1303f000))
 
 
 #if defined(__cplusplus)

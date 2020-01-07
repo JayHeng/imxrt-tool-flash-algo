@@ -39,8 +39,10 @@
 /** local definitions **/
 
 #define FLASH_BASE_ADDR 0x08000000
+#define FLEXSPI_INSTANCE_0 (0)
+#define FLEXSPI_INSTANCE_SEL FLEXSPI_INSTANCE_0
 
-quadspi_nor_config_t flashConfig = {.pageSize = 0x400};
+flexspi_nor_config_t flashConfig = {.pageSize = 0x400};
 
 const unsigned char rawData[512] = {
 	0x46, 0x43, 0x46, 0x42, 0x00, 0x00, 0x02, 0x56, 0x00, 0x00, 0x00, 0x00,
@@ -115,10 +117,10 @@ void configBootClk(void)
 int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
 
   configBootClk();
-  memset((void *)&flashConfig, 0U, sizeof(quadspi_nor_config_t));
+  memset((void *)&flashConfig, 0U, sizeof(flexspi_nor_config_t));
   memcpy((void *)&flashConfig, (const void *)rawData, 512);
 
-  status_t status = quadspi_nor_init(&flashConfig);
+  status_t status = flexspi_nor_flash_init(FLEXSPI_INSTANCE_SEL, &flashConfig);
 
   return status;                                  /* Finished without Errors */
 }
@@ -143,7 +145,7 @@ int UnInit (unsigned long fnc) {
 int EraseChip (void) {
 
   /*Erase all*/
-  status_t status =  quadspi_nor_erase_all(&flashConfig);
+  status_t status =  flexspi_nor_flash_erase_all(FLEXSPI_INSTANCE_SEL, &flashConfig);
   
   return status;
 }
@@ -166,7 +168,7 @@ void delay(void)
 int EraseSector (unsigned long adr) {
 
   /*Erase Sector*/
-  status_t status =  quadspi_nor_erase(&flashConfig, adr, flashConfig.sectorSize);
+  status_t status =  flexspi_nor_flash_erase(FLEXSPI_INSTANCE_SEL, &flashConfig, adr, flashConfig.sectorSize);
   //delay();
   
   return status;
@@ -188,7 +190,7 @@ int ProgramPage (unsigned long adr, unsigned long sz, unsigned char *buf) {
                                        buf+=flashConfig.pageSize,
                                        adr+=flashConfig.pageSize)
   {
-    status =  quadspi_nor_page_program(&flashConfig, adr, (uint32_t *)buf);
+    status =  flexspi_nor_flash_page_program(FLEXSPI_INSTANCE_SEL, &flashConfig, adr, (uint32_t *)buf);
   }
 
   return status;

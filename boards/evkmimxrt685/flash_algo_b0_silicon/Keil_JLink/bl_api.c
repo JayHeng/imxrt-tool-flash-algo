@@ -64,7 +64,6 @@ status_t otp_init(uint32_t src_clk_freq)
 {
     return g_bootloaderTree->otpDriver->init(src_clk_freq);
 }
-
 status_t otp_deinit(void)
 {
     return g_bootloaderTree->otpDriver->deinit();
@@ -80,11 +79,6 @@ status_t otp_fuse_program(uint32_t addr, uint32_t data, bool lock)
     return g_bootloaderTree->otpDriver->fuse_program(addr, data, lock);
 }
 
-status_t otp_crc_calc(uint32_t *src, uint32_t numberOfWords, uint32_t *crcChecksum)
-{
-    return g_bootloaderTree->otpDriver->crc_calc(src, numberOfWords, crcChecksum);
-}
-
 status_t otp_shadow_register_reload(void)
 {
     return g_bootloaderTree->otpDriver->reload();
@@ -95,73 +89,103 @@ status_t otp_crc_check(uint32_t start_addr, uint32_t end_addr, uint32_t crc_addr
     return g_bootloaderTree->otpDriver->crc_check(start_addr, end_addr, crc_addr);
 }
 
+status_t otp_crc_calc(uint32_t *src, uint32_t numberOfWords, uint32_t *crcChecksum)
+{
+    return g_bootloaderTree->otpDriver->crc_calc(src, numberOfWords, crcChecksum);
+}
+
 
 /*******************************************************************************
- * QSPI NOR driver
+ * FlexSPI NOR driver
  ******************************************************************************/
-status_t quadspi_nor_init(quadspi_nor_config_t *config)
+uint32_t flexspi_nor_driver_get_version(void)
 {
-    return g_bootloaderTree->qspiNorDriver->init(config);
+    return g_bootloaderTree->flexspiNorDriver->version;
 }
 
-status_t quadspi_nor_set_api_property(quadspi_nor_config_t *config, uint32_t property_tag, uint32_t property)
+status_t flexspi_nor_flash_init(uint32_t instance, flexspi_nor_config_t *config)
 {
-    return g_bootloaderTree->qspiNorDriver->set_property( config, property_tag, property);
+    return g_bootloaderTree->flexspiNorDriver->init(instance, config);
 }
 
-status_t quadspi_nor_page_program(quadspi_nor_config_t *config, uint32_t dstAddr, const uint32_t *src)
+status_t flexspi_nor_flash_page_program(uint32_t instance,
+                                        flexspi_nor_config_t *config,
+                                        uint32_t dstAddr,
+                                        const uint32_t *src)
 {
-    return g_bootloaderTree->qspiNorDriver->page_program(config, dstAddr, src);
+    return g_bootloaderTree->flexspiNorDriver->page_program(instance, config, dstAddr, src);
 }
 
-status_t quadspi_nor_erase_all(quadspi_nor_config_t *config)
+status_t flexspi_nor_flash_erase_all(uint32_t instance, flexspi_nor_config_t *config)
 {
-    return g_bootloaderTree->qspiNorDriver->erase_all(config);
+    return g_bootloaderTree->flexspiNorDriver->erase_all(instance, config);
 }
 
-status_t quadspi_nor_wait_busy(quadspi_nor_config_t *config, bool isParallelMode, uint32_t baseAddr)
+status_t flexspi_nor_get_config(uint32_t instance, flexspi_nor_config_t *config, serial_nor_config_option_t *option)
 {
-   return g_bootloaderTree->qspiNorDriver->wait_busy(config, isParallelMode, baseAddr);
+    return g_bootloaderTree->flexspiNorDriver->get_config(instance, config, option);
 }
 
-status_t quadspi_nor_erase(quadspi_nor_config_t *config, uint32_t start, uint32_t length)
+status_t flexspi_nor_flash_erase(uint32_t instance, flexspi_nor_config_t *config, uint32_t start, uint32_t length)
 {
-    return g_bootloaderTree->qspiNorDriver->erase(config, start, length);
+    return g_bootloaderTree->flexspiNorDriver->erase(instance, config, start, length);
 }
 
-status_t quadspi_nor_erase_sector(quadspi_nor_config_t *config, uint32_t address)
+status_t flexspi_nor_flash_read(
+    uint32_t instance, flexspi_nor_config_t *config, uint32_t *dst, uint32_t start, uint32_t bytes)
 {
-    return g_bootloaderTree->qspiNorDriver->erase_sector(config, address);
+    return g_bootloaderTree->flexspiNorDriver->read(instance, config, dst, start, bytes);
 }
 
-status_t quadspi_nor_erase_block(quadspi_nor_config_t *config, uint32_t address)
+status_t flexspi_update_lut(uint32_t instance, uint32_t seqIndex, const uint32_t *lutBase, uint32_t numberOfSeq)
 {
-     return g_bootloaderTree->qspiNorDriver->erase_block(config, address);
+    return g_bootloaderTree->flexspiNorDriver->update_lut(instance, seqIndex, lutBase, numberOfSeq);
 }
 
-status_t quadspi_nor_get_config(quadspi_nor_config_t *config, serial_nor_config_option_t *option)
+status_t flexspi_command_xfer(uint32_t instance, flexspi_xfer_t *xfer)
 {
-    return g_bootloaderTree->qspiNorDriver->get_config(config, option);
+    return g_bootloaderTree->flexspiNorDriver->xfer(instance, xfer);
 }
 
-status_t quadspi_nor_read(quadspi_nor_config_t *config, uint32_t *dst, uint32_t start, uint32_t bytes)
+status_t flexspi_nor_set_clock_source(uint32_t clockSrc)
 {
-    return g_bootloaderTree->qspiNorDriver->read(config, dst, start, bytes);
+    return g_bootloaderTree->flexspiNorDriver->set_clock_source(clockSrc);
 }
 
-status_t quadspi_nor_hw_reset(quadspi_nor_config_t *config)
+void flexspi_nor_flash_config_clock(uint32_t instance, uint32_t freqOption, uint32_t sampleClkMode)
 {
-    return g_bootloaderTree->qspiNorDriver->hw_reset(config);
+    g_bootloaderTree->flexspiNorDriver->config_clock(instance, freqOption, sampleClkMode);
 }
 
-status_t quadspi_command_xfer(quadspi_xfer_t *xfer)
+status_t flexspi_nor_auto_config(uint32_t instance, flexspi_nor_config_t *config, serial_nor_config_option_t *option)
 {
-    return g_bootloaderTree->qspiNorDriver->xfer(xfer);
+    /*
+    // Wait until the FLEXSPI is idle
+    register uint32_t delaycnt = 10000u;
+    while(delaycnt--)
+    {
+    }
+    status_t status = g_bootloaderTree->flexspiNorDriver->get_config(instance, config, option);
+    if (status != kStatus_Success)
+    {
+        return status;
+    }
+
+    return g_bootloaderTree->flexspiNorDriver->init(instance, config);
+    */
+
+    // Note: Below are the Position-independent codes for above the flow.
+    static uint8_t s_ramfuncArray[] = { 0xF8, 0xB5, 0x0D, 0x46, 0x04, 0x46, 0x42, 0xF2, 0x10, 0x71, 0x08,
+                                        0x46, 0x41, 0x1E, 0x00, 0x28, 0xFB, 0xD1, 0x4F, 0xF6, 0x1C, 0x76,
+                                        0xC1, 0xF2, 0x01, 0x36, 0x33, 0x68, 0x29, 0x46, 0x20, 0x46, 0xDF,
+                                        0x69, 0xB8, 0x47, 0x30, 0xB9, 0x32, 0x68, 0x29, 0x46, 0x20, 0x46,
+                                        0x53, 0x68, 0xBD, 0xE8, 0xF4, 0x40, 0x18, 0x47, 0xF2, 0xBD };
+
+    uint32_t alignedBuffer[(sizeof(s_ramfuncArray) + 3) / sizeof(uint32_t)];
+    memcpy(alignedBuffer, s_ramfuncArray, sizeof(s_ramfuncArray));
+    static status_t (*autoConfigCallback)(uint32_t, flexspi_nor_config_t *, serial_nor_config_option_t *);
+    autoConfigCallback =
+        (status_t (*)(uint32_t, flexspi_nor_config_t *, serial_nor_config_option_t *))((uint32_t)&alignedBuffer + 1);
+
+    return autoConfigCallback(instance, config, option);
 }
-
-status_t quadspi_update_lut(uint32_t seqIndex, const uint32_t *lutBase, uint32_t numberOfSeq)
-{
-    return g_bootloaderTree->qspiNorDriver->update_lut(seqIndex, lutBase, numberOfSeq);
-}
-
-
