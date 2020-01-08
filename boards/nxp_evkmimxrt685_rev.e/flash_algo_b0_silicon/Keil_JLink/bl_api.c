@@ -34,9 +34,7 @@
  *
  */
 #include "bl_api.h"
-
-
-
+#include <string.h>
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -159,33 +157,31 @@ void flexspi_nor_flash_config_clock(uint32_t instance, uint32_t freqOption, uint
 
 status_t flexspi_nor_auto_config(uint32_t instance, flexspi_nor_config_t *config, serial_nor_config_option_t *option)
 {
-    /*
     // Wait until the FLEXSPI is idle
     register uint32_t delaycnt = 10000u;
     while(delaycnt--)
     {
     }
     status_t status = g_bootloaderTree->flexspiNorDriver->get_config(instance, config, option);
-    if (status != kStatus_Success)
+    if (status != 0)
     {
         return status;
     }
 
     return g_bootloaderTree->flexspiNorDriver->init(instance, config);
-    */
 
     // Note: Below are the Position-independent codes for above the flow.
-    static uint8_t s_ramfuncArray[] = { 0xF8, 0xB5, 0x0D, 0x46, 0x04, 0x46, 0x42, 0xF2, 0x10, 0x71, 0x08,
-                                        0x46, 0x41, 0x1E, 0x00, 0x28, 0xFB, 0xD1, 0x4F, 0xF6, 0x1C, 0x76,
-                                        0xC1, 0xF2, 0x01, 0x36, 0x33, 0x68, 0x29, 0x46, 0x20, 0x46, 0xDF,
-                                        0x69, 0xB8, 0x47, 0x30, 0xB9, 0x32, 0x68, 0x29, 0x46, 0x20, 0x46,
-                                        0x53, 0x68, 0xBD, 0xE8, 0xF4, 0x40, 0x18, 0x47, 0xF2, 0xBD };
+    // static uint8_t s_ramfuncArray[] = { 0xF8, 0xB5, 0x0D, 0x46, 0x04, 0x46, 0x42, 0xF2, 0x10, 0x71, 0x08,
+                                        // 0x46, 0x41, 0x1E, 0x00, 0x28, 0xFB, 0xD1, 0x4F, 0xF6, 0x1C, 0x76,
+                                        // 0xC1, 0xF2, 0x01, 0x36, 0x33, 0x68, 0x29, 0x46, 0x20, 0x46, 0xDF,
+                                        // 0x69, 0xB8, 0x47, 0x30, 0xB9, 0x32, 0x68, 0x29, 0x46, 0x20, 0x46,
+                                        // 0x53, 0x68, 0xBD, 0xE8, 0xF4, 0x40, 0x18, 0x47, 0xF2, 0xBD };
 
-    uint32_t alignedBuffer[(sizeof(s_ramfuncArray) + 3) / sizeof(uint32_t)];
-    memcpy(alignedBuffer, s_ramfuncArray, sizeof(s_ramfuncArray));
-    static status_t (*autoConfigCallback)(uint32_t, flexspi_nor_config_t *, serial_nor_config_option_t *);
-    autoConfigCallback =
-        (status_t (*)(uint32_t, flexspi_nor_config_t *, serial_nor_config_option_t *))((uint32_t)&alignedBuffer + 1);
+    // uint32_t alignedBuffer[(sizeof(s_ramfuncArray) + 3) / sizeof(uint32_t)];
+    // memcpy(alignedBuffer, s_ramfuncArray, sizeof(s_ramfuncArray));
+    // static status_t (*autoConfigCallback)(uint32_t, flexspi_nor_config_t *, serial_nor_config_option_t *);
+    // autoConfigCallback =
+        // (status_t (*)(uint32_t, flexspi_nor_config_t *, serial_nor_config_option_t *))((uint32_t)&alignedBuffer + 1);
 
-    return autoConfigCallback(instance, config, option);
+    // return autoConfigCallback(instance, config, option);
 }
