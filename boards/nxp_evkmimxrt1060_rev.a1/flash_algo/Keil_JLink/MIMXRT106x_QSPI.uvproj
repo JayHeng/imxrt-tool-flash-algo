@@ -10,7 +10,8 @@
       <TargetName>RT106x_Qspi_Flash</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>Cortex-M0</Device>
@@ -222,6 +223,7 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>0</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>0</StupSel>
@@ -362,6 +364,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -374,7 +377,7 @@
               <MiscControls></MiscControls>
               <Define>CPU_MIMXRT1062DVL6A</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Sources;..\..\..\CMSIS\Include;..\..\..\devices\MIMXRT1062;..\..\..\platform\drivers\common</IncludePath>
+              <IncludePath>.\Sources;..\..\..\..\CMSIS\Include;..\..\..\..\devices\MIMXRT1062;..\..\..\..\devices\MIMXRT1062\drivers</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -476,7 +479,7 @@
             <File>
               <FileName>system_MIMXRT1062.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1062\system_MIMXRT1062.c</FilePath>
+              <FilePath>..\..\..\..\devices\MIMXRT1062\system_MIMXRT1062.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -486,6 +489,7 @@
       <TargetName>ARM7_ARM9</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>ARM7 (Little Endian)</Device>
@@ -697,6 +701,7 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>0</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>0</StupSel>
@@ -837,6 +842,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -951,7 +957,7 @@
             <File>
               <FileName>system_MIMXRT1062.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1062\system_MIMXRT1062.c</FilePath>
+              <FilePath>..\..\..\..\devices\MIMXRT1062\system_MIMXRT1062.c</FilePath>
             </File>
           </Files>
         </Group>

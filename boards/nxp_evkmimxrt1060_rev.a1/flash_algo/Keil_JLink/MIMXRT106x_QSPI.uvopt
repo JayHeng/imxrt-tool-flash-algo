@@ -440,7 +440,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\devices\MIMXRT1062\system_MIMXRT1062.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\devices\MIMXRT1062\system_MIMXRT1062.c</PathWithFileName>
       <FilenameWithoutPath>system_MIMXRT1062.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
