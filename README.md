@@ -72,4 +72,28 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
         <td>/</td>
         <td>/</td>
     </tr>
+    <tr>
+        <td rowspan="4">i.MXRT1060</td>
+        <td>IAR</td>
+        <td>/</td>
+        <td>/</td>
+        <td>/</td>
+    </tr>
+    <tr>
+        <td rowspan="2">Keil/J-Link</td>
+        <td>NXP MIMXRT1060-EVK_Rev.A1</td>
+        <td>U33 - IS25WP064AJBLE</td>
+        <td>Done</td>
+    </tr>
+    <tr>
+        <td>HON xProject</td>
+        <td>IS25WP512M</td>
+        <td>Done</td>
+    </tr>
+    <tr>
+        <td>MCUX</td>
+        <td>/</td>
+        <td>/</td>
+        <td>/</td>
+    </tr>
 </table>
