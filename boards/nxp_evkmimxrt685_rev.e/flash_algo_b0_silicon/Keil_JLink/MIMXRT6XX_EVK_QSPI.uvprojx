@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\out\</OutputDirectory>
-          <OutputName>MIMXRT6XX_B0_EVK_QSPI</OutputName>
+          <OutputName>MIMXRT6XX_B0_EVK_FLEXSPI</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -383,9 +383,9 @@
           <GroupName>Program Functions</GroupName>
           <Files>
             <File>
-              <FileName>FlashPrg_w25q_nosfdp_v2.c</FileName>
+              <FileName>FlashPrg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashPrg_w25q_nosfdp_v2.c</FilePath>
+              <FilePath>.\FlashPrg.c</FilePath>
             </File>
           </Files>
         </Group>

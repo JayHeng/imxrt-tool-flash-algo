@@ -38,9 +38,12 @@
 /** local definitions **/
 
 #define FLASH_BASE_ADDR 0x08000000
+#define FLEXSPI_INSTANCE_0 (0)
+#define FLEXSPI_INSTANCE_SEL FLEXSPI_INSTANCE_0
 #define CONFIG_OPTION 0xc0000000
 
-quadspi_nor_config_t flashConfig = {.pageSize = 0x400};
+
+flexspi_nor_config_t flashConfig = {.pageSize = 0x400};
 
 /*  Initialize Flash Programming Functions
  *    Parameter:      adr:  Device Base Address
@@ -51,14 +54,14 @@ quadspi_nor_config_t flashConfig = {.pageSize = 0x400};
 
 int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
 
-  memset((void *)&flashConfig, 0U, sizeof(quadspi_nor_config_t));
+  memset((void *)&flashConfig, 0U, sizeof(flexspi_nor_config_t));
   serial_nor_config_option_t configOption;
   configOption.option0.U = CONFIG_OPTION;
-  status_t status = quadspi_nor_get_config(&flashConfig, &configOption);
+  status_t status = flexspi_nor_get_config(FLEXSPI_INSTANCE_SEL, &flashConfig, &configOption);
 
   if(!status)
   {
-    status = quadspi_nor_init(&flashConfig);
+    status = flexspi_nor_flash_init(FLEXSPI_INSTANCE_SEL, &flashConfig);
   }
 
   return status;                                  /* Finished without Errors */
@@ -84,7 +87,7 @@ int UnInit (unsigned long fnc) {
 int EraseChip (void) {
 
   /*Erase all*/
-  status_t status =  quadspi_nor_erase_all(&flashConfig);
+  status_t status =  flexspi_nor_flash_erase_all(FLEXSPI_INSTANCE_SEL, &flashConfig);
   
   return status;
 }
@@ -98,7 +101,7 @@ int EraseChip (void) {
 int EraseSector (unsigned long adr) {
 
   /*Erase Sector*/
-  status_t status =  quadspi_nor_erase(&flashConfig, adr, flashConfig.sectorSize);
+  status_t status =  flexspi_nor_flash_erase(FLEXSPI_INSTANCE_SEL, &flashConfig, adr, flashConfig.sectorSize);
   
   return status;
 }
@@ -119,7 +122,7 @@ int ProgramPage (unsigned long adr, unsigned long sz, unsigned char *buf) {
                                        buf+=flashConfig.pageSize,
                                        adr+=flashConfig.pageSize)
   {
-    status =  quadspi_nor_page_program(&flashConfig, adr, (uint32_t *)buf);
+    status =  flexspi_nor_flash_page_program(FLEXSPI_INSTANCE_SEL, &flashConfig, adr, (uint32_t *)buf);
   }
 
   return status;
