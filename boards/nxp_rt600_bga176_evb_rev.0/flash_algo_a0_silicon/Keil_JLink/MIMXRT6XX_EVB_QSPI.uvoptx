@@ -22,7 +22,7 @@
   </DaveTm>
 
   <Target>
-    <TargetName>MIMXRT6XX_EVK_QSPI</TargetName>
+    <TargetName>MIMXRT6XX_EVB_QSPI</TargetName>
     <ToolsetNumber>0x4</ToolsetNumber>
     <ToolsetName>ARM-ADS</ToolsetName>
     <TargetOption>
@@ -192,8 +192,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\FlashPrg.c</PathWithFileName>
-      <FilenameWithoutPath>FlashPrg.c</FilenameWithoutPath>
+      <PathWithFileName>.\FlashPrg_w25q64_sfdp.c</PathWithFileName>
+      <FilenameWithoutPath>FlashPrg_w25q64_sfdp.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

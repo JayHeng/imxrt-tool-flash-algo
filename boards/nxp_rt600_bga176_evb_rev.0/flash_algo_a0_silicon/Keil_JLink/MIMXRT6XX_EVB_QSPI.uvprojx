@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>MIMXRT6XX_EVK_QSPI</TargetName>
+      <TargetName>MIMXRT6XX_EVB_QSPI</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>6120000::V6.12::.\ARMCLANG</pCCUsed>
@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\out\</OutputDirectory>
-          <OutputName>MIMXRT6XX_A0_EVK_QSPI</OutputName>
+          <OutputName>MIMXRT6XX_A0_EVB_QSPI</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -383,9 +383,9 @@
           <GroupName>Program Functions</GroupName>
           <Files>
             <File>
-              <FileName>FlashPrg_w25q_nosfdp_v2.c</FileName>
+              <FileName>FlashPrg_w25q64_sfdp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashPrg_w25q_nosfdp_v2.c</FilePath>
+              <FilePath>.\FlashPrg_w25q64_sfdp.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -422,7 +422,7 @@
       <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.0.1" condition="ARMv6_7_8-M Device">
         <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.0.1"/>
         <targetInfos>
-          <targetInfo name="MIMXRT6XX_EVK_QSPI"/>
+          <targetInfo name="MIMXRT6XX_EVB_QSPI"/>
         </targetInfos>
       </component>
     </components>

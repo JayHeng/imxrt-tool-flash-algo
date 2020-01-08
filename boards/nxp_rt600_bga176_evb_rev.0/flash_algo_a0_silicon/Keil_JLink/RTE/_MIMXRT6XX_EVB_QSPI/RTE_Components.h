@@ -4,7 +4,7 @@
  *      *** Do not modify ! ***
  *
  * Project: 'MIMXRT6XX_EVB_QSPI' 
- * Target:  'MIMXRT6XX_EVK_QSPI' 
+ * Target:  'MIMXRT6XX_EVB_QSPI' 
  */
 
 #ifndef RTE_COMPONENTS_H
