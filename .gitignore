@@ -25,6 +25,7 @@ EW*.tmp.c
 *.pbi.cout
 *.pbd
 *.pbd.browse
+*.map
 
 #
 # Top-level generic files
@@ -34,6 +35,7 @@ release
 *.nxa07314
 
 */*/*/*/out/
+*/*/*/*/Output/
 */*/*/out/
 
 # flash algo exe file
