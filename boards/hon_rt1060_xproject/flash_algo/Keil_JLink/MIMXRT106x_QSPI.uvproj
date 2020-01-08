@@ -47,7 +47,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Output\</OutputDirectory>
-          <OutputName>MIMXRT106x_EVK_QSPI</OutputName>
+          <OutputName>MIMXRT106x_HON_QSPI</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -80,7 +80,7 @@
           <AfterMake>
             <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>1</RunUserProg2>
-            <UserProg1Name>cmd.exe /C copy "Output\%L" "MIMXRT106x_EVK_QSPI_4KB_SEC.FLM"</UserProg1Name>
+            <UserProg1Name>cmd.exe /C copy "Output\%L" "MIMXRT106x_HON_QSPI_32KB_SEC.FLM"</UserProg1Name>
             <UserProg2Name>fromelf --bincombined -o "$L@L.bin" "#L"</UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
