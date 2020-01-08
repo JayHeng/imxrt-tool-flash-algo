@@ -3,8 +3,8 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'MIMXRT6XX_EVK_QSPI' 
- * Target:  'MIMXRT6XX_EVK_QSPI' 
+ * Project: 'MIMXRT6XX_EVK_FLEXSPI' 
+ * Target:  'MIMXRT6XX_EVK_FLEXSPI' 
  */
 
 #ifndef RTE_COMPONENTS_H
