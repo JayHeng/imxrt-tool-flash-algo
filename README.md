@@ -25,7 +25,7 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
         <td rowspan="3">Keil/J-Link</td>
         <td>NXP RT600_BGA176_EVB_Rev.0</td>
         <td>U8 - W25Q64FW</td>
-        <td>Done, FlashPrg.c</td>
+        <td>Done</td>
     </tr>
     <tr>
         <td>NXP MIMXRT685-EVK_Rev.B</td>
@@ -35,7 +35,7 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
     <tr>
         <td>MSFT xProject_V1</td>
         <td>W25Q16FWUXIE (no SFDP)</td>
-        <td>Done, FlashPrg_w25q_nosfdp_v2.c</td>
+        <td>Done</td>
     </tr>
     <tr>
         <td>MCUX</td>
