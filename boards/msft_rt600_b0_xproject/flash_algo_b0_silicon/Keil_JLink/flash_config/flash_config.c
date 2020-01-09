@@ -26,18 +26,18 @@ const flexspi_boot_config_t g_flexSpiConfig = {
     .csHoldTime           = 3,
     .csSetupTime          = 3,
     .columAddressWidth    = 0,
-    .deviceModeCfgEnable  = 0, //TODO enable quad mode by sending an initial command to flash
+    .deviceModeCfgEnable  = 1, // Enable quad mode by sending an initial command to flash
     .deviceModeType       = 0,
     .waitTimeCfgCommands  = 0,
-    .deviceModeSeq        = 0x0, // Run single command, sequence #2
-    .deviceModeArg        = 0x0, //Set bit 2 with that command (Write Status Register 2)
+    .deviceModeSeq        = 0x0201, // Run single command, sequence #2
+    .deviceModeArg        = 0x00000002, //Set bit 2 with that command (Write Status Register 2)
     .configCmdEnable      = 0,
     .configModeType       = {0},
     .configCmdSeqs        = {0},
     .configCmdArgs        = {0},
     .controllerMiscOption = (0),
     .deviceType           = 0x0,
-    .sflashPadType        = kSerialFlash_1Pads,
+    .sflashPadType        = kSerialFlash_4Pads,
     .serialClkFreq        = kFlexSpiSerialClk_48MHz,
     .flashA1Size          = BOARD_FLASH_SIZE,
     .flashA2Size          = 0,
@@ -55,6 +55,8 @@ const flexspi_boot_config_t g_flexSpiConfig = {
     .busyOffset             = 0,
     .busyBitPolarity        = 0,
     .lut                = {
+
+/*
         // Sequence 0 - Read Data
         // 0x03 - Read Data command, 0x18 - 24 bit address
         [FLEXSPI_READ_DATA_LUT_SEQ_INDEX * FLEXSPI_LUT_SEQUENCE_SIZE_WORDS]     =
@@ -64,19 +66,21 @@ const flexspi_boot_config_t g_flexSpiConfig = {
         [FLEXSPI_READ_DATA_LUT_SEQ_INDEX * FLEXSPI_LUT_SEQUENCE_SIZE_WORDS + 1] =
             FLEXSPI_LUT_SEQ(kFLEXSPI_Command_READ_SDR,  kFLEXSPI_1PAD, 0x80,
                             kFLEXSPI_Command_STOP,      0x00,          0x00),
-/*
+*/
+
         // Sequence 0 - Quad Read
         // 0x6B - Fast read Quad Output command, 0x18 - 24 bit address
-        [0] =  FLEXSPI_LUT_SEQ(kFLEXSPI_Command_SDR,       kFLEXSPI_1PAD, W25Q16FW_FLASH_COMMAND_QUAD_READ,
-                               kFLEXSPI_Command_RADDR_SDR, kFLEXSPI_1PAD, 0x18),
+        [FLEXSPI_READ_DATA_LUT_SEQ_INDEX * FLEXSPI_LUT_SEQUENCE_SIZE_WORDS]     =
+            FLEXSPI_LUT_SEQ(kFLEXSPI_Command_SDR,       kFLEXSPI_1PAD, W25Q16FW_FLASH_COMMAND_QUAD_READ,
+                            kFLEXSPI_Command_RADDR_SDR, kFLEXSPI_1PAD, 0x18),
         // 0x8 - 8 dummy clocks, 0x80 - read 128 bytes
-        [1] =  FLEXSPI_LUT_SEQ(kFLEXSPI_Command_DUMMY_SDR, kFLEXSPI_1PAD, 0x08,
-                               kFLEXSPI_Command_READ_SDR,  kFLEXSPI_4PAD, 0x80),
-*/
+        [FLEXSPI_READ_DATA_LUT_SEQ_INDEX * FLEXSPI_LUT_SEQUENCE_SIZE_WORDS + 1] =
+            FLEXSPI_LUT_SEQ(kFLEXSPI_Command_DUMMY_SDR, kFLEXSPI_1PAD, 0x08,
+                            kFLEXSPI_Command_READ_SDR,  kFLEXSPI_4PAD, 0x80),
         // Sequence 1 - Read Status Register
         // 0x05 - Read status register command, 0x4 - read 4 bytes
         [FLEXSPI_READ_STATUS_LUT_SEQ_INDEX * FLEXSPI_LUT_SEQUENCE_SIZE_WORDS] =
-           FLEXSPI_LUT_SEQ(kFLEXSPI_Command_SDR,       kFLEXSPI_1PAD, W25Q16FW_FLASH_COMMAND_READ_STATUS_REGISTER,
+            FLEXSPI_LUT_SEQ(kFLEXSPI_Command_SDR,       kFLEXSPI_1PAD, W25Q16FW_FLASH_COMMAND_READ_STATUS_REGISTER,
                             kFLEXSPI_Command_READ_SDR,  kFLEXSPI_1PAD, 0x04),
         // Sequence 2 - Write Status Register 2
         // 0x31 - Write status register 2 command, 0x1 - write 1 byte
@@ -126,6 +130,6 @@ const flexspi_boot_config_t g_flexSpiConfig = {
     .ipcmdSerialClkFreq = 1,
     .isUniformBlockSize = 0,
     .blockSize          = 0x10000,
-   .isNonBlockingMode  = 0,
+    .isNonBlockingMode  = 0,
 };
 #endif /* BOOT_HEADER_ENABLE */
