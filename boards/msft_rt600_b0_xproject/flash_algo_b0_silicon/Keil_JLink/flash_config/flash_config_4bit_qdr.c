@@ -155,7 +155,7 @@ const flexspi_boot_config_t g_flexSpiConfig = {
                             kFLEXSPI_Command_RADDR_SDR, kFLEXSPI_1PAD, 0x18),
         // 0x8 - 8 dummy clocks, 0x80 - read 128 bytes
         [FLEXSPI_READ_DATA_LUT_SEQ_INDEX * FLEXSPI_LUT_SEQUENCE_SIZE_WORDS + 1] =
-            FLEXSPI_LUT_SEQ(kFLEXSPI_Command_DUMMY_SDR, kFLEXSPI_1PAD, 0x08,
+            FLEXSPI_LUT_SEQ(kFLEXSPI_Command_DUMMY_SDR, kFLEXSPI_4PAD, 0x08,
                             kFLEXSPI_Command_READ_SDR,  kFLEXSPI_4PAD, 0x80),
 
 
