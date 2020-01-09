@@ -57,6 +57,14 @@
     (FLEXSPI_LUT_OPERAND0(op0) | FLEXSPI_LUT_NUM_PADS0(pad0) | FLEXSPI_LUT_OPCODE0(cmd0) | FLEXSPI_LUT_OPERAND1(op1) | \
      FLEXSPI_LUT_NUM_PADS1(pad1) | FLEXSPI_LUT_OPCODE1(cmd1))
 
+//!@brief FlexSPI Read Sample Clock Source definition
+enum
+{
+    kFlexSPIReadSampleClk_LoopbackInternally      = 0,
+    kFlexSPIReadSampleClk_LoopbackFromDqsPad      = 1,
+    kFlexSPIReadSampleClk_ExternalInputFromDqsPad = 3,
+};
+
 /* !@brief Data pad used in Read command */
 enum
 {
@@ -93,29 +101,46 @@ enum
 /* !@brief Misc feature bit definitions */
 enum
 {
-    kFlexSpiMiscOffset_DiffClkEnable         = 0, /* !< Bit for Differential clock enable */
-    kFlexSpiMiscOffset_WordAddressableEnable = 3, /* !< Bit for Word Addressable enable */
-    kFlexSpiMiscOffset_SafeConfigFreqEnable  = 4, /* !< Bit for Safe Configuration Frequency enable */
-    kFlexSpiMiscOffset_DdrModeEnable         = 6, /* !< Bit for DDR clock confiuration indication. */
+    kFlexSpiMiscOffset_DiffClkEnable            = 0, //!< Bit for Differential clock enable
+    kFlexSpiMiscOffset_Ck2Enable                = 1, //!< Bit for CK2 enable
+    kFlexSpiMiscOffset_ParallelEnable           = 2, //!< Bit for Parallel mode enable
+    kFlexSpiMiscOffset_WordAddressableEnable    = 3, //!< Bit for Word Addressable enable
+    kFlexSpiMiscOffset_SafeConfigFreqEnable     = 4, //!< Bit for Safe Configuration Frequency enable
+    kFlexSpiMiscOffset_PadSettingOverrideEnable = 5, //!< Bit for Pad setting override enable
+    kFlexSpiMiscOffset_DdrModeEnable            = 6, //!< Bit for DDR clock confiuration indication.
 };
+
+//!@brief FlexSPI LUT Sequence structure
+typedef struct _lut_sequence
+{
+    uint8_t seqNum; //!< Sequence Number, valid number: 1-16
+    uint8_t seqId;  //!< Sequence Index, valid number: 0-15
+    uint16_t reserved;
+} flexspi_lut_seq_t;
+
+typedef struct
+{
+    uint8_t time_100ps;  // Data valid time, in terms of 100ps
+    uint8_t delay_cells; // Data valid time, in terms of delay cells
+} flexspi_dll_time_t;
 
 typedef struct _FlexspiBootConfig
 {
     uint32_t tag;
     uint32_t version;
     uint32_t reserved0;
-    uint8_t readSamplingOption;
+    uint8_t readSampleClkSrc;   //!< [0x00c-0x00c] Read Sample Clock Source, valid value: 0/1/3
     uint8_t csHoldTime;
     uint8_t csSetupTime;
-    uint8_t columAddressWidth;
+    uint8_t columnAddressWidth;
     uint8_t deviceModeCfgEnable; /* off: 0x10 */
     uint8_t deviceModeType;
     uint16_t waitTimeCfgCommands;
-    uint32_t deviceModeSeq;
+    flexspi_lut_seq_t deviceModeSeq;
     uint32_t deviceModeArg;
     uint8_t configCmdEnable;
     uint8_t configModeType[3];
-    uint32_t configCmdSeqs[3]; /* off: 0x20 */
+    flexspi_lut_seq_t configCmdSeqs[3]; /* off: 0x20 */
     uint32_t reserved1;
     uint32_t configCmdArgs[3]; /* off: 0x30 */
     uint32_t reserved2;
@@ -123,34 +148,37 @@ typedef struct _FlexspiBootConfig
     uint8_t deviceType;
     uint8_t sflashPadType;
     uint8_t serialClkFreq;
-    uint8_t reserved3[9];
-    uint32_t flashA1Size; /* off: 0x50 */
-    uint32_t flashA2Size;
-    uint32_t flashB1Size;
-    uint32_t flashB2Size;
+    uint8_t lutCustomSeqEnable;
+    uint32_t reserved3[2];
+    uint32_t sflashA1Size; /* off: 0x50 */
+    uint32_t sflashA2Size;
+    uint32_t sflashB1Size;
+    uint32_t sflashB2Size;
     uint32_t csPadSettingOverride; /* off: 0x60 */
     uint32_t sclkPadSettingOverride;
     uint32_t dataPadSettingOverride;
     uint32_t dqsPadSettingOverride;
     uint32_t timeoutInMs; /* off: 0x70 */
-    uint8_t coarseTuning;
-    uint8_t reserved4;
-    uint16_t fineTuning;
-    uint8_t samplePoint;
-    uint8_t dataHoldTime;
-    uint16_t reserved5;
+    uint32_t commandInterval;
+    flexspi_dll_time_t dataValidTime[2];
     uint16_t busyOffset;
     uint16_t busyBitPolarity;
-    uint32_t lut[64];       /* off: 0x80 */
-    uint32_t reserved6[16]; /* off: 0x180 */
+    uint32_t lookupTable[64];       /* off: 0x80 */
+    flexspi_lut_seq_t lutCustomSeq[12]; /* off: 0x180 */
+    uint32_t reserved4[4];
     uint32_t pageSize;      /* off: 0x1C0 */
     uint32_t sectorSize;
     uint8_t ipcmdSerialClkFreq;
     uint8_t isUniformBlockSize;
-    uint8_t reserved7[6];
+    uint8_t isDataOrderSwapped;
+    uint8_t reserved5[1];
+    uint8_t serialNorType;
+    uint8_t needExitNoCmdMode;
+    uint8_t halfClkForNonReadCmd;
+    uint8_t needRestoreNoCmdMode;
     uint32_t blockSize; /* off: 0x1D0 */
-    uint8_t isNonBlockingMode;
-    uint8_t reserved8[43];
+    uint32_t flashStateCtx;
+    uint32_t reserve6[10];
 } flexspi_boot_config_t;
 
 #ifdef __cplusplus

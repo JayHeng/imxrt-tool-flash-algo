@@ -22,39 +22,39 @@ __attribute__((section(".flash_conf")))
 const flexspi_boot_config_t g_flexSpiConfig = {
     .tag                  = FLASH_CONFIG_BLOCK_TAG,
     .version              = FLASH_CONFIG_BLOCK_VERSION,
-    .readSamplingOption   = 2,
+    .readSampleClkSrc     = 2,
     .csHoldTime           = 3,
     .csSetupTime          = 3,
-    .columAddressWidth    = 0,
+    .columnAddressWidth   = 0,
     .deviceModeCfgEnable  = 1, // Enable quad mode by sending an initial command to flash
     .deviceModeType       = 0,
     .waitTimeCfgCommands  = 0,
-    .deviceModeSeq        = 0x0201, // Run single command, sequence #2
+    .deviceModeSeq        = {.seqNum = 0x01,
+                             .seqId  = 0x02,
+                            },  // Run single command, sequence #2
     .deviceModeArg        = 0x00000002, //Set bit 2 with that command (Write Status Register 2)
     .configCmdEnable      = 0,
     .configModeType       = {0},
-    .configCmdSeqs        = {0},
+    //.configCmdSeqs        = {0},
     .configCmdArgs        = {0},
     .controllerMiscOption = (0),
     .deviceType           = 0x0,
     .sflashPadType        = kSerialFlash_4Pads,
     .serialClkFreq        = kFlexSpiSerialClk_48MHz,
-    .flashA1Size          = BOARD_FLASH_SIZE,
-    .flashA2Size          = 0,
-    .flashB1Size          = 0,
-    .flashB2Size          = 0,
+    .lutCustomSeqEnable   = 0,
+    .sflashA1Size         = BOARD_FLASH_SIZE,
+    .sflashA2Size         = 0,
+    .sflashB1Size         = 0,
+    .sflashB2Size         = 0,
     .csPadSettingOverride = 0,
     .sclkPadSettingOverride = 0,
     .dataPadSettingOverride = 0,
     .dqsPadSettingOverride  = 0,
     .timeoutInMs            = 0,
-    .coarseTuning           = 0,
-    .fineTuning             = 0,
-    .samplePoint            = 0,
-    .dataHoldTime           = 0,
+    .commandInterval        = 0,
     .busyOffset             = 0,
     .busyBitPolarity        = 0,
-    .lut                = {
+    .lookupTable            = {
 
 /*
         // Sequence 0 - Read Data
@@ -130,6 +130,5 @@ const flexspi_boot_config_t g_flexSpiConfig = {
     .ipcmdSerialClkFreq = 1,
     .isUniformBlockSize = 0,
     .blockSize          = 0x10000,
-    .isNonBlockingMode  = 0,
 };
 #endif /* BOOT_HEADER_ENABLE */
