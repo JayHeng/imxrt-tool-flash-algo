@@ -192,8 +192,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\FlashPrg_w25q16_nosfdp_v1.c</PathWithFileName>
-      <FilenameWithoutPath>FlashPrg_w25q16_nosfdp_v1.c</FilenameWithoutPath>
+      <PathWithFileName>.\FlashPrg_w25q16_nosfdp_v2.c</PathWithFileName>
+      <FilenameWithoutPath>FlashPrg_w25q16_nosfdp_v2.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -229,7 +229,7 @@
       <GroupNumber>3</GroupNumber>
       <FileNumber>3</FileNumber>
       <FileType>1</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>.\bl_api.c</PathWithFileName>
