@@ -8,6 +8,7 @@
  */
 #include <stdint.h>
 #include <stdbool.h>
+#include "flash_config.h"
 #ifndef __FLEXSPI_NOR_FLASH_H__
 #define __FLEXSPI_NOR_FLASH_H__
 
@@ -196,6 +197,7 @@ enum
     kFlashInstMode_OPI_DDR = 0x82,
 };
 
+/*
 //!@brief FlexSPI LUT Sequence structure
 typedef struct _lut_sequence
 {
@@ -203,6 +205,7 @@ typedef struct _lut_sequence
     uint8_t seqId;  //!< Sequence Index, valid number: 0-15
     uint16_t reserved;
 } flexspi_lut_seq_t;
+*/
 
 //!@brief Flash Configuration Command Type
 enum
@@ -215,11 +218,13 @@ enum
     kDeviceConfigCmdType_Reset,      //!< Reset device command
 };
 
+/*
 typedef struct
 {
     uint8_t time_100ps;  // Data valid time, in terms of 100ps
     uint8_t delay_cells; // Data valid time, in terms of delay cells
 } flexspi_dll_time_t;
+*/
 
 //!@brief FlexSPI Memory Configuration Block
 typedef struct _FlexSPIConfig

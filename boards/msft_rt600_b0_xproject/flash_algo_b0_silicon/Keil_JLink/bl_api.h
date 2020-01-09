@@ -146,6 +146,7 @@ enum
 };
 
 //!@brief FLEXSPI clock configuration - When clock source is FRO192
+/*
 enum
 {
     kFlexSpiSerialClk_32MHz = 1,
@@ -153,6 +154,7 @@ enum
     kFlexSpiSerialClk_64MHz = 3,
     kFlexSpiSerialClk_96MHz = 4,
 };
+*/
 
 //!@brief FLEXSPI Flash driver API Interface
 typedef struct

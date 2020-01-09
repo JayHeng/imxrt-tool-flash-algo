@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "fsl_common.h"
+//#include "fsl_common.h"
 /*******************************************************************************
  * Definition
  ******************************************************************************/
@@ -75,6 +75,7 @@ enum
 };
 
 /* !@brief FLEXSPI clock configuration - In High speed boot mode mode */
+/*
 enum
 {
     kFlexSpiSerialClk_30MHz  = 1,
@@ -87,6 +88,7 @@ enum
     kFlexSpiSerialClk_166MHz = 8,
     kFlexSpiSerialClk_200MHz = 9,
 };
+*/
 
 /* !@brief FLEXSPI clock configuration - In Normal boot mode */
 enum
@@ -180,6 +182,9 @@ typedef struct _FlexspiBootConfig
     uint32_t flashStateCtx;
     uint32_t reserve6[10];
 } flexspi_boot_config_t;
+
+extern const flexspi_boot_config_t g_flexSpiConfig;
+
 
 #ifdef __cplusplus
 extern "C" {
