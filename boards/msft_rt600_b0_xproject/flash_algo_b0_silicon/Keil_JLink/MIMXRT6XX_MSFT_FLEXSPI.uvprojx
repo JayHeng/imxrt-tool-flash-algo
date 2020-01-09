@@ -388,9 +388,9 @@
               <FilePath>.\FlashPrg_w25q16_nosfdp_v2.c</FilePath>
             </File>
             <File>
-              <FileName>flash_config_1bit_sdr.c</FileName>
+              <FileName>flash_config_4bit_qdr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\flash_config\flash_config_1bit_sdr.c</FilePath>
+              <FilePath>.\flash_config\flash_config_4bit_qdr.c</FilePath>
             </File>
           </Files>
         </Group>
