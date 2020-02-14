@@ -8,6 +8,7 @@
  */
 #include <stdint.h>
 #include <stdbool.h>
+#include "flash_config.h"
 #ifndef __FLEXSPI_NOR_FLASH_H__
 #define __FLEXSPI_NOR_FLASH_H__
 
@@ -196,6 +197,7 @@ enum
     kFlashInstMode_OPI_DDR = 0x82,
 };
 
+/*
 //!@brief FlexSPI LUT Sequence structure
 typedef struct _lut_sequence
 {
@@ -203,6 +205,7 @@ typedef struct _lut_sequence
     uint8_t seqId;  //!< Sequence Index, valid number: 0-15
     uint16_t reserved;
 } flexspi_lut_seq_t;
+*/
 
 //!@brief Flash Configuration Command Type
 enum
@@ -215,11 +218,13 @@ enum
     kDeviceConfigCmdType_Reset,      //!< Reset device command
 };
 
+/*
 typedef struct
 {
     uint8_t time_100ps;  // Data valid time, in terms of 100ps
     uint8_t delay_cells; // Data valid time, in terms of delay cells
 } flexspi_dll_time_t;
+*/
 
 //!@brief FlexSPI Memory Configuration Block
 typedef struct _FlexSPIConfig
@@ -336,13 +341,11 @@ extern status_t flexspi_nor_read_persistent(uint32_t *data);
 //!@brief Reset FlexSPI NOR Flash
 extern void flexspi_nor_hw_reset(uint32_t instance, uint32_t reset_logic);
 
-//!@brief Restore Flash to SPI protocol
-status_t flexspi_nor_restore_spi_protocol(uint32_t instance,
-                                          flexspi_nor_config_t *config,
-                                          flash_run_context_t *run_ctx);
-
 //!@brief Set the clock source for FlexSPI NOR
 extern status_t flexspi_nor_set_clock_source(uint32_t clockSource);
+
+//!@brief Set the clock source for FlexSPI NOR
+extern status_t flexspi_nor_auto_config(uint32_t instance, flexspi_nor_config_t *config, serial_nor_config_option_t *option);
 
 //!@brief Set redundant boot image index for FlexSPI NOR
 extern void flexspi_set_redundant_boot_image_index(uint32_t imageIndex);

@@ -351,6 +351,7 @@
                     <name>CCIncludePath2</name>
                     <state>$TOOLKIT_DIR$\src\flashloader\framework2\</state>
                     <state>$PROJ_DIR$\rom_api\</state>
+                    <state>$PROJ_DIR$\flash_config\</state>
                     <state>$PROJ_DIR$\</state>
                 </option>
                 <option>
@@ -1059,6 +1060,15 @@
             <data />
         </settings>
     </configuration>
+    <group>
+        <name>flash_config</name>
+        <file>
+            <name>$PROJ_DIR$\flash_config\flash_config.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\flash_config\flash_config_4bit_qdr.c</name>
+        </file>
+    </group>
     <group>
         <name>Framework</name>
         <file>

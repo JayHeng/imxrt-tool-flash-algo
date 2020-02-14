@@ -30,6 +30,7 @@
 #include "flash_loader.h"       // The flash loader framework API declarations.
 #include "flash_loader_extra.h"
 #include "bl_api.h"
+#include "flash_config.h"
 #include "cmsis_iccarm.h"
 
 
@@ -50,7 +51,6 @@
 
 /** private data **/
 flexspi_nor_config_t flashConfig;
-serial_nor_config_option_t configOption;
 /** internal functions **/
 #if USE_ARGC_ARGV
 static uint32_t strToUint(const char *str);
@@ -102,9 +102,10 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
   MEM_WriteU32(0x40001430, 0x3U);
   /* MAINCLKSELB */
   MEM_WriteU32(0x40001434, 0x0U);
-  configOption.option0.U = 0xc1503051;
-  configOption.option1.U = 0x20000014;
-  
+  //configOption.option0.U = 0xc1503051;
+  //configOption.option1.U = 0x20000014;
+  memset((void *)&flashConfig, 0U, sizeof(flexspi_nor_config_t));
+  memcpy((void *)&flashConfig, (const void *)&g_flexSpiConfig, 512);
   
   flexspi_nor_set_clock_source(kFlexSpiClockSrc_FFRO_Clk);
   //CLKCTL0->PSCCTL0_SET = CLKCTL0_PSCCTL0_SET_FLEXSPI0_OTFAD_MASK;
@@ -129,7 +130,7 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
   // Clear FLASH status store register
   MEM_WriteU32(0x40002380, 0x0U);
 
-  if(RESULT_OK == flexspi_nor_auto_config(0, &flashConfig, &configOption))
+  if(RESULT_OK == flexspi_nor_flash_init(0, &flashConfig))
   {
     if ((FLAG_ERASE_ONLY & flags) != 0)
     {
