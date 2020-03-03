@@ -422,9 +422,9 @@
           <GroupName>Program Functions</GroupName>
           <Files>
             <File>
-              <FileName>FlashPrg_is25lp064_2nd.c</FileName>
+              <FileName>FlashPrg_is25lp256_w25q256.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashPrg_is25lp064_2nd.c</FilePath>
+              <FilePath>.\FlashPrg_is25lp256_w25q256.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -900,9 +900,9 @@
           <GroupName>Program Functions</GroupName>
           <Files>
             <File>
-              <FileName>FlashPrg_is25lp064_2nd.c</FileName>
+              <FileName>FlashPrg_is25lp256_w25q256.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashPrg_is25lp064_2nd.c</FilePath>
+              <FilePath>.\FlashPrg_is25lp256_w25q256.c</FilePath>
             </File>
           </Files>
         </Group>
