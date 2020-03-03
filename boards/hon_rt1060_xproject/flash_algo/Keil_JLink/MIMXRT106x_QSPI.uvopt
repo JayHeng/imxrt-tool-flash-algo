@@ -316,8 +316,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\FlashPrg_is25wp512.c</PathWithFileName>
-      <FilenameWithoutPath>FlashPrg_is25wp512.c</FilenameWithoutPath>
+      <PathWithFileName>.\FlashPrg_is25lp064_2nd.c</PathWithFileName>
+      <FilenameWithoutPath>FlashPrg_is25lp064_2nd.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
