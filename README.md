@@ -98,7 +98,7 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
         <td>/</td>
     </tr>
     <tr>
-        <td rowspan="4">i.MXRT1060</td>
+        <td rowspan="5">i.MXRT1060</td>
         <td>IAR</td>
         <td>/</td>
         <td>/</td>
