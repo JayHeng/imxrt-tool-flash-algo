@@ -24,23 +24,27 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
         <td>/</td>
     </tr>
     <tr>
-        <td rowspan="3">Keil/J-Link</td>
-        <td>NXP RT600_BGA176_EVB_Rev.0</td>
+        <td rowspan="3">Keil<br>
+                        J-Link</td>
+        <td>NXP RT600-EVB_Rev.0</td>
         <td>U8 - W25Q64FW</td>
         <td>Done</td>
-        <td>PIO1[23:20], QSPI0_PortA</td>
+        <td>PIO1[23:20]<br>
+            QSPI0_PortA</td>
     </tr>
     <tr>
-        <td>NXP MIMXRT685-EVK_Rev.B</td>
-        <td>U19 - MX25UM51345GXDI00</td>
+        <td>NXP RT600-EVK_Rev.B</td>
+        <td>U19 - MX25UM51345</td>
         <td>/</td>
-        <td>PIO1[27:20], QSPI0_PortA</td>
+        <td>PIO1[27:20]<br>
+            QSPI0_PortA</td>
     </tr>
     <tr>
         <td>MSFT xProject_V1</td>
-        <td>W25Q16FWUXIE (no SFDP)</td>
+        <td>W25Q16FW(no SFDP)</td>
         <td>Done</td>
-        <td>PIO1[23:20], QSPI0_PortA</td>
+        <td>PIO1[23:20]<br>
+            QSPI0_PortA</td>
     </tr>
     <tr>
         <td>MCUX</td>
@@ -58,23 +62,26 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
         <td>/</td>
     </tr>
     <tr>
-        <td rowspan="3">Keil/J-Link</td>
-        <td>NXP RT600_BGA176_EVB_RevB0_Rev.C</td>
+        <td rowspan="3">Keil<br>
+                        J-Link</td>
+        <td>NXP RT600-EVB_Rev.C</td>
         <td>/</td>
         <td>/</td>
         <td>/</td>
     </tr>
     <tr>
-        <td>NXP MIMXRT685-EVK_Rev.E</td>
-        <td>U19 - MX25UM51345GXDI00</td>
+        <td>NXP RT600-EVK_Rev.E</td>
+        <td>U19 - MX25UM51345</td>
         <td>Done</td>
-        <td>PIO1[14:11],PIO2[23:22,18:17], FLEXSPI0_PortB</td>
+        <td>PIO1[14:11],PIO2[23:22,18:17]<br>
+            FLEXSPI0_PortB</td>
     </tr>
     <tr>
         <td>MSFT xProject_V2</td>
-        <td>W25Q16FWUXIE (no SFDP)</td>
+        <td>W25Q16FW(no SFDP)</td>
         <td>Done</td>
-        <td>PIO1[23:20], FLEXSPI0_PortA</td>
+        <td>PIO1[23:20]<br>
+            FLEXSPI0_PortA</td>
     </tr>
     <tr>
         <td>MCUX</td>
@@ -92,17 +99,20 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
         <td>/</td>
     </tr>
     <tr>
-        <td rowspan="2">Keil/J-Link</td>
-        <td>NXP MIMXRT1060-EVK_Rev.A1</td>
-        <td>U33 - IS25WP064AJBLE</td>
+        <td rowspan="2">Keil<br>
+                        J-Link</td>
+        <td>NXP RT1060-EVK_Rev.A1</td>
+        <td>U33 - IS25WP064</td>
         <td>Done</td>
-        <td>GPIO_SD_B1[11:08], FLEXSPI0_PortA</td>
+        <td>GPIO_SD_B1[11:08]<br>
+            FLEXSPI0_PortA</td>
     </tr>
     <tr>
         <td>HON xProject</td>
         <td>IS25WP512M</td>
         <td>Done</td>
-        <td>GPIO_SD_B1[11:08], FLEXSPI0_PortA</td>
+        <td>GPIO_SD_B1[11:08]<br>
+            FLEXSPI0_PortA</td>
     </tr>
     <tr>
         <td>MCUX</td>
