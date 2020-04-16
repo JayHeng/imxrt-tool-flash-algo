@@ -185,7 +185,7 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
 
 所以我们需要为 J-Link 增加 i.MXRT600 的支持。将本项目中提供的 i.MXRT600 芯片支持包解压，将包中的 \JLink_V652\Devices\NXP\iMXRT6xx 文件夹拷贝到上图路径下：
 
-> * i.MXRT600 芯片支持包：[\imxrt-tool-flash-algo\packs\iar&segger_patch_for_rt600_b0_1210.zip](packs/iar&segger_patch_for_rt600_b0_1210.zip)
+> * i.MXRT600 芯片支持包：[\imxrt-tool-flash-algo\packs\RT600_b0_segger_patch_1210.zip](packs/RT600_b0_segger_patch_1210.zip)
 
 ![](http://henjay724.com/image/github/i.MXRT600_add_support_in_JLink_v2.png)
 
@@ -229,7 +229,7 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
 
 ![](http://henjay724.com/image/github/i.MXRT600_usage_in_jflash.PNG)
 
-然后，你就可以任意读写擦 i.MXRT600-EVK 上的 flash 了。
+然后，将 i.MXRT600-EVK 设为 Serial ISP 模式（SW5[2:1]设为Off-Off-On）并通电，连接上后便可以任意读写擦 flash 了。
 
 ![](http://henjay724.com/image/github/i.MXRT600_usage_in_jflash_run.PNG)
 
