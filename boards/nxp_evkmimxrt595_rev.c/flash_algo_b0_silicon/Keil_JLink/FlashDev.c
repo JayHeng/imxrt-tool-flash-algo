@@ -30,7 +30,7 @@
  *    Initial release
  */ 
 
-#include "../FlashOS.H"        // FlashOS Structures
+#include "FlashOS.H"        // FlashOS Structures
 
 struct FlashDevice const FlashDevice = {
    FLASH_DRV_VERS,             // Driver Version, do not modify!

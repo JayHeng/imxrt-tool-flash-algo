@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>ARMCM33_DSP_FP_TZ</Device>
           <Vendor>ARM</Vendor>
-          <PackID>ARM.CMSIS.5.5.1</PackID>
+          <PackID>ARM.CMSIS.5.6.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x20200000,0x00020000) IROM(0x00000000,0x00200000) IROM2(0x00200000,0x00200000) CPUTYPE("Cortex-M33") FPU3(SFPU) DSP TZ CLOCK(12000000) ESEL ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -82,7 +82,7 @@
           <AfterMake>
             <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name>cmd.exe /C copy "!L" "..\@L.FLM"</UserProg1Name>
+            <UserProg1Name>cmd.exe /C copy "!L" "@L.FLM"</UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
@@ -338,7 +338,7 @@
               <MiscControls> -Wno-pedantic -Wno-padded -Wno-cast-align  -Wno-missing-variable-declarations -Wno-unused-parameter  -Wno-missing-prototypes  -Wno-covered-switch-default -Wno-missing-braces </MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.;rom_api/</IncludePath>
+              <IncludePath></IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -372,7 +372,7 @@
             <ScatterFile>.\Target.lin</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
-            <Misc></Misc>
+            <Misc>--diag_suppress L6305</Misc>
             <LinkerInputFile></LinkerInputFile>
             <DisabledWarnings></DisabledWarnings>
           </LDads>
@@ -383,9 +383,9 @@
           <GroupName>Program Functions</GroupName>
           <Files>
             <File>
-              <FileName>FlashPrg.c</FileName>
+              <FileName>FlashPrg_mx25um51345.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashPrg.c</FilePath>
+              <FilePath>.\FlashPrg_mx25um51345.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -405,7 +405,7 @@
             <File>
               <FileName>bl_api.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\rom_api\bl_api.c</FilePath>
+              <FilePath>.\bl_api.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -31,7 +31,7 @@
  */ 
 
 #include <stdbool.h>
-#include "../FlashOS.H"        // FlashOS Structures
+#include "FlashOS.H"        // FlashOS Structures
 #include <string.h>
 #include "bl_api.h"
 
