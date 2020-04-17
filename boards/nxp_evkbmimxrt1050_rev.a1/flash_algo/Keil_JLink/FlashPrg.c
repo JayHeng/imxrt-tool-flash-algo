@@ -15,7 +15,7 @@
 #define SECTOR_SIZE          (262144)
 #define BASE_ADDRESS         (0x60000000)
 
-flexspi_nor_config_t config;
+flexspi_nor_config_t config = {1};
 
 /*
  *  Initialize Flash Programming Functions
