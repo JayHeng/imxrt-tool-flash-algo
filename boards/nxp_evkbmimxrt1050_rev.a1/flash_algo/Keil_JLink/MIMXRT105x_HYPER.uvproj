@@ -422,9 +422,9 @@
           <GroupName>Program Functions</GroupName>
           <Files>
             <File>
-              <FileName>FlashPrg.c</FileName>
+              <FileName>FlashPrg_s26ks512s.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashPrg.c</FilePath>
+              <FilePath>.\FlashPrg_s26ks512s.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -900,9 +900,9 @@
           <GroupName>Program Functions</GroupName>
           <Files>
             <File>
-              <FileName>FlashPrg.c</FileName>
+              <FileName>FlashPrg_s26ks512s.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashPrg.c</FilePath>
+              <FilePath>.\FlashPrg_s26ks512s.c</FilePath>
             </File>
           </Files>
         </Group>

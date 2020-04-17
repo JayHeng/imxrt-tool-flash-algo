@@ -316,8 +316,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\FlashPrg.c</PathWithFileName>
-      <FilenameWithoutPath>FlashPrg.c</FilenameWithoutPath>
+      <PathWithFileName>.\FlashPrg_s26ks512s.c</PathWithFileName>
+      <FilenameWithoutPath>FlashPrg_s26ks512s.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
