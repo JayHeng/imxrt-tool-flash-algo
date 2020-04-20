@@ -12,7 +12,7 @@
 #include "flexspi_nor/flexspi_nor_flash.h"
 
 #define FLEXSPI_NOR_INSTANCE 0
-#define SECTOR_SIZE          (262144)
+#define SECTOR_SIZE          (32768)
 #define BASE_ADDRESS         (0x60000000)
 
 flexspi_nor_config_t config = {1};
