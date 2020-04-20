@@ -46,6 +46,7 @@
 /* FlexSPI NOR status */
 enum _flexspi_nor_status
 {
+    kStatusGroup_FLEXSPINOR        = 200,
     kStatus_FLEXSPINOR_ProgramFail = MAKE_STATUS(kStatusGroup_FLEXSPINOR, 0), //!< Status for Page programming failure
     kStatus_FLEXSPINOR_EraseSectorFail = MAKE_STATUS(kStatusGroup_FLEXSPINOR, 1), //!< Status for Sector Erase failure
     kStatus_FLEXSPINOR_EraseAllFail = MAKE_STATUS(kStatusGroup_FLEXSPINOR, 2),    //!< Status for Chip Erase failure

@@ -271,6 +271,25 @@ status_t flexspi_nor_read_persistent(uint32_t *data)
     return kStatus_Success;
 }
 
+void flexspi_update_padsetting(flexspi_mem_config_t *config, uint32_t driveStrength)
+{
+#define IOMUXC_PAD_SETTING_DSE_SHIFT (3)
+#define IOMUXC_PAD_SETTING_DSE_MASK (0x07 << IOMUXC_PAD_SETTING_DSE_SHIFT)
+#define IOMUXC_PAD_SETTING_DSE(x) (((x) << IOMUXC_PAD_SETTING_DSE_SHIFT) & IOMUXC_PAD_SETTING_DSE_MASK)
+    if (driveStrength)
+    {
+        config->dqsPadSettingOverride =
+            (FLEXSPI_DQS_SW_PAD_CTL_VAL & ~IOMUXC_PAD_SETTING_DSE_MASK) | IOMUXC_PAD_SETTING_DSE(driveStrength);
+        config->sclkPadSettingOverride =
+            (FLEXSPI_SW_PAD_CTL_VAL & ~IOMUXC_PAD_SETTING_DSE_MASK) | IOMUXC_PAD_SETTING_DSE(driveStrength);
+        config->dataPadSettingOverride =
+            (FLEXSPI_SW_PAD_CTL_VAL & ~IOMUXC_PAD_SETTING_DSE_MASK) | IOMUXC_PAD_SETTING_DSE(driveStrength);
+
+        config->csPadSettingOverride =
+            (FLEXSPI_DQS_SW_PAD_CTL_VAL & ~IOMUXC_PAD_SETTING_DSE_MASK) | IOMUXC_PAD_SETTING_DSE(driveStrength);
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // EOF
 ////////////////////////////////////////////////////////////////////////////////

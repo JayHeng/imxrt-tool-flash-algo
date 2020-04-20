@@ -134,12 +134,12 @@ void clock_init(void)
 }
 
 //!@brief Configure clock for FlexSPI peripheral
-void flexspi_clock_config(uint32_t instance, flexspi_serial_clk_freq_t freq, uint32_t sampleClkMode)
+void flexspi_clock_config(uint32_t instance, uint32_t freq, uint32_t sampleClkMode)
 {
     uint32_t pfd480 = 0;
     uint32_t cscmr1 = 0;
-    uint32_t frac   = 0;
-    uint32_t podf   = 0;
+    uint32_t frac = 0;
+    uint32_t podf = 0;
 
     typedef struct _flexspi_clock_param
     {
@@ -148,11 +148,13 @@ void flexspi_clock_config(uint32_t instance, flexspi_serial_clk_freq_t freq, uin
     } flexspi_clock_param_t;
 
     const flexspi_clock_param_t k_sdr_clock_config[kFlexSpiSerialClk_200MHz + 1] = {
-        // Reserved, 30MHz     50MHz     60MHz     75MHz    80MHz    100MHz   133MHz   166MHz   200MHz
-        {0, 0}, {34, 8}, {22, 8}, {24, 6}, {30, 4}, {18, 6}, {14, 6}, {17, 4}, {12, 6}, {22, 2}};
+        // Reserved, 30MHz     50MHz     60MHz        75MHz    80MHz       100MHz   133MHz       166MHz   200MHz
+        { 0, 0 }, { 34, 8 }, { 22, 8 }, { 24, 6 }, { 30, 4 }, { 18, 6 }, { 14, 6 }, { 17, 4 }, { 26, 2 }, { 22, 2 }
+    };
     const flexspi_clock_param_t k_ddr_clock_config[kFlexSpiSerialClk_200MHz + 1] = {
-        // Reserved, 30MHz,  50MHz,   60MHz,   75MHz,   80Mhz,   100MHz,  133MHz,   166MHz,  200MHz
-        {0, 0}, {24, 6}, {22, 4}, {12, 6}, {30, 2}, {18, 3}, {22, 2}, {33, 1}, {26, 1}, {22, 1}};
+        // Reserved, 30MHz,  50MHz,       60MHz,      75MHz,   80Mhz,   100MHz,      133MHz,   166MHz,     200MHz
+        { 0, 0 }, { 24, 6 }, { 22, 4 }, { 12, 6 }, { 30, 2 }, { 18, 3 }, { 22, 2 }, { 33, 1 }, { 26, 1 }, { 22, 1 }
+    };
 
     do
     {

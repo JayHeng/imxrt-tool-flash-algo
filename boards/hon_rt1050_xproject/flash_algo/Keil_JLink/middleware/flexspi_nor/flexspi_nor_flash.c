@@ -3429,8 +3429,8 @@ status_t flexspi_nor_flash_erase(uint32_t instance, flexspi_nor_config_t *config
             break;
         }
 
-        aligned_start = ALIGN_DOWN(start, config->sectorSize);
-        aligned_end = ALIGN_UP(start + length, config->sectorSize);
+        aligned_start = ((start) & -(config->sectorSize));
+        aligned_end   = (-(-(start + length) & -(config->sectorSize)));
 
         // If the block size and sector size is uniform, just do sector erase
         if (config->isUniformBlockSize || (config->blockSize == 0))
