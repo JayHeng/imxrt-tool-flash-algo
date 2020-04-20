@@ -1,8 +1,10 @@
 /*
- * Copyright (c) 2016, Freescale Semiconductor, Inc.
- * Copyright 2017 NXP
+ * Copyright 2014-2015 Freescale Semiconductor, Inc.
+ * Copyright 2016-2019 NXP
+ * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
+ *
  */
 
 #ifndef __FSL_FLEXSPI_H__
@@ -17,8 +19,6 @@
 #define FlexSPI_LUT_COUNT (64)
 /* The count of FlexSPI AHB Buffer */
 #define FlexSPI_AHB_RX_BUF_COUNT (4U)
-/* Base address of AHB address space mapped to Serial Flash Memory */
-#define FlexSPI_ASFM_BASE (0x00000000U)
 /* AHB RX_BUF depth, in longwords */
 #define FlexSPI_AHB_RX_BUF_DEPTH (512U)
 /* AHB TX BUF depth, in longwords */
@@ -29,52 +29,52 @@
 #define FlexSPI_IP_TX_BUF_DEPTH (256U)
 
 /* FLEXSPI memory config block related defintions */
-#define FLEXSPI_CFG_BLK_TAG     (0x42464346UL) // ascii "FCFB" Big Endian
+#define FLEXSPI_CFG_BLK_TAG (0x42464346UL)     // ascii "FCFB" Big Endian
 #define FLEXSPI_CFG_BLK_VERSION (0x56010400UL) // V1.4.0
-#define FLEXSPI_CFG_BLK_SIZE    (512)
+#define FLEXSPI_CFG_BLK_SIZE (512)
 
 /* FLEXSPI Feature related definitions */
 #define FLEXSPI_FEATURE_HAS_PARALLEL_MODE 1
 
 /* Lookup table related defintions */
-#define CMD_INDEX_READ        0
-#define CMD_INDEX_READSTATUS  1
+#define CMD_INDEX_READ 0
+#define CMD_INDEX_READSTATUS 1
 #define CMD_INDEX_WRITEENABLE 2
-#define CMD_INDEX_WRITE       4
+#define CMD_INDEX_WRITE 4
 
-#define CMD_LUT_SEQ_IDX_READ        0
-#define CMD_LUT_SEQ_IDX_READSTATUS  1
+#define CMD_LUT_SEQ_IDX_READ 0
+#define CMD_LUT_SEQ_IDX_READSTATUS 1
 #define CMD_LUT_SEQ_IDX_WRITEENABLE 3
-#define CMD_LUT_SEQ_IDX_WRITE       9
+#define CMD_LUT_SEQ_IDX_WRITE 9
 
-#define CMD_SDR        0x01
-#define CMD_DDR        0x21
-#define RADDR_SDR      0x02
-#define RADDR_DDR      0x22
-#define CADDR_SDR      0x03
-#define CADDR_DDR      0x23
-#define MODE1_SDR      0x04
-#define MODE1_DDR      0x24
-#define MODE2_SDR      0x05
-#define MODE2_DDR      0x25
-#define MODE4_SDR      0x06
-#define MODE4_DDR      0x26
-#define MODE8_SDR      0x07
-#define MODE8_DDR      0x27
-#define WRITE_SDR      0x08
-#define WRITE_DDR      0x28
-#define READ_SDR       0x09
-#define READ_DDR       0x29
-#define LEARN_SDR      0x0A
-#define LEARN_DDR      0x2A
-#define DATSZ_SDR      0x0B
-#define DATSZ_DDR      0x2B
-#define DUMMY_SDR      0x0C
-#define DUMMY_DDR      0x2C
+#define CMD_SDR 0x01
+#define CMD_DDR 0x21
+#define RADDR_SDR 0x02
+#define RADDR_DDR 0x22
+#define CADDR_SDR 0x03
+#define CADDR_DDR 0x23
+#define MODE1_SDR 0x04
+#define MODE1_DDR 0x24
+#define MODE2_SDR 0x05
+#define MODE2_DDR 0x25
+#define MODE4_SDR 0x06
+#define MODE4_DDR 0x26
+#define MODE8_SDR 0x07
+#define MODE8_DDR 0x27
+#define WRITE_SDR 0x08
+#define WRITE_DDR 0x28
+#define READ_SDR 0x09
+#define READ_DDR 0x29
+#define LEARN_SDR 0x0A
+#define LEARN_DDR 0x2A
+#define DATSZ_SDR 0x0B
+#define DATSZ_DDR 0x2B
+#define DUMMY_SDR 0x0C
+#define DUMMY_DDR 0x2C
 #define DUMMY_RWDS_SDR 0x0D
 #define DUMMY_RWDS_DDR 0x2D
-#define JMP_ON_CS      0x1F
-#define STOP           0
+#define JMP_ON_CS 0x1F
+#define STOP 0
 
 #define FLEXSPI_1PAD 0
 #define FLEXSPI_2PAD 1
@@ -88,15 +88,7 @@
 //!@brief Defintions for FlexSPI Serial Clock Frequency
 typedef enum _FlexSpiSerialClockFreq
 {
-    kFlexSpiSerialClk_30MHz  = 1,
-    kFlexSpiSerialClk_50MHz  = 2,
-    kFlexSpiSerialClk_60MHz  = 3,
-    kFlexSpiSerialClk_75MHz  = 4,
-    kFlexSpiSerialClk_80MHz  = 5,
-    kFlexSpiSerialClk_100MHz = 6,
-    kFlexSpiSerialClk_133MHz = 7,
-    kFlexSpiSerialClk_166MHz = 8,
-    kFlexSpiSerialClk_200MHz = 9,
+    kFlexSpiSerialClk_SafeFreq = 1,
 } flexspi_serial_clk_freq_t;
 
 //!@brief FlexSPI clock configuration type
@@ -109,24 +101,24 @@ enum
 //!@brief FlexSPI Read Sample Clock Source definition
 typedef enum _FlashReadSampleClkSource
 {
-    kFlexSPIReadSampleClk_LoopbackInternally      = 0,
-    kFlexSPIReadSampleClk_LoopbackFromDqsPad      = 1,
-    kFlexSPIReadSampleClk_LoopbackFromSckPad      = 2,
+    kFlexSPIReadSampleClk_LoopbackInternally = 0,
+    kFlexSPIReadSampleClk_LoopbackFromDqsPad = 1,
+    kFlexSPIReadSampleClk_LoopbackFromSckPad = 2,
     kFlexSPIReadSampleClk_ExternalInputFromDqsPad = 3,
 } flexspi_read_sample_clk_t;
 
 //!@brief FlexSPI IP Error codes
 typedef enum _FlexSpiIpCmdError
 {
-    kFlexSpiIpCmdError_NoError                          = 0,
+    kFlexSpiIpCmdError_NoError = 0,
     kFlexSpiIpCmdError_DataSizeNotEvenUnderParallelMode = 1,
-    kFlexSpiIpCmdError_JumpOnCsInIpCmd                  = 2,
-    kFlexSpiIpCmdError_UnknownOpCode                    = 3,
-    kFlexSpiIpCmdError_SdrDummyInDdrSequence            = 4,
-    kFlexSpiIpCmdError_DDRDummyInSdrSequence            = 5,
-    kFlexSpiIpCmdError_InvalidAddress                   = 6,
-    kFlexSpiIpCmdError_SequenceExecutionTimeout         = 0x0E,
-    kFlexSpiIpCmdError_FlashBoundaryAcrosss             = 0x0F
+    kFlexSpiIpCmdError_JumpOnCsInIpCmd = 2,
+    kFlexSpiIpCmdError_UnknownOpCode = 3,
+    kFlexSpiIpCmdError_SdrDummyInDdrSequence = 4,
+    kFlexSpiIpCmdError_DDRDummyInSdrSequence = 5,
+    kFlexSpiIpCmdError_InvalidAddress = 6,
+    kFlexSpiIpCmdError_SequenceExecutionTimeout = 0x0E,
+    kFlexSpiIpCmdError_FlashBoundaryAcrosss = 0x0F
 } flexspi_ipcmd_error_t;
 
 /* status code for flexspi */
@@ -135,36 +127,38 @@ enum _flexspi_status
     kStatus_FLEXSPI_SequenceExecutionTimeout =
         MAKE_STATUS(kStatusGroup_FLEXSPI, 0),                               //!< Status for Sequence Execution timeout
     kStatus_FLEXSPI_InvalidSequence = MAKE_STATUS(kStatusGroup_FLEXSPI, 1), //!< Status for Invalid Sequence
-    kStatus_FLEXSPI_DeviceTimeout   = MAKE_STATUS(kStatusGroup_FLEXSPI, 2), //!< Status for Device timeout
+    kStatus_FLEXSPI_DeviceTimeout = MAKE_STATUS(kStatusGroup_FLEXSPI, 2),   //!< Status for Device timeout
 };
 
 //!@brief Misc feature bit definitions
 enum
 {
-    kFlexSpiMiscOffset_DiffClkEnable            = 0, //!< Bit for Differential clock enable
-    kFlexSpiMiscOffset_Ck2Enable                = 1, //!< Bit for CK2 enable
-    kFlexSpiMiscOffset_ParallelEnable           = 2, //!< Bit for Parallel mode enable
-    kFlexSpiMiscOffset_WordAddressableEnable    = 3, //!< Bit for Word Addressable enable
-    kFlexSpiMiscOffset_SafeConfigFreqEnable     = 4, //!< Bit for Safe Configuration Frequency enable
+    kFlexSpiMiscOffset_DiffClkEnable = 0,            //!< Bit for Differential clock enable
+    kFlexSpiMiscOffset_Ck2Enable = 1,                //!< Bit for CK2 enable
+    kFlexSpiMiscOffset_ParallelEnable = 2,           //!< Bit for Parallel mode enable
+    kFlexSpiMiscOffset_WordAddressableEnable = 3,    //!< Bit for Word Addressable enable
+    kFlexSpiMiscOffset_SafeConfigFreqEnable = 4,     //!< Bit for Safe Configuration Frequency enable
     kFlexSpiMiscOffset_PadSettingOverrideEnable = 5, //!< Bit for Pad setting override enable
-    kFlexSpiMiscOffset_DdrModeEnable            = 6, //!< Bit for DDR clock confiuration indication.
-    kFlexSpiMiscOffset_UseValidTimeForAllFreq   = 7, //!< Bit for DLLCR settings under all modes
+    kFlexSpiMiscOffset_DdrModeEnable = 6,            //!< Bit for DDR clock confiuration indication.
+    kFlexSpiMiscOffset_UseValidTimeForAllFreq = 7,   //!< Bit for DLLCR settings under all modes
+    kFlexSpiMiscOffset_SecondPinMux = 8,             //!< Bit for Second Pinmux group
+    kFlexSpiMiscOffset_SecondDqsPinMux = 9,          //!< Bit for Second DQS Pinmux
 };
 
 //!@brief Flash Type Definition
 enum
 {
-    kFlexSpiDeviceType_SerialNOR    = 1,    //!< Flash devices are Serial NOR
-    kFlexSpiDeviceType_SerialNAND   = 2,    //!< Flash devices are Serial NAND
-    kFlexSpiDeviceType_SerialRAM    = 3,    //!< Flash devices are Serial RAM/HyperFLASH
+    kFlexSpiDeviceType_SerialNOR = 1,       //!< Flash devices are Serial NOR
+    kFlexSpiDeviceType_SerialNAND = 2,      //!< Flash devices are Serial NAND
+    kFlexSpiDeviceType_SerialRAM = 3,       //!< Flash devices are Serial RAM/HyperFLASH
     kFlexSpiDeviceType_MCP_NOR_NAND = 0x12, //!< Flash device is MCP device, A1 is Serial NOR, A2 is Serial NAND
-    kFlexSpiDeviceType_MCP_NOR_RAM  = 0x13, //!< Flash deivce is MCP device, A1 is Serial NOR, A2 is Serial RAMs
+    kFlexSpiDeviceType_MCP_NOR_RAM = 0x13,  //!< Flash deivce is MCP device, A1 is Serial NOR, A2 is Serial RAMs
 };
 
 //!@brief Flash Pad Definitions
 enum
 {
-    kSerialFlash_1Pad  = 1,
+    kSerialFlash_1Pad = 1,
     kSerialFlash_2Pads = 2,
     kSerialFlash_4Pads = 4,
     kSerialFlash_8Pads = 8,
@@ -202,8 +196,8 @@ typedef struct _FlexSPIConfig
     uint32_t version;           //!< [0x004-0x007] Version,[31:24] -'V', [23:16] - Major, [15:8] - Minor, [7:0] - bugfix
     uint32_t reserved0;         //!< [0x008-0x00b] Reserved for future use
     uint8_t readSampleClkSrc;   //!< [0x00c-0x00c] Read Sample Clock Source, valid value: 0/1/3
-    uint8_t dataHoldTime;       //!< [0x00d-0x00d] Data hold time, default value: 3
-    uint8_t dataSetupTime;      //!< [0x00e-0x00e] Date setup time, default value: 3
+    uint8_t csHoldTime;         //!< [0x00d-0x00d] CS hold time, default value: 3
+    uint8_t csSetupTime;        //!< [0x00e-0x00e] CS setup time, default value: 3
     uint8_t columnAddressWidth; //!< [0x00f-0x00f] Column Address with, for HyperBus protocol, it is fixed to 3, For
     //! Serial NAND, need to refer to datasheet
     uint8_t deviceModeCfgEnable; //!< [0x010-0x010] Device Mode Configure enable flag, 1 - Enable, 0 - Disable
@@ -288,90 +282,101 @@ typedef enum
 //!@brief Generate bit mask
 #define FLEXSPI_BITMASK(bit_offset) (1u << (bit_offset))
 
+#ifndef FLEXSPI_ENABLE_OCTAL_FLASH_SUPPORT
+#define FLEXSPI_ENABLE_OCTAL_FLASH_SUPPORT (1)
+#endif
+
+#ifndef FLEXSPI_ENABLE_NO_CMD_MODE_SUPPORT
+#define FLEXSPI_ENABLE_NO_CMD_MODE_SUPPORT (1)
+#endif
+
 /**********************************************************************************************************************
  * API
  *********************************************************************************************************************/
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-//!@brief Initialize FlexSPI
-status_t flexspi_init(uint32_t instance, flexspi_mem_config_t *config);
+    //!@brief Initialize FlexSPI
+    status_t flexspi_init(uint32_t instance, flexspi_mem_config_t *config);
 
-//!@brief Send Write enable command to Serial Memory device
-status_t flexspi_device_write_enable(uint32_t instance,
-                                     flexspi_mem_config_t *config,
-                                     bool isParallelMode,
-                                     uint32_t baseAddr);
+    //!@brief Send Write enable command to Serial Memory device
+    status_t flexspi_device_write_enable(uint32_t instance,
+                                         flexspi_mem_config_t *config,
+                                         bool isParallelMode,
+                                         uint32_t baseAddr);
 
-//!@brief Wait until device is idle
-status_t flexspi_device_wait_busy(uint32_t instance,
-                                  flexspi_mem_config_t *config,
-                                  bool isParallelMode,
-                                  uint32_t baseAddr);
+    //!@brief Wait until device is idle
+    status_t flexspi_device_wait_busy(uint32_t instance,
+                                      flexspi_mem_config_t *config,
+                                      bool isParallelMode,
+                                      uint32_t baseAddr);
 
-//!@brief Configure FlexSPI Lookup table
-status_t flexspi_update_lut(uint32_t instance, uint32_t seqIndex, const uint32_t *lutBase, uint32_t numberOfSeq);
+    //!@brief Configure FlexSPI Lookup table
+    status_t flexspi_update_lut(uint32_t instance, uint32_t seqIndex, const uint32_t *lutBase, uint32_t numberOfSeq);
 
-//!@brief Perform FlexSPI command
-status_t flexspi_command_xfer(uint32_t instance, flexspi_xfer_t *xfer);
+    //!@brief Perform FlexSPI command
+    status_t flexspi_command_xfer(uint32_t instance, flexspi_xfer_t *xfer);
 
-//!@brief Get FlexSPI Clock frequency
-extern status_t flexspi_get_clock(uint32_t instance, flexspi_clock_type_t type, uint32_t *freq);
+    //!@brief Get FlexSPI Clock frequency
+    extern status_t flexspi_get_clock(uint32_t instance, flexspi_clock_type_t type, uint32_t *freq);
 
-//!@brief Wait until FlexSPI controller becomes idle
-void flexspi_wait_idle(uint32_t instance);
+    //!@brief Wait until FlexSPI controller becomes idle
+    void flexspi_wait_idle(uint32_t instance);
 
-//!@brief Clear FlexSPI cache
-void flexspi_clear_cache(uint32_t instance);
+    //!@brief Clear FlexSPI cache
+    void flexspi_clear_cache(uint32_t instance);
 
-//!@brief Clear FlexSPI sequence pointer
-void flexspi_clear_sequence_pointer(uint32_t instance);
+    //!@brief Clear FlexSPI sequence pointer
+    void flexspi_clear_sequence_pointer(uint32_t instance);
 
-//!@brief Enable clock gate of FlexSPI
-extern void flexspi_clock_gate_enable(uint32_t instance);
+    //!@brief Enable clock gate of FlexSPI
+    extern void flexspi_clock_gate_enable(uint32_t instance);
 
-//!@brief Disable clock gate of FlexSPI
-extern void flexspi_clock_gate_disable(uint32_t instance);
+    //!@brief Disable clock gate of FlexSPI
+    extern void flexspi_clock_gate_disable(uint32_t instance);
 
-//!@brief Configure IOMUX for FlexSPI
-extern void flexspi_iomux_config(uint32_t instance, flexspi_mem_config_t *config);
+    //!@brief Configure IOMUX for FlexSPI
+    extern void flexspi_iomux_config(uint32_t instance, flexspi_mem_config_t *config);
 
-//!@brief Configure Clock for FlexSPI
-extern void flexspi_clock_config(uint32_t instance, flexspi_serial_clk_freq_t freq, uint32_t sampleClkMode);
+    //!@brief Configure Clock for FlexSPI
+    extern void flexspi_clock_config(uint32_t instance, uint32_t freq, uint32_t sampleClkMode);
 
-//!@brief Check whether Pad Setting Override feature is enabled.
-bool flexspi_is_padsetting_override_enable(flexspi_mem_config_t *config);
+    //!@brief Check whether Pad Setting Override feature is enabled.
+    bool flexspi_is_padsetting_override_enable(flexspi_mem_config_t *config);
 
-//!@brief Check whether Differential clock feature is enabled.
-bool flexspi_is_differential_clock_enable(flexspi_mem_config_t *config);
+    //!@brief Check whether Differential clock feature is enabled.
+    bool flexspi_is_differential_clock_enable(flexspi_mem_config_t *config);
 
-//!@brief Check whether DDR mode feature is enabled.
-bool flexspi_is_ddr_mode_enable(flexspi_mem_config_t *config);
+    //!@brief Check whether DDR mode feature is enabled.
+    bool flexspi_is_ddr_mode_enable(flexspi_mem_config_t *config);
 
-//!@brief Check whether CK2 feature is enabled.
-bool flexspi_is_ck2_enabled(flexspi_mem_config_t *config);
+    //!@brief Check whether CK2 feature is enabled.
+    bool flexspi_is_ck2_enabled(flexspi_mem_config_t *config);
 
-//!@brief Check whether Parallel mode feature is enabled.
-bool flexspi_is_parallel_mode(flexspi_mem_config_t *config);
+    //!@brief Check whether Parallel mode feature is enabled.
+    bool flexspi_is_parallel_mode(flexspi_mem_config_t *config);
 
-//!@brief Check whether device works under word addressable mode
-bool flexspi_is_word_addressable(flexspi_mem_config_t *config);
+    //!@brief Check whether device works under word addressable mode
+    bool flexspi_is_word_addressable(flexspi_mem_config_t *config);
 
-//!@brief Configure FlexSPI DLL register
-status_t flexspi_configure_dll(uint32_t instance, flexspi_mem_config_t *config);
+    //!@brief Configure FlexSPI DLL register
+    status_t flexspi_configure_dll(uint32_t instance, flexspi_mem_config_t *config);
 
-//!@brief Half FlexSPI Clock
-void flexspi_half_clock_control(uint32_t instance, uint32_t option);
+    //!@brief Half FlexSPI Clock
+    void flexspi_half_clock_control(uint32_t instance, uint32_t option);
 
-//!@brief Set Failfase setting info
-extern status_t flexspi_set_failsafe_setting(flexspi_mem_config_t *config);
+    //!@brief Set Failfase setting info
+    extern status_t flexspi_set_failsafe_setting(flexspi_mem_config_t *config);
 
-//!@brief Get Maximumn clock frequency
-extern status_t flexspi_get_max_supported_freq(uint32_t instance, uint32_t *freq, uint32_t clkMode);
+    //!@brief Get Maximumn clock frequency
+    extern status_t flexspi_get_max_supported_freq(uint32_t instance, uint32_t *freq, uint32_t clkMode);
 
-extern void flexspi_sw_delay_us(uint64_t us);
+    extern void flexspi_sw_delay_us(uint64_t us);
+
+    extern void flexspi_update_padsetting(flexspi_mem_config_t *config, uint32_t driveStrength);
 
 #ifdef __cplusplus
 }

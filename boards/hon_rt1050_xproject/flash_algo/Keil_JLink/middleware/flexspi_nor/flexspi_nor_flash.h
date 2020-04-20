@@ -1,8 +1,10 @@
 /*
- * Copyright (c) 2016, Freescale Semiconductor, Inc.
- * Copyright 2016-2017 NXP
+ * Copyright 2014-2015 Freescale Semiconductor, Inc.
+ * Copyright 2016-2020 NXP
+ * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
+ *
  */
 
 #ifndef __FLEXSPI_NOR_FLASH_H__
@@ -12,14 +14,14 @@
 #include "flexspi/fsl_flexspi.h"
 
 /*  */
-#define NOR_CMD_INDEX_READ        CMD_INDEX_READ        //!< 0
-#define NOR_CMD_INDEX_READSTATUS  CMD_INDEX_READSTATUS  //!< 1
+#define NOR_CMD_INDEX_READ CMD_INDEX_READ               //!< 0
+#define NOR_CMD_INDEX_READSTATUS CMD_INDEX_READSTATUS   //!< 1
 #define NOR_CMD_INDEX_WRITEENABLE CMD_INDEX_WRITEENABLE //!< 2
 #define NOR_CMD_INDEX_ERASESECTOR 3                     //!< 3
 #define NOR_CMD_INDEX_PAGEPROGRAM CMD_INDEX_WRITE       //!< 4
-#define NOR_CMD_INDEX_CHIPERASE   5                     //!< 5
-#define NOR_CMD_INDEX_DUMMY       6                     //!< 6
-#define NOR_CMD_INDEX_ERASEBLOCK  7                     //!< 7
+#define NOR_CMD_INDEX_CHIPERASE 5                       //!< 5
+#define NOR_CMD_INDEX_DUMMY 6                           //!< 6
+#define NOR_CMD_INDEX_ERASEBLOCK 7                      //!< 7
 
 #define NOR_CMD_LUT_SEQ_IDX_READ CMD_LUT_SEQ_IDX_READ //!< 0  READ LUT sequence id in lookupTable stored in config block
 #define NOR_CMD_LUT_SEQ_IDX_READSTATUS \
@@ -31,7 +33,7 @@
 #define NOR_CMD_LUT_SEQ_IDX_WRITEENABLE_XPI \
     4 //!< 4  Write Enable DPI/QPI/OPI sequence id in lookupTable stored in config block
 #define NOR_CMD_LUT_SEQ_IDX_ERASESECTOR 5 //!< 5  Erase Sector sequence id in lookupTable stored in config block
-#define NOR_CMD_LUT_SEQ_IDX_ERASEBLOCK  8 //!< 8 Erase Block sequence id in lookupTable stored in config block
+#define NOR_CMD_LUT_SEQ_IDX_ERASEBLOCK 8  //!< 8 Erase Block sequence id in lookupTable stored in config block
 #define NOR_CMD_LUT_SEQ_IDX_PAGEPROGRAM \
     CMD_LUT_SEQ_IDX_WRITE                //!< 9  Program sequence id in lookupTable stored in config block
 #define NOR_CMD_LUT_SEQ_IDX_CHIPERASE 11 //!< 11 Chip Erase sequence in lookupTable id stored in config block
@@ -44,12 +46,11 @@
 /* FlexSPI NOR status */
 enum _flexspi_nor_status
 {
-    kStatusGroup_FLEXSPINOR        = 200,
     kStatus_FLEXSPINOR_ProgramFail = MAKE_STATUS(kStatusGroup_FLEXSPINOR, 0), //!< Status for Page programming failure
     kStatus_FLEXSPINOR_EraseSectorFail = MAKE_STATUS(kStatusGroup_FLEXSPINOR, 1), //!< Status for Sector Erase failure
-    kStatus_FLEXSPINOR_EraseAllFail    = MAKE_STATUS(kStatusGroup_FLEXSPINOR, 2), //!< Status for Chip Erase failure
-    kStatus_FLEXSPINOR_WaitTimeout     = MAKE_STATUS(kStatusGroup_FLEXSPINOR, 3), //!< Status for timeout
-    kStatus_FlexSPINOR_NotSupported    = MAKE_STATUS(kStatusGroup_FLEXSPINOR, 4), // Status for PageSize overflow
+    kStatus_FLEXSPINOR_EraseAllFail = MAKE_STATUS(kStatusGroup_FLEXSPINOR, 2),    //!< Status for Chip Erase failure
+    kStatus_FLEXSPINOR_WaitTimeout = MAKE_STATUS(kStatusGroup_FLEXSPINOR, 3),     //!< Status for timeout
+    kStatus_FlexSPINOR_NotSupported = MAKE_STATUS(kStatusGroup_FLEXSPINOR, 4),    // Status for PageSize overflow
     kStatus_FlexSPINOR_WriteAlignmentError = MAKE_STATUS(kStatusGroup_FLEXSPINOR, 5), //!< Status for Alignement error
     kStatus_FlexSPINOR_CommandFailure =
         MAKE_STATUS(kStatusGroup_FLEXSPINOR, 6), //!< Status for Erase/Program Verify Error
@@ -63,35 +64,43 @@ enum _flexspi_nor_status
 
 enum
 {
-    kSerialNorCfgOption_Tag                         = 0x0c,
-    kSerialNorCfgOption_DeviceType_ReadSFDP_SDR     = 0,
-    kSerialNorCfgOption_DeviceType_ReadSFDP_DDR     = 1,
-    kSerialNorCfgOption_DeviceType_HyperFLASH1V8    = 2,
-    kSerialNorCfgOption_DeviceType_HyperFLASH3V0    = 3,
+    kSerialNorCfgOption_Tag = 0x0c,
+    kSerialNorCfgOption_DeviceType_ReadSFDP_SDR = 0,
+    kSerialNorCfgOption_DeviceType_ReadSFDP_DDR = 1,
+    kSerialNorCfgOption_DeviceType_HyperFLASH1V8 = 2,
+    kSerialNorCfgOption_DeviceType_HyperFLASH3V0 = 3,
     kSerialNorCfgOption_DeviceType_MacronixOctalDDR = 4,
     kSerialNorCfgOption_DeviceType_MacronixOctalSDR = 5,
-    kSerialNorCfgOption_DeviceType_MicronOctalDDR   = 6,
-    kSerialNorCfgOption_DeviceType_MicronOctalSDR   = 7,
-    kSerialNorCfgOption_DeviceType_AdestoOctalDDR   = 8,
-    kSerialNorCfgOption_DeviceType_AdestoOctalSDR   = 9,
+    kSerialNorCfgOption_DeviceType_MicronOctalDDR = 6,
+    kSerialNorCfgOption_DeviceType_MicronOctalSDR = 7,
+    kSerialNorCfgOption_DeviceType_AdestoOctalDDR = 8,
+    kSerialNorCfgOption_DeviceType_AdestoOctalSDR = 9,
 };
 
 enum
 {
-    kSerialNorQuadMode_NotConfig            = 0,
-    kSerialNorQuadMode_StatusReg1_Bit6      = 1,
-    kSerialNorQuadMode_StatusReg2_Bit1      = 2,
-    kSerialNorQuadMode_StatusReg2_Bit7      = 3,
+    kSerialNorQuadMode_NotConfig = 0,
+    kSerialNorQuadMode_StatusReg1_Bit6 = 1,
+    kSerialNorQuadMode_StatusReg2_Bit1 = 2,
+    kSerialNorQuadMode_StatusReg2_Bit7 = 3,
     kSerialNorQuadMode_StatusReg2_Bit1_0x31 = 4,
 };
 
 enum
 {
-    kSerialNorEnhanceMode_Disabled         = 0,
-    kSerialNorEnhanceMode_0_4_4_Mode       = 1,
-    kSerialNorEnhanceMode_0_8_8_Mode       = 2,
+    kSerialNorEnhanceMode_Disabled = 0,
+    kSerialNorEnhanceMode_0_4_4_Mode = 1,
+    kSerialNorEnhanceMode_0_8_8_Mode = 2,
     kSerialNorEnhanceMode_DataOrderSwapped = 3,
-    kSerialNorEnhanceMode_2ndPinMux        = 4,
+    kSerialNorEnhanceMode_2ndPinMux = 4,
+};
+
+enum
+{
+    kSerialNorConnection_SinglePortA,
+    kSerialNorConnection_Parallel,
+    kSerialNorConnection_SinglePortB,
+    kSerialNorConnection_BothPorts
 };
 
 /*
@@ -119,9 +128,13 @@ typedef struct _serial_nor_config_option
     {
         struct
         {
-            uint32_t dummy_cycles : 8;    //!< Dummy cycles before read
-            uint32_t status_override : 8; //!< Override status register value during device mode configuration
-            uint32_t reserved : 16;       //!< Reserved for future use
+            uint32_t dummy_cycles : 8;     //!< Dummy cycles before read
+            uint32_t status_override : 8;  //!< Override status register value during device mode configuration
+            uint32_t pinmux_group : 4;     //!< The pinmux group selection
+            uint32_t dqs_pinmux_group : 4; //!< The DQS Pinmux Group Selection
+            uint32_t drive_strength : 4;   //!< The Drive Strength of FlexSPI Pads
+            uint32_t flash_connection : 4; //!< Flash connection option: 0 - Single Flash connected to port A, 1 -
+            //! Parallel mode, 2 - Single Flash connected to Port B
         } B;
         uint32_t U;
     } option1;
@@ -142,13 +155,13 @@ typedef union
 
 enum
 {
-    kRestoreSequence_None           = 0,
-    kRestoreSequence_HW_Reset       = 1,
-    kRestoreSequence_4QPI_FF        = 2,
-    kRestoreSequence_5QPI_FF        = 3,
-    kRestoreSequence_8QPI_FF        = 4,
-    kRestoreSequence_Send_F0        = 5,
-    kRestoreSequence_Send_66_99     = 6,
+    kRestoreSequence_None = 0,
+    kRestoreSequence_HW_Reset = 1,
+    kRestoreSequence_4QPI_FF = 2,
+    kRestoreSequence_5QPI_FF = 3,
+    kRestoreSequence_8QPI_FF = 4,
+    kRestoreSequence_Send_F0 = 5,
+    kRestoreSequence_Send_66_99 = 6,
     kRestoreSequence_Send_6699_9966 = 7,
     kRestoreSequence_Send_06_FF, // Adesto EcoXIP
 };
@@ -156,12 +169,12 @@ enum
 enum
 {
     kFlashInstMode_ExtendedSpi = 0x00,
-    kFlashInstMode_0_4_4_SDR   = 0x01,
-    kFlashInstMode_0_4_4_DDR   = 0x02,
-    kFlashInstMode_QPI_SDR     = 0x41,
-    kFlashInstMode_QPI_DDR     = 0x42,
-    kFlashInstMode_OPI_SDR     = 0x81,
-    kFlashInstMode_OPI_DDR     = 0x82,
+    kFlashInstMode_0_4_4_SDR = 0x01,
+    kFlashInstMode_0_4_4_DDR = 0x02,
+    kFlashInstMode_QPI_SDR = 0x41,
+    kFlashInstMode_QPI_DDR = 0x42,
+    kFlashInstMode_OPI_SDR = 0x81,
+    kFlashInstMode_OPI_DDR = 0x82,
 };
 
 /*

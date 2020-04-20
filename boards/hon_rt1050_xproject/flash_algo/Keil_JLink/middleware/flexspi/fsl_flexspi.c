@@ -1,8 +1,10 @@
 /*
- * Copyright (c) 2016, Freescale Semiconductor, Inc.
- * Copyright 2016-2017 NXP
+ * Copyright 2014-2015 Freescale Semiconductor, Inc.
+ * Copyright 2016-2019 NXP
+ * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
+ *
  */
 #include "fsl_flexspi.h"
 #include <assert.h>
@@ -12,11 +14,11 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-#define FLEXSPI_LUT_KEY_VAL     (0x5AF05AF0ul) //!< FlesSPI Unlock/Lock Key
-#define FLEXSPI_WAIT_TIMEOUT_NS (500000000UL)  //!< FlexSPI timeout value, 500ms
-#define FLEXSPI_FREQ_1GHz       (1000000000UL)
+#define FLEXSPI_LUT_KEY_VAL (0x5AF05AF0ul)    //!< FlesSPI Unlock/Lock Key
+#define FLEXSPI_WAIT_TIMEOUT_NS (500000000UL) //!< FlexSPI timeout value, 500ms
+#define FLEXSPI_FREQ_1GHz (1000000000UL)
 
-#define FREQ_1MHz             (1000000UL)
+#define FREQ_1MHz (1000000UL)
 #define FLEXSPI_DLLCR_DEFAULT (0x100UL)
 
 #define FLEXSPI0_CLK_GATE_OFFSET 13U
@@ -84,18 +86,18 @@ static void flexspi_swreset(FLEXSPI_Type *base)
 static void flexspi_unlock_lut(FLEXSPI_Type *base)
 {
     base->LUTKEY = FLEXSPI_LUT_KEY_VAL;
-    base->LUTCR  = 0x02;
+    base->LUTCR = 0x02;
 }
 
 static void flexspi_lock_lut(FLEXSPI_Type *base)
 {
     base->LUTKEY = FLEXSPI_LUT_KEY_VAL;
-    base->LUTCR  = 0x01;
+    base->LUTCR = 0x01;
 }
 
 bool flexspi_is_parallel_mode(flexspi_mem_config_t *config)
 {
-    if (config->controllerMiscOption & (1 << kFlexSpiMiscOffset_ParallelEnable))
+    if (config->controllerMiscOption & FLEXSPI_BITMASK(kFlexSpiMiscOffset_ParallelEnable))
     {
         return true;
     }
@@ -107,7 +109,7 @@ bool flexspi_is_parallel_mode(flexspi_mem_config_t *config)
 
 bool flexspi_is_padsetting_override_enable(flexspi_mem_config_t *config)
 {
-    if (config->controllerMiscOption & (1 << kFlexSpiMiscOffset_PadSettingOverrideEnable))
+    if (config->controllerMiscOption & FLEXSPI_BITMASK(kFlexSpiMiscOffset_PadSettingOverrideEnable))
     {
         return true;
     }
@@ -119,7 +121,7 @@ bool flexspi_is_padsetting_override_enable(flexspi_mem_config_t *config)
 
 bool flexspi_is_differential_clock_enable(flexspi_mem_config_t *config)
 {
-    if (config->controllerMiscOption & (1 << kFlexSpiMiscOffset_DiffClkEnable))
+    if (config->controllerMiscOption & FLEXSPI_BITMASK(kFlexSpiMiscOffset_DiffClkEnable))
     {
         return true;
     }
@@ -131,7 +133,7 @@ bool flexspi_is_differential_clock_enable(flexspi_mem_config_t *config)
 
 bool flexspi_is_word_addressable(flexspi_mem_config_t *config)
 {
-    if (config->controllerMiscOption & (1 << kFlexSpiMiscOffset_WordAddressableEnable))
+    if (config->controllerMiscOption & FLEXSPI_BITMASK(kFlexSpiMiscOffset_WordAddressableEnable))
     {
         return true;
     }
@@ -143,7 +145,7 @@ bool flexspi_is_word_addressable(flexspi_mem_config_t *config)
 
 bool flexspi_is_ck2_enabled(flexspi_mem_config_t *config)
 {
-    if (config->controllerMiscOption & (1 << kFlexSpiMiscOffset_Ck2Enable))
+    if (config->controllerMiscOption & FLEXSPI_BITMASK(kFlexSpiMiscOffset_Ck2Enable))
     {
         return true;
     }
@@ -155,7 +157,7 @@ bool flexspi_is_ck2_enabled(flexspi_mem_config_t *config)
 
 bool flexspi_is_ddr_mode_enable(flexspi_mem_config_t *config)
 {
-    if (config->controllerMiscOption & (1 << kFlexSpiMiscOffset_DdrModeEnable))
+    if (config->controllerMiscOption & FLEXSPI_BITMASK(kFlexSpiMiscOffset_DdrModeEnable))
     {
         return true;
     }
@@ -173,10 +175,10 @@ status_t flexspi_configure_dll(uint32_t instance, flexspi_mem_config_t *config)
 
     do
     {
-        FLEXSPI_Type *base   = flexspi_get_module_base(instance);
+        FLEXSPI_Type *base = flexspi_get_module_base(instance);
         bool isUnifiedConfig = true;
         uint32_t flexspiRootClk;
-        uint32_t flexspiDll[2];
+        uint32_t flexspiDll[2] = { FLEXSPI_DLLCR_DEFAULT, FLEXSPI_DLLCR_DEFAULT };
         uint32_t dllValue;
         uint32_t temp;
 
@@ -212,6 +214,7 @@ status_t flexspi_configure_dll(uint32_t instance, flexspi_mem_config_t *config)
             flexspiDll[0] = FLEXSPI_DLLCR_DEFAULT; // 1 fixed delay cells in DLL delay chain)
             flexspiDll[1] = FLEXSPI_DLLCR_DEFAULT; // 1 fixed delay cells in DLL delay chain)
         }
+#if FLEXSPI_ENABLE_OCTAL_FLASH_SUPPORT
         else
         {
             flexspi_get_clock(instance, kFlexSpiClock_SerialRootClock, &flexspiRootClk);
@@ -247,7 +250,7 @@ status_t flexspi_configure_dll(uint32_t instance, flexspi_mem_config_t *config)
                     if (dataValidTimeH < 1)
                     {
                         // Convert the data valid time to n ps.
-                        temp = config->dataValidTime[i].time_100ps * 100ul;
+                        temp = dataValidTimeL * 100ul;
                         if (temp < 1)
                         {
                             uint32_t maxFreq;
@@ -291,6 +294,7 @@ status_t flexspi_configure_dll(uint32_t instance, flexspi_mem_config_t *config)
                 }
             }
         }
+#endif // FLEXSPI_ENABLE_OCTAL_FLASH_SUPPORT
 
         if (base->MCR0 & FLEXSPI_MCR0_MDIS_MASK)
         {
@@ -358,7 +362,7 @@ status_t flexspi_get_ticks(uint32_t *ticks, uint32_t intervalNs, uint32_t freq, 
 
 status_t flexspi_config_mcr1(uint32_t instance, flexspi_mem_config_t *config)
 {
-    uint32_t seqWaitTicks    = 0xFFFFu;
+    uint32_t seqWaitTicks = 0xFFFFu;
     uint32_t ahbBusWaitTicks = 0xFFFFu;
     uint32_t serialRootClockFreq;
     uint32_t ahbBusClockFreq;
@@ -454,11 +458,11 @@ status_t flexspi_config_flash_control_registers(uint32_t instance, flexspi_mem_c
         for (index = 0; index < FLEXSPI_FLSHCR0_COUNT; index++)
         {
             // Configure FLSHCR0
-            flashSize            = *flashSizeStart++;
+            flashSize = *flashSizeStart++;
             base->FLSHCR0[index] = flashSize / 1024;
 
             // Configure FLSHCR1
-            temp = FLEXSPI_FLSHCR1_TCSS(config->dataSetupTime) | FLEXSPI_FLSHCR1_TCSH(config->dataHoldTime) |
+            temp = FLEXSPI_FLSHCR1_TCSS(config->csSetupTime) | FLEXSPI_FLSHCR1_TCSH(config->csHoldTime) |
                    FLEXSPI_FLSHCR1_CAS(config->columnAddressWidth);
             if (flexspi_is_word_addressable(config))
             {
@@ -553,8 +557,8 @@ status_t flexspi_device_write_enable(uint32_t instance,
         }
         flexspi_xfer_t flashXfer;
         flashXfer.operation = kFlexSpiOperation_Command;
-        flashXfer.seqNum    = 1;
-        flashXfer.seqId     = CMD_LUT_SEQ_IDX_WRITEENABLE;
+        flashXfer.seqNum = 1;
+        flashXfer.seqId = CMD_LUT_SEQ_IDX_WRITEENABLE;
 #if FLEXSPI_FEATURE_HAS_PARALLEL_MODE
         flashXfer.isParallelModeEnable = isParallelMode;
 #else
@@ -564,12 +568,12 @@ status_t flexspi_device_write_enable(uint32_t instance,
 
         if (config->lutCustomSeqEnable && config->lutCustomSeq[CMD_INDEX_WRITEENABLE].seqNum)
         {
-            flashXfer.seqId  = config->lutCustomSeq[CMD_INDEX_WRITEENABLE].seqId;
+            flashXfer.seqId = config->lutCustomSeq[CMD_INDEX_WRITEENABLE].seqId;
             flashXfer.seqNum = config->lutCustomSeq[CMD_INDEX_WRITEENABLE].seqNum;
         }
         flexspi_update_lut(instance, CMD_LUT_FOR_IP_CMD, &config->lookupTable[4 * flashXfer.seqId], flashXfer.seqNum);
         flashXfer.seqId = CMD_LUT_FOR_IP_CMD;
-        status          = flexspi_command_xfer(instance, &flashXfer);
+        status = flexspi_command_xfer(instance, &flashXfer);
 
     } while (0);
 
@@ -597,19 +601,19 @@ status_t flexspi_device_workmode_config(uint32_t instance, flexspi_mem_config_t 
         }
 
         flexspi_xfer_t flashXfer;
-        flashXfer.operation            = kFlexSpiOperation_Config;
-        flashXfer.baseAddress          = baseAddr;
-        flashXfer.seqId                = config->deviceModeSeq.seqId;
-        flashXfer.seqNum               = config->deviceModeSeq.seqNum;
+        flashXfer.operation = kFlexSpiOperation_Config;
+        flashXfer.baseAddress = baseAddr;
+        flashXfer.seqId = config->deviceModeSeq.seqId;
+        flashXfer.seqNum = config->deviceModeSeq.seqNum;
         flashXfer.isParallelModeEnable = false;
-        flashXfer.txBuffer             = &config->deviceModeArg;
-        flashXfer.txSize               = 4;
+        flashXfer.txBuffer = &config->deviceModeArg;
+        flashXfer.txSize = 4;
 
         flexspi_device_write_enable(instance, config, false, baseAddr);
         // Update LUT 1 for device mode config command
         flexspi_update_lut(instance, CMD_LUT_FOR_IP_CMD, &config->lookupTable[4 * flashXfer.seqId], flashXfer.seqNum);
         flashXfer.seqId = CMD_LUT_FOR_IP_CMD;
-        status          = flexspi_command_xfer(instance, &flashXfer);
+        status = flexspi_command_xfer(instance, &flashXfer);
         if (status != kStatus_Success)
         {
             break;
@@ -675,10 +679,10 @@ status_t flexspi_device_cmd_config(uint32_t instance, flexspi_mem_config_t *conf
 
         flexspi_xfer_t flashXfer;
         uint32_t index;
-        flashXfer.operation            = kFlexSpiOperation_Config;
-        flashXfer.baseAddress          = baseAddr;
+        flashXfer.operation = kFlexSpiOperation_Config;
+        flashXfer.baseAddress = baseAddr;
         flashXfer.isParallelModeEnable = false;
-        flashXfer.txSize               = 4;
+        flashXfer.txSize = 4;
 
         for (index = 0; index < 3; index++)
         {
@@ -691,8 +695,8 @@ status_t flexspi_device_cmd_config(uint32_t instance, flexspi_mem_config_t *conf
                     continue;
                 }
 
-                flashXfer.seqId    = config->configCmdSeqs[index].seqId;
-                flashXfer.seqNum   = config->configCmdSeqs[index].seqNum;
+                flashXfer.seqId = config->configCmdSeqs[index].seqId;
+                flashXfer.seqNum = config->configCmdSeqs[index].seqNum;
                 flashXfer.txBuffer = &config->configCmdArgs[index];
 
                 status = flexspi_device_write_enable(instance, config, false, baseAddr);
@@ -704,7 +708,7 @@ status_t flexspi_device_cmd_config(uint32_t instance, flexspi_mem_config_t *conf
                 flexspi_update_lut(instance, CMD_LUT_FOR_IP_CMD, &config->lookupTable[4 * flashXfer.seqId],
                                    flashXfer.seqNum);
                 flashXfer.seqId = CMD_LUT_FOR_IP_CMD;
-                status          = flexspi_command_xfer(instance, &flashXfer);
+                status = flexspi_command_xfer(instance, &flashXfer);
                 if (status != kStatus_Success)
                 {
                     return status;
@@ -783,12 +787,9 @@ status_t flexspi_init(uint32_t instance, flexspi_mem_config_t *config)
          *
          *  ROM configures the FlexSPI Serial clock to 30MHz if one of below case is met:
          *  1. ROM is required to configure external device to certain modes at safe frequency
-         *  2. Device is under DDR mode. In such case, the serial clock is twice
-         *     than the request clock for SDR command, it may exceed the highest frequency
          */
         bool need_safe_freq = (config->deviceModeCfgEnable || config->configCmdEnable) &&
-                              ((config->controllerMiscOption & (1 << kFlexSpiMiscOffset_SafeConfigFreqEnable)) ||
-                               flexspi_is_ddr_mode_enable(config));
+                              ((config->controllerMiscOption & (1 << kFlexSpiMiscOffset_SafeConfigFreqEnable)));
 
         if (config->tag != FLEXSPI_CFG_BLK_TAG)
         {
@@ -804,13 +805,12 @@ status_t flexspi_init(uint32_t instance, flexspi_mem_config_t *config)
         if (need_safe_freq)
         {
             // Configure FlexSPI serial clock using safe frequency
-            flexspi_clock_config(instance, kFlexSpiSerialClk_30MHz, kFlexSpiClk_SDR);
+            flexspi_clock_config(instance, kFlexSpiSerialClk_SafeFreq, kFlexSpiClk_SDR);
         }
         else
         {
             // Configure FlexSPI serial clock with specified frequency
-            flexspi_clock_config(instance, (flexspi_serial_clk_freq_t)config->serialClkFreq,
-                                 flexspi_is_ddr_mode_enable(config));
+            flexspi_clock_config(instance, config->serialClkFreq, flexspi_is_ddr_mode_enable(config));
         }
         // Enable FlexSPI Clock Gate
         flexspi_clock_gate_enable(instance);
@@ -826,6 +826,7 @@ status_t flexspi_init(uint32_t instance, flexspi_mem_config_t *config)
                                          FLEXSPI_MCR0_AHBGRANTWAIT_MASK | FLEXSPI_MCR0_COMBINATIONEN_MASK |
                                          FLEXSPI_MCR0_ATDFEN_MASK | FLEXSPI_MCR0_ARDFEN_MASK);
 
+#if FLEXSPI_ENABLE_NO_CMD_MODE_SUPPORT
         // If this condition meets, it means FlexSPI PORT B exists, the the 8 bit is supported by combining PORTA[3:0]
         // with PORTB[3:0]
         if ((sizeof(base->FLSHCR1) / sizeof(base->FLSHCR1[0])) > 2)
@@ -836,6 +837,7 @@ status_t flexspi_init(uint32_t instance, flexspi_mem_config_t *config)
                 mcr0 |= FLEXSPI_MCR0_COMBINATIONEN_MASK;
             }
         }
+#endif
 
         // Configure AHBGRANTWAIT and IPGRANTWAIT
         mcr0 |= FLEXSPI_MCR0_IPGRANTWAIT_MASK | FLEXSPI_MCR0_AHBGRANTWAIT_MASK;
@@ -843,12 +845,15 @@ status_t flexspi_init(uint32_t instance, flexspi_mem_config_t *config)
         mcr0 |= FLEXSPI_MCR0_RXCLKSRC(config->readSampleClkSrc);
         base->MCR0 = mcr0;
 
+#if FLEXSPI_ENABLE_NO_CMD_MODE_SUPPORT
         // Configure MCR1
         flexspi_config_mcr1(instance, config);
+#endif
 
         // Configure MCR2
         base->MCR2 &= ~FLEXSPI_MCR2_SAMEDEVICEEN_MASK;
 
+#if FLEXSPI_ENABLE_NO_CMD_MODE_SUPPORT
         // If this condition meets, it means FlexSPI PORT B exists, SCKB pads used as PORTB SCK with be used a inverted
         // SCK for PORTA
         // Enable differential clock as needed.
@@ -859,6 +864,7 @@ status_t flexspi_init(uint32_t instance, flexspi_mem_config_t *config)
                 base->MCR2 |= FLEXSPI_MCR2_SCKBDIFFOPT_MASK;
             }
         }
+#endif
 
         // Configure AHB buffer
         flexspi_config_ahb_buffers(base, config);
@@ -902,8 +908,7 @@ status_t flexspi_init(uint32_t instance, flexspi_mem_config_t *config)
              */
             base->MCR0 |= FLEXSPI_MCR0_MDIS_MASK;
             // Re-configure FlexSPI Serial clock frequency in order to acheive high performance.
-            flexspi_clock_config(instance, (flexspi_serial_clk_freq_t)config->serialClkFreq,
-                                 flexspi_is_ddr_mode_enable(config));
+            flexspi_clock_config(instance, config->serialClkFreq, flexspi_is_ddr_mode_enable(config));
 
             // Re-Configure MCR1
             flexspi_config_mcr1(instance, config);
@@ -935,13 +940,13 @@ status_t flexspi_update_lut(uint32_t instance, uint32_t seqIndex, const uint32_t
         flexspi_wait_until_ip_idle(base);
 
         uint32_t start_index = 0;
-        uint32_t end_index   = 0;
+        uint32_t end_index = 0;
         volatile uint32_t *flexspiLutPtr;
 
         flexspi_unlock_lut(base);
 
-        start_index   = 4 * seqIndex;
-        end_index     = 4 * (seqIndex + seqNumber);
+        start_index = 4 * seqIndex;
+        end_index = 4 * (seqIndex + seqNumber);
         flexspiLutPtr = &base->LUT[start_index];
         while (start_index < end_index)
         {
@@ -960,9 +965,10 @@ status_t flexspi_update_lut(uint32_t instance, uint32_t seqIndex, const uint32_t
     return status;
 }
 
+#if (!BL_FEATURE_HAS_FLEXSPI_NOR_ROMAPI) || (!ROM_API_HAS_FLEXSPI_XFER)
 status_t flexspi_command_xfer(uint32_t instance, flexspi_xfer_t *xfer)
 {
-    status_t status    = kStatus_InvalidArgument;
+    status_t status = kStatus_InvalidArgument;
     FLEXSPI_Type *base = flexspi_get_module_base(instance);
 
     do
@@ -976,7 +982,7 @@ status_t flexspi_command_xfer(uint32_t instance, flexspi_xfer_t *xfer)
 #if !FLEXSPI_FEATURE_HAS_PARALLEL_MODE
         bool isParallelMode = false;
 #else
-        bool isParallelMode            = xfer->isParallelModeEnable;
+        bool isParallelMode = xfer->isParallelModeEnable;
 #endif // FLEXSPI_FEATURE_HAS_PARALLEL_MODE
 
         flexspi_wait_until_ip_idle(base);
@@ -1008,16 +1014,16 @@ status_t flexspi_command_xfer(uint32_t instance, flexspi_xfer_t *xfer)
         if (xfer->operation == kFlexSpiOperation_Read)
         {
             register uint32_t xferRemainingSize = xfer->rxSize;
-            register uint32_t *xferBufferPtr    = xfer->rxBuffer;
+            register uint32_t *xferBufferPtr = xfer->rxBuffer;
             if ((size_t)xferBufferPtr & 0x03)
             {
                 break;
             }
             // Set Half RX FIFO size as Watermark size
-            uint32_t rx_fifo_size  = sizeof(base->RFDR);
-            uint32_t watermark     = rx_fifo_size / 8 / 2;
+            uint32_t rx_fifo_size = sizeof(base->RFDR);
+            uint32_t watermark = rx_fifo_size / 8 / 2;
             uint32_t burst_rx_size = rx_fifo_size / 2;
-            base->IPRXFCR          = FLEXSPI_IPRXFCR_RXWMRK(watermark - 1);
+            base->IPRXFCR = FLEXSPI_IPRXFCR_RXWMRK(watermark - 1);
 
             // Clear FIFO before read
             flexspi_clear_ip_rxfifo(base);
@@ -1074,7 +1080,7 @@ status_t flexspi_command_xfer(uint32_t instance, flexspi_xfer_t *xfer)
         if ((xfer->operation == kFlexSpiOperation_Write) || (xfer->operation == kFlexSpiOperation_Config))
         {
             register int32_t xferRemainingSize = (int32_t)xfer->txSize;
-            register uint32_t *xferBufferPtr   = xfer->txBuffer;
+            register uint32_t *xferBufferPtr = xfer->txBuffer;
             // Enusre that the tx buffer is 4 words aligned for better performance
             if ((size_t)xferBufferPtr & 0x03)
             {
@@ -1082,10 +1088,10 @@ status_t flexspi_command_xfer(uint32_t instance, flexspi_xfer_t *xfer)
             }
 
             // Set Half TX FIFO size as Watermark size
-            uint32_t tx_fifo_size  = sizeof(base->TFDR);
-            uint32_t watermark     = tx_fifo_size / 8 / 2;
+            uint32_t tx_fifo_size = sizeof(base->TFDR);
+            uint32_t watermark = tx_fifo_size / 8 / 2;
             uint32_t burst_tx_size = tx_fifo_size / 2;
-            base->IPTXFCR          = FLEXSPI_IPTXFCR_TXWMRK(watermark - 1);
+            base->IPTXFCR = FLEXSPI_IPTXFCR_TXWMRK(watermark - 1);
 
             // Clear FIFO before write
             flexspi_clear_ip_txfifo(base);
@@ -1165,6 +1171,7 @@ status_t flexspi_command_xfer(uint32_t instance, flexspi_xfer_t *xfer)
 
     return status;
 }
+#endif // #if (!BL_FEATURE_HAS_FLEXSPI_NOR_ROMAPI) || (!ROM_API_HAS_FLEXSPI_XFER)
 
 void flexspi_wait_idle(uint32_t instance)
 {
@@ -1184,6 +1191,7 @@ void flexspi_wait_idle(uint32_t instance)
     } while (0);
 }
 
+#if (!BL_FEATURE_HAS_FLEXSPI_NOR_ROMAPI) || (!ROM_API_HAS_FLEXSPI_CLEAR_CACHE)
 void flexspi_clear_cache(uint32_t instance)
 {
     do
@@ -1198,6 +1206,7 @@ void flexspi_clear_cache(uint32_t instance)
 
     } while (0);
 }
+#endif // #if (!BL_FEATURE_HAS_FLEXSPI_NOR_ROMAPI) || (!ROM_API_HAS_FLEXSPI_CLEAR_CACHE)
 
 #if FLEXSPI_FEATURE_HAS_PARALLEL_MODE
 static status_t flexspi_extract_parallel_data(uint32_t *dst0, uint32_t *dst1, uint32_t *src, uint32_t length)
@@ -1208,7 +1217,7 @@ static status_t flexspi_extract_parallel_data(uint32_t *dst0, uint32_t *dst1, ui
     {
         uint8_t *dst0Byte = (uint8_t *)dst0;
         uint8_t *dst1Byte = (uint8_t *)dst1;
-        uint8_t *srcByte  = (uint8_t *)src;
+        uint8_t *srcByte = (uint8_t *)src;
         if ((length < 1) || (length & 1) || (dst0 == NULL) || (dst1 == NULL))
         {
             break;
@@ -1248,32 +1257,32 @@ status_t flexspi_device_wait_busy(uint32_t instance,
 #if FLEXSPI_FEATURE_HAS_PARALLEL_MODE
         uint32_t status0, status1;
 #else
-        isParallelMode                 = false;
+        isParallelMode = false;
 #endif // FLEXSPI_FEATURE_HAS_PARALLEL_MODE
         flexspi_xfer_t flashXfer;
 
-        busyMask     = 1 << config->busyOffset;
+        busyMask = 1 << config->busyOffset;
         busyPolarity = config->busyBitPolarity;
 
         flashXfer.baseAddress = baseAddr;
-        flashXfer.operation   = kFlexSpiOperation_Read;
-        flashXfer.seqNum      = 1;
-        flashXfer.seqId       = CMD_LUT_SEQ_IDX_READSTATUS;
-        flashXfer.rxBuffer    = &statusDataBuffer[0];
+        flashXfer.operation = kFlexSpiOperation_Read;
+        flashXfer.seqNum = 1;
+        flashXfer.seqId = CMD_LUT_SEQ_IDX_READSTATUS;
+        flashXfer.rxBuffer = &statusDataBuffer[0];
 
-        flashXfer.rxSize               = isParallelMode ? sizeof(statusDataBuffer) : sizeof(statusDataBuffer[0]);
+        flashXfer.rxSize = isParallelMode ? sizeof(statusDataBuffer) : sizeof(statusDataBuffer[0]);
         flashXfer.isParallelModeEnable = isParallelMode;
 
         if (config->lutCustomSeqEnable && config->lutCustomSeq[CMD_INDEX_READSTATUS].seqNum)
         {
-            flashXfer.seqId  = config->lutCustomSeq[CMD_INDEX_READSTATUS].seqId;
+            flashXfer.seqId = config->lutCustomSeq[CMD_INDEX_READSTATUS].seqId;
             flashXfer.seqNum = config->lutCustomSeq[CMD_INDEX_READSTATUS].seqNum;
         }
 
         flexspi_update_lut(instance, flashXfer.seqId, &config->lookupTable[4 * flashXfer.seqId], flashXfer.seqNum);
 
         bool enableTimeoutCheck = config->timeoutInMs ? true : false;
-        uint64_t remainingMs    = config->timeoutInMs;
+        uint64_t remainingMs = config->timeoutInMs;
 
         do
         {
