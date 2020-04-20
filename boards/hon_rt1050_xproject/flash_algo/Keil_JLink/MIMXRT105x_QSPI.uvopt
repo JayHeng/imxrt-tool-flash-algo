@@ -22,7 +22,7 @@
   </DaveTm>
 
   <Target>
-    <TargetName>RT1050_Hyper_Flash</TargetName>
+    <TargetName>RT1050_Qspi_Flash</TargetName>
     <ToolsetNumber>0x4</ToolsetNumber>
     <ToolsetName>ARM-ADS</ToolsetName>
     <TargetOption>
