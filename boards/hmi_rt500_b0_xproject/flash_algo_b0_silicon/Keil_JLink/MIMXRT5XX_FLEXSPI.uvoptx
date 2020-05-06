@@ -182,8 +182,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\FlashPrg_mx25um51345.c</PathWithFileName>
-      <FilenameWithoutPath>FlashPrg_mx25um51345.c</FilenameWithoutPath>
+      <PathWithFileName>.\FlashPrg_gd25le128.c</PathWithFileName>
+      <FilenameWithoutPath>FlashPrg_gd25le128.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

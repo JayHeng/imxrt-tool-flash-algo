@@ -383,9 +383,9 @@
           <GroupName>Program Functions</GroupName>
           <Files>
             <File>
-              <FileName>FlashPrg_mx25um51345.c</FileName>
+              <FileName>FlashPrg_gd25le128.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashPrg_mx25um51345.c</FilePath>
+              <FilePath>.\FlashPrg_gd25le128.c</FilePath>
             </File>
           </Files>
         </Group>
