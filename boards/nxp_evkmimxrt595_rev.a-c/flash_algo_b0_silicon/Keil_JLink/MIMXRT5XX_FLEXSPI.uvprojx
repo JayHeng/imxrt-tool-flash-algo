@@ -393,9 +393,9 @@
           <GroupName>Device Description</GroupName>
           <Files>
             <File>
-              <FileName>FlashDev.c</FileName>
+              <FileName>FlashDev_mx25um51345.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashDev.c</FilePath>
+              <FilePath>.\FlashDev_mx25um51345.c</FilePath>
             </File>
           </Files>
         </Group>

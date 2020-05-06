@@ -17,6 +17,6 @@ DSCR +0                ; Device Description
 {
   DevDscr +0
   {
-    FlashDev.o
+    FlashDev_s26ks512s.o
   }
 }

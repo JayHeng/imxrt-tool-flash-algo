@@ -432,9 +432,9 @@
           <GroupName>Device Description</GroupName>
           <Files>
             <File>
-              <FileName>FlashDev.c</FileName>
+              <FileName>FlashDev_s26ks512s.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashDev.c</FilePath>
+              <FilePath>.\FlashDev_s26ks512s.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -910,9 +910,9 @@
           <GroupName>Device Description</GroupName>
           <Files>
             <File>
-              <FileName>FlashDev.c</FileName>
+              <FileName>FlashDev_s26ks512s.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashDev.c</FilePath>
+              <FilePath>.\FlashDev_s26ks512s.c</FilePath>
             </File>
           </Files>
         </Group>
