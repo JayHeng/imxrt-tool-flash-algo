@@ -36,9 +36,10 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
             Not for J-Flash</td>
     </tr>
     <tr>
-        <td>zzz xProject_V1</td>
-        <td></td>
-        <td></td>
+        <td>HMI xProject_V1</td>
+        <td>GD25LE128</td>
+        <td>PIO1[23:20]<br>
+            FLEXSPI0_PortA</td>
         <td></td>
     </tr>
     <tr>

@@ -37,7 +37,7 @@ struct FlashDevice const FlashDevice = {
    "MIMXRT5XX FLEXSPI",        // Device Name 
    EXTSPI,                     // Device Type
    0x08000000,                 // Device Start Address
-   0x04000000,                 // Device Size is 64MB
+   0x01000000,                 // Device Size is 16MB
    256,                        // Programming Page Size
    0,                          // Reserved, must be 0
    0xFF,                       // Initial Content of Erased Memory
