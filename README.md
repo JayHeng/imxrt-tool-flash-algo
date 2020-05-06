@@ -17,7 +17,41 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
     </tr>
     <tr>
         <td rowspan="4">i.MXRT500<br>
-                        A0/B0</td>
+                        A0</td>
+        <td>IAR</td>
+        <td>/</td>
+        <td>/</td>
+        <td>/</td>
+        <td>/</td>
+    </tr>
+    <tr>
+        <td rowspan="2">Keil<br>
+                        J-Link</td>
+        <td>NXP EVK_Rev.A-B</td>
+        <td>U38<br>
+            MX25UM51345</td>
+        <td>PIO1[27:20]<br>
+            FLEXSPI0_PortA</td>
+        <td>Done<br>
+            Not for J-Flash</td>
+    </tr>
+    <tr>
+        <td>HMI xProject_V1</td>
+        <td>GD25LE128</td>
+        <td>PIO1[23:20]<br>
+            FLEXSPI0_PortA</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>MCUX</td>
+        <td>/</td>
+        <td>/</td>
+        <td>/</td>
+        <td>/</td>
+    </tr>
+    <tr>
+        <td rowspan="3">i.MXRT500<br>
+                        B0</td>
         <td>IAR</td>
         <td>/</td>
         <td>/</td>
@@ -34,13 +68,6 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
             FLEXSPI0_PortA</td>
         <td>Done<br>
             Not for J-Flash</td>
-    </tr>
-    <tr>
-        <td>HMI xProject_V1</td>
-        <td>GD25LE128</td>
-        <td>PIO1[23:20]<br>
-            FLEXSPI0_PortA</td>
-        <td></td>
     </tr>
     <tr>
         <td>MCUX</td>
