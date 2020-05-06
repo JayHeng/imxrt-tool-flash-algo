@@ -11,7 +11,7 @@
 /*******************************************************************************
  * Definition
  ******************************************************************************/
-#define BOOTLOADER_TREE_LOCATION    (0x1302f000u)
+#define BOOTLOADER_TREE_LOCATION    (0x1301ff00u)
 #define g_bootloaderTree    ((bootloader_tree_t*)BOOTLOADER_TREE_LOCATION)
 
 
