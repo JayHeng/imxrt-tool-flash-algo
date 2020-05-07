@@ -42,8 +42,7 @@
 
 #define MEM_WriteU32(addr, value)  (*((volatile uint32_t *)(addr)) = value)
 
-flexspi_nor_config_t flashConfig;
-serial_nor_config_option_t configOption;
+flexspi_nor_config_t flashConfig = {.pageSize = 256};
 
 /*  Initialize Flash Programming Functions
  *    Parameter:      adr:  Device Base Address
@@ -56,7 +55,9 @@ int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
   uint32_t v;
 
   memset((void *)&flashConfig, 0U, sizeof(flexspi_nor_config_t));
+  serial_nor_config_option_t configOption;
   configOption.option0.U = CONFIG_OPTION;
+  configOption.option1.U = 0;
 
   //CACHE64_CTRL0->CCR = 0;
   MEM_WriteU32(0x40033800, 0);
