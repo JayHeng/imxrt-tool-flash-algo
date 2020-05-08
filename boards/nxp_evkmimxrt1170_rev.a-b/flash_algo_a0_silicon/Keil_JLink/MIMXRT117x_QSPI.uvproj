@@ -223,6 +223,7 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>0</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>0</StupSel>
@@ -376,7 +377,7 @@
               <MiscControls></MiscControls>
               <Define>CPU_MIMXRT1176DVMAA_cm7</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Sources;..\..\..\CMSIS\Include;..\..\..\devices\MIMXRT1176\drivers;..\..\..\devices\MIMXRT1176;..\..\..\platform\drivers\common;..\..\..\devices\MIMXRT1176\drivers;..\;..\..\..\platform\drivers\igpio</IncludePath>
+              <IncludePath>.\Sources;..\..\..\..\CMSIS\Include;..\..\..\..\devices\MIMXRT1176\drivers;..\..\..\..\devices\MIMXRT1176;..\</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -458,27 +459,27 @@
             <File>
               <FileName>system_MIMXRT1176_cm7.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\system_MIMXRT1176_cm7.c</FilePath>
-            </File>
-            <File>
-              <FileName>fsl_clock.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\fsl_clock.c</FilePath>
+              <FilePath>..\..\..\..\devices\MIMXRT1176\system_MIMXRT1176_cm7.c</FilePath>
             </File>
             <File>
               <FileName>fsl_anatop.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\fsl_anatop.c</FilePath>
+              <FilePath>..\..\..\..\devices\MIMXRT1176\drivers\fsl_anatop.c</FilePath>
             </File>
             <File>
               <FileName>fsl_anatop_ai.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\fsl_anatop_ai.c</FilePath>
+              <FilePath>..\..\..\..\devices\MIMXRT1176\drivers\fsl_anatop_ai.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\devices\MIMXRT1176\drivers\fsl_clock.c</FilePath>
             </File>
             <File>
               <FileName>fsl_common.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\platform\drivers\common\fsl_common.c</FilePath>
+              <FilePath>..\..\..\..\devices\MIMXRT1176\drivers\fsl_common.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -700,6 +701,7 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>0</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>0</StupSel>
@@ -935,27 +937,27 @@
             <File>
               <FileName>system_MIMXRT1176_cm7.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\system_MIMXRT1176_cm7.c</FilePath>
-            </File>
-            <File>
-              <FileName>fsl_clock.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\fsl_clock.c</FilePath>
+              <FilePath>..\..\..\..\devices\MIMXRT1176\system_MIMXRT1176_cm7.c</FilePath>
             </File>
             <File>
               <FileName>fsl_anatop.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\fsl_anatop.c</FilePath>
+              <FilePath>..\..\..\..\devices\MIMXRT1176\drivers\fsl_anatop.c</FilePath>
             </File>
             <File>
               <FileName>fsl_anatop_ai.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\fsl_anatop_ai.c</FilePath>
+              <FilePath>..\..\..\..\devices\MIMXRT1176\drivers\fsl_anatop_ai.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\devices\MIMXRT1176\drivers\fsl_clock.c</FilePath>
             </File>
             <File>
               <FileName>fsl_common.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\platform\drivers\common\fsl_common.c</FilePath>
+              <FilePath>..\..\..\..\devices\MIMXRT1176\drivers\fsl_common.c</FilePath>
             </File>
           </Files>
         </Group>
