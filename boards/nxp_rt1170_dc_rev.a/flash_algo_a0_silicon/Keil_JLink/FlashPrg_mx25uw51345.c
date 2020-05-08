@@ -13,9 +13,9 @@
 #include "clock_config.h"
 
 #define FLEXSPI_NOR_INSTANCE 1
-#define SECTOR_SIZE (0x10000)
+#define SECTOR_SIZE (0x1000)
 #define BASE_ADDRESS (0x30000000)
-#define CONFIG_OPTION (0xc0000007)
+#define CONFIG_OPTION (0xc0403007)
 
 /* Init this global variable to workaround of the issue to running this flash algo in Segger */
 flexspi_nor_config_t config = {1};
