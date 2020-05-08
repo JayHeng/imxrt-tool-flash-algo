@@ -15,6 +15,7 @@
 #define FLEXSPI_NOR_INSTANCE 1
 #define SECTOR_SIZE (0x10000)
 #define BASE_ADDRESS (0x30000000)
+#define CONFIG_OPTION (0xc0000007)
 
 /* Init this global variable to workaround of the issue to running this flash algo in Segger */
 flexspi_nor_config_t config = {1};
@@ -64,7 +65,7 @@ int Init(unsigned long adr, unsigned long clk, unsigned long fnc)
     CLOCK_InitSysPll3(&sysPll3Config);
 
     CCM->CLOCK_ROOT[kCLOCK_Root_Flexspi1].CONTROL_SET = 0x503;
-    option.option0.U = 0xc0000007;
+    option.option0.U = CONFIG_OPTION;
 
     status = flexspi_nor_get_config(FLEXSPI_NOR_INSTANCE, &config, &option);
     if (status != kStatus_Success)

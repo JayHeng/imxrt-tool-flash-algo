@@ -13,7 +13,7 @@ struct FlashDevice const FlashDevice = {FLASH_DRV_VERS,                      // 
                                         "MIMXRT117x 16mB QuadSPI NOR Flash", // Device Name
                                         EXTSPI,                              // Device Type
                                         0x30000000,                          // Device Start Address
-                                        0x1000000,                           // Device Size in Bytes (16mB)
+                                        0x01000000,                          // Device Size in Bytes (16mB)
                                         256,                                 // Programming Page Size
                                         0,                                   // Reserved, must be 0
                                         0xFF,                                // Initial Content of Erased Memory
