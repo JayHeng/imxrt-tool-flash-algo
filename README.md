@@ -3,7 +3,7 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
 
 > * IAR EWARM v8.40.2  
 > * Keil MDK v5.27  
-> * J-Link v6.52e  
+> * J-Link v6.52e、v6.72b  
 > * MCUXpresso IDE v11.0.0_2495_alpha  
 
 <table><tbody>
@@ -223,6 +223,40 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
         <td>GPIO_AD_B1[13:10]<br>
             FLEXSPI_PortA</td>
         <td>Done</td>
+    </tr>
+    <tr>
+        <td>MCUX</td>
+        <td>/</td>
+        <td>/</td>
+        <td>/</td>
+        <td>/</td>
+    </tr>
+    <tr>
+        <td rowspan="4">i.MXRT1170<br>
+                        A0</td>
+        <td>IAR</td>
+        <td>/</td>
+        <td>/</td>
+        <td>/</td>
+        <td>/</td>
+    </tr>
+    <tr>
+        <td rowspan="2">Keil<br>
+                        J-Link</td>
+        <td>NXP EVK_Rev.A-B</td>
+        <td>U23<br>
+            IS25WP128</td>
+        <td>GPIO_SD_B2[11:08]<br>
+            FLEXSPI0_PortA</td>
+        <td>Done</td>
+    </tr>
+    <tr>
+        <td>NXP DC_Rev.A</td>
+        <td>U16<br>
+            MX25UW51345</td>
+        <td>GPIO_SD_B2[11:08,03:00]<br>
+            FLEXSPI0_PortA&B</td>
+        <td></td>
     </tr>
     <tr>
         <td>MCUX</td>
