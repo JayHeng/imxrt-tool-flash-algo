@@ -1,0 +1,335 @@
+/*
+ * Copyright 2014-2016 Freescale Semiconductor, Inc.
+ * Copyright 2016-2018 NXP
+ * All rights reserved.
+ *
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ */
+
+#include <stdint.h>
+#include <stdbool.h>
+
+#ifndef __FLEXSPI_NOR_FLASH_H__
+#define __FLEXSPI_NOR_FLASH_H__
+
+#define NOR_CMD_INDEX_READ CMD_INDEX_READ               //!< 0
+#define NOR_CMD_INDEX_READSTATUS CMD_INDEX_READSTATUS   //!< 1
+#define NOR_CMD_INDEX_WRITEENABLE CMD_INDEX_WRITEENABLE //!< 2
+#define NOR_CMD_INDEX_ERASESECTOR 3                     //!< 3
+#define NOR_CMD_INDEX_PAGEPROGRAM CMD_INDEX_WRITE       //!< 4
+#define NOR_CMD_INDEX_CHIPERASE 5                       //!< 5
+#define NOR_CMD_INDEX_DUMMY 6                           //!< 6
+#define NOR_CMD_INDEX_ERASEBLOCK 7                      //!< 7
+
+#define NOR_CMD_LUT_SEQ_IDX_READ CMD_LUT_SEQ_IDX_READ //!< 0  READ LUT sequence id in lookupTable stored in config block
+#define NOR_CMD_LUT_SEQ_IDX_READSTATUS \
+    CMD_LUT_SEQ_IDX_READSTATUS //!< 1  Read Status LUT sequence id in lookupTable stored in config block
+#define NOR_CMD_LUT_SEQ_IDX_READSTATUS_XPI \
+    2 //!< 2  Read status DPI/QPI/OPI sequence id in lookupTable stored in config block
+#define NOR_CMD_LUT_SEQ_IDX_WRITEENABLE \
+    CMD_LUT_SEQ_IDX_WRITEENABLE //!< 3  Write Enable sequence id in lookupTable stored in config block
+#define NOR_CMD_LUT_SEQ_IDX_WRITEENABLE_XPI \
+    4 //!< 4  Write Enable DPI/QPI/OPI sequence id in lookupTable stored in config block
+#define NOR_CMD_LUT_SEQ_IDX_ERASESECTOR 5 //!< 5  Erase Sector sequence id in lookupTable stored in config block
+#define NOR_CMD_LUT_SEQ_IDX_ERASEBLOCK 8  //!< 8 Erase Block sequence id in lookupTable stored in config block
+#define NOR_CMD_LUT_SEQ_IDX_PAGEPROGRAM \
+    CMD_LUT_SEQ_IDX_WRITE                //!< 9  Program sequence id in lookupTable stored in config block
+#define NOR_CMD_LUT_SEQ_IDX_CHIPERASE 11 //!< 11 Chip Erase sequence in lookupTable id stored in config block
+#define NOR_CMD_LUT_SEQ_IDX_READ_SFDP 13 //!< 13 Read SFDP sequence in lookupTable id stored in config block
+#define NOR_CMD_LUT_SEQ_IDX_RESTORE_NOCMD \
+    14 //!< 14 Restore 0-4-4/0-8-8 mode sequence id in lookupTable stored in config block
+#define NOR_CMD_LUT_SEQ_IDX_EXIT_NOCMD \
+    15 //!< 15 Exit 0-4-4/0-8-8 mode sequence id in lookupTable stored in config blobk
+
+enum
+{
+    kSerialNorCfgOption_Tag = 0x0c,
+    kSerialNorCfgOption_DeviceType_ReadSFDP_SDR = 0,
+    kSerialNorCfgOption_DeviceType_ReadSFDP_DDR = 1,
+    kSerialNorCfgOption_DeviceType_HyperFLASH1V8 = 2,
+    kSerialNorCfgOption_DeviceType_HyperFLASH3V0 = 3,
+    kSerialNorCfgOption_DeviceType_MacronixOctalDDR = 4,
+    kSerialNorCfgOption_DeviceType_MacronixOctalSDR = 5,
+    kSerialNorCfgOption_DeviceType_MicronOctalDDR = 6,
+    kSerialNorCfgOption_DeviceType_MicronOctalSDR = 7,
+    kSerialNorCfgOption_DeviceType_AdestoOctalDDR = 8,
+    kSerialNorCfgOption_DeviceType_AdestoOctalSDR = 9,
+};
+
+enum
+{
+    kSerialNorQuadMode_NotConfig = 0,
+    kSerialNorQuadMode_StatusReg1_Bit6 = 1,
+    kSerialNorQuadMode_StatusReg2_Bit1 = 2,
+    kSerialNorQuadMode_StatusReg2_Bit7 = 3,
+    kSerialNorQuadMode_StatusReg2_Bit1_0x31 = 4,
+};
+
+enum
+{
+    kSerialNorEnhanceMode_Disabled = 0,
+    kSerialNorEnhanceMode_0_4_4_Mode = 1,
+    kSerialNorEnhanceMode_0_8_8_Mode = 2,
+    kSerialNorEnhanceMode_DataOrderSwapped = 3,
+    kSerialNorEnhanceMode_2ndPinMux = 4,
+};
+
+enum
+{
+    kFlashResetLogic_Disabled = 0,
+    kFlashResetLogic_ResetPin = 1,
+    kFlashResetLogic_JedecHwReset = 2,
+};
+
+enum
+{
+    kSerialNorConnection_SinglePortA,
+    kSerialNorConnection_Parallel,
+    kSerialNorConnection_SinglePortB,
+    kSerialNorConnection_BothPorts
+};
+
+typedef uint32_t status_t;
+
+typedef enum _FlexSPIOperationType
+{
+    kFlexSpiOperation_Command, //!< FlexSPI operation: Only command, both TX and
+    //! RX buffer are ignored.
+    kFlexSpiOperation_Config, //!< FlexSPI operation: Configure device mode, the
+    //! TX FIFO size is fixed in LUT.
+    kFlexSpiOperation_Write, //!< FlexSPI operation: Write,  only TX buffer is
+    //! effective
+    kFlexSpiOperation_Read, //!< FlexSPI operation: Read, only Rx Buffer is
+    //! effective.
+    kFlexSpiOperation_End = kFlexSpiOperation_Read,
+} flexspi_operation_t;
+
+//!@brief FlexSPI Transfer Context
+typedef struct _FlexSpiXfer
+{
+    flexspi_operation_t operation; //!< FlexSPI operation
+    uint32_t baseAddress;          //!< FlexSPI operation base address
+    uint32_t seqId;                //!< Sequence Id
+    uint32_t seqNum;               //!< Sequence Number
+    bool isParallelModeEnable;     //!< Is a parallel transfer
+    uint32_t *txBuffer;            //!< Tx buffer
+    uint32_t txSize;               //!< Tx size in bytes
+    uint32_t *rxBuffer;            //!< Rx buffer
+    uint32_t rxSize;               //!< Rx size in bytes
+} flexspi_xfer_t;
+
+/*
+ * Serial NOR Configuration Option
+ */
+typedef struct _serial_nor_config_option
+{
+    union
+    {
+        struct
+        {
+            uint32_t max_freq : 4;          //!< Maximum supported Frequency
+            uint32_t misc_mode : 4;         //!< miscellaneous mode
+            uint32_t quad_mode_setting : 4; //!< Quad mode setting
+            uint32_t cmd_pads : 4;          //!< Command pads
+            uint32_t query_pads : 4;        //!< SFDP read pads
+            uint32_t device_type : 4;       //!< Device type
+            uint32_t option_size : 4;       //!< Option size, in terms of uint32_t, size = (option_size + 1) * 4
+            uint32_t tag : 4;               //!< Tag, must be 0x0E
+        } B;
+        uint32_t U;
+    } option0;
+
+    union
+    {
+        struct
+        {
+            uint32_t dummy_cycles : 8;     //!< Dummy cycles before read
+            uint32_t status_override : 8;  //!< Override status register value during device mode configuration
+            uint32_t pinmux_group : 4;     //!< The pinmux group selection
+            uint32_t dqs_pinmux_group : 4; //!< The DQS Pinmux Group Selection
+            uint32_t drive_strength : 4;   //!< The Drive Strength of FlexSPI Pads
+            uint32_t flash_connection : 4; //!< Flash connection option: 0 - Single Flash connected to port A, 1 -
+            //! Parallel mode, 2 - Single Flash connected to Port B
+        } B;
+        uint32_t U;
+    } option1;
+
+} serial_nor_config_option_t;
+
+typedef union
+{
+    struct
+    {
+        uint8_t por_mode;
+        uint8_t current_mode;
+        uint8_t exit_no_cmd_sequence;
+        uint8_t restore_sequence;
+    } B;
+    uint32_t U;
+} flash_run_context_t;
+
+enum
+{
+    kRestoreSequence_None = 0,
+    kRestoreSequence_HW_Reset = 1,
+    kRestoreSequence_4QPI_FF = 2,
+    kRestoreSequence_5QPI_FF = 3,
+    kRestoreSequence_8QPI_FF = 4,
+    kRestoreSequence_Send_F0 = 5,
+    kRestoreSequence_Send_66_99 = 6,
+    kRestoreSequence_Send_6699_9966 = 7,
+    kRestoreSequence_Send_06_FF, // Adesto EcoXIP
+};
+
+enum
+{
+    kFlashInstMode_ExtendedSpi = 0x00,
+    kFlashInstMode_0_4_4_SDR = 0x01,
+    kFlashInstMode_0_4_4_DDR = 0x02,
+    kFlashInstMode_QPI_SDR = 0x41,
+    kFlashInstMode_QPI_DDR = 0x42,
+    kFlashInstMode_OPI_SDR = 0x81,
+    kFlashInstMode_OPI_DDR = 0x82,
+};
+
+//!@brief FlexSPI LUT Sequence structure
+typedef struct _lut_sequence
+{
+    uint8_t seqNum; //!< Sequence Number, valid number: 1-16
+    uint8_t seqId;  //!< Sequence Index, valid number: 0-15
+    uint16_t reserved;
+} flexspi_lut_seq_t;
+
+//!@brief Flash Configuration Command Type
+enum
+{
+    kDeviceConfigCmdType_Generic,    //!< Generic command, for example: configure dummy cycles, drive strength, etc
+    kDeviceConfigCmdType_QuadEnable, //!< Quad Enable command
+    kDeviceConfigCmdType_Spi2Xpi,    //!< Switch from SPI to DPI/QPI/OPI mode
+    kDeviceConfigCmdType_Xpi2Spi,    //!< Switch from DPI/QPI/OPI to SPI mode
+    kDeviceConfigCmdType_Spi2NoCmd,  //!< Switch to 0-4-4/0-8-8 mode
+    kDeviceConfigCmdType_Reset,      //!< Reset device command
+};
+
+typedef struct
+{
+    uint8_t time_100ps;  // Data valid time, in terms of 100ps
+    uint8_t delay_cells; // Data valid time, in terms of delay cells
+} flexspi_dll_time_t;
+
+//!@brief FlexSPI Memory Configuration Block
+typedef struct _FlexSPIConfig
+{
+    uint32_t tag;               //!< [0x000-0x003] Tag, fixed value 0x42464346UL
+    uint32_t version;           //!< [0x004-0x007] Version,[31:24] -'V', [23:16] - Major, [15:8] - Minor, [7:0] - bugfix
+    uint32_t reserved0;         //!< [0x008-0x00b] Reserved for future use
+    uint8_t readSampleClkSrc;   //!< [0x00c-0x00c] Read Sample Clock Source, valid value: 0/1/3
+    uint8_t csHoldTime;         //!< [0x00d-0x00d] CS hold time, default value: 3
+    uint8_t csSetupTime;        //!< [0x00e-0x00e] CS setup time, default value: 3
+    uint8_t columnAddressWidth; //!< [0x00f-0x00f] Column Address with, for HyperBus protocol, it is fixed to 3, For
+    //! Serial NAND, need to refer to datasheet
+    uint8_t deviceModeCfgEnable; //!< [0x010-0x010] Device Mode Configure enable flag, 1 - Enable, 0 - Disable
+    uint8_t deviceModeType; //!< [0x011-0x011] Specify the configuration command type:Quad Enable, DPI/QPI/OPI switch,
+    //! Generic configuration, etc.
+    uint16_t waitTimeCfgCommands; //!< [0x012-0x013] Wait time for all configuration commands, unit: 100us, Used for
+    //! DPI/QPI/OPI switch or reset command
+    flexspi_lut_seq_t deviceModeSeq; //!< [0x014-0x017] Device mode sequence info, [7:0] - LUT sequence id, [15:8] - LUt
+    //! sequence number, [31:16] Reserved
+    uint32_t deviceModeArg;    //!< [0x018-0x01b] Argument/Parameter for device configuration
+    uint8_t configCmdEnable;   //!< [0x01c-0x01c] Configure command Enable Flag, 1 - Enable, 0 - Disable
+    uint8_t configModeType[3]; //!< [0x01d-0x01f] Configure Mode Type, similar as deviceModeTpe
+    flexspi_lut_seq_t
+        configCmdSeqs[3]; //!< [0x020-0x02b] Sequence info for Device Configuration command, similar as deviceModeSeq
+    uint32_t reserved1;   //!< [0x02c-0x02f] Reserved for future use
+    uint32_t configCmdArgs[3];     //!< [0x030-0x03b] Arguments/Parameters for device Configuration commands
+    uint32_t reserved2;            //!< [0x03c-0x03f] Reserved for future use
+    uint32_t controllerMiscOption; //!< [0x040-0x043] Controller Misc Options, see Misc feature bit definitions for more
+    //! details
+    uint8_t deviceType;    //!< [0x044-0x044] Device Type:  See Flash Type Definition for more details
+    uint8_t sflashPadType; //!< [0x045-0x045] Serial Flash Pad Type: 1 - Single, 2 - Dual, 4 - Quad, 8 - Octal
+    uint8_t serialClkFreq; //!< [0x046-0x046] Serial Flash Frequencey, device specific definitions, See System Boot
+    //! Chapter for more details
+    uint8_t lutCustomSeqEnable; //!< [0x047-0x047] LUT customization Enable, it is required if the program/erase cannot
+    //! be done using 1 LUT sequence, currently, only applicable to HyperFLASH
+    uint32_t reserved3[2];               //!< [0x048-0x04f] Reserved for future use
+    uint32_t sflashA1Size;               //!< [0x050-0x053] Size of Flash connected to A1
+    uint32_t sflashA2Size;               //!< [0x054-0x057] Size of Flash connected to A2
+    uint32_t sflashB1Size;               //!< [0x058-0x05b] Size of Flash connected to B1
+    uint32_t sflashB2Size;               //!< [0x05c-0x05f] Size of Flash connected to B2
+    uint32_t csPadSettingOverride;       //!< [0x060-0x063] CS pad setting override value
+    uint32_t sclkPadSettingOverride;     //!< [0x064-0x067] SCK pad setting override value
+    uint32_t dataPadSettingOverride;     //!< [0x068-0x06b] data pad setting override value
+    uint32_t dqsPadSettingOverride;      //!< [0x06c-0x06f] DQS pad setting override value
+    uint32_t timeoutInMs;                //!< [0x070-0x073] Timeout threshold for read status command
+    uint32_t commandInterval;            //!< [0x074-0x077] CS deselect interval between two commands
+    flexspi_dll_time_t dataValidTime[2]; //!< [0x078-0x07b] CLK edge to data valid time for PORT A and PORT B
+    uint16_t busyOffset;                 //!< [0x07c-0x07d] Busy offset, valid value: 0-31
+    uint16_t busyBitPolarity; //!< [0x07e-0x07f] Busy flag polarity, 0 - busy flag is 1 when flash device is busy, 1 -
+    //! busy flag is 0 when flash device is busy
+    uint32_t lookupTable[64];           //!< [0x080-0x17f] Lookup table holds Flash command sequences
+    flexspi_lut_seq_t lutCustomSeq[12]; //!< [0x180-0x1af] Customizable LUT Sequences
+    uint32_t reserved4[4];              //!< [0x1b0-0x1bf] Reserved for future use
+} flexspi_mem_config_t;
+
+/*
+ *  Serial NOR configuration block
+ */
+typedef struct _flexspi_nor_config
+{
+    flexspi_mem_config_t memConfig; //!< Common memory configuration info via FlexSPI
+    uint32_t pageSize;              //!< Page size of Serial NOR
+    uint32_t sectorSize;            //!< Sector size of Serial NOR
+    uint8_t ipcmdSerialClkFreq;     //!< Clock frequency for IP command
+    uint8_t isUniformBlockSize;     //!< Sector/Block size is the same
+    uint8_t isDataOrderSwapped;     //!< Data order (D0, D1, D2, D3) is swapped (D1,D0, D3, D2)
+    uint8_t reserved0[1];           //!< Reserved for future use
+    uint8_t serialNorType;          //!< Serial NOR Flash type: 0/1/2/3
+    uint8_t needExitNoCmdMode;      //!< Need to exit NoCmd mode before other IP command
+    uint8_t halfClkForNonReadCmd;   //!< Half the Serial Clock for non-read command: true/false
+    uint8_t needRestoreNoCmdMode;   //!< Need to Restore NoCmd mode after IP commmand execution
+    uint32_t blockSize;             //!< Block size
+    uint32_t flashStateCtx;         //!< Flash State Context
+    uint32_t reserve2[10];          //!< Reserved for future use
+} flexspi_nor_config_t;
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+//!@brief Initialize Serial NOR devices via FlexSPI
+status_t flexspi_nor_flash_init(uint32_t instance, flexspi_nor_config_t *config);
+
+//!@brief Program data to Serial NOR via FlexSPI
+status_t flexspi_nor_flash_page_program(uint32_t instance,
+                                        flexspi_nor_config_t *config,
+                                        uint32_t dstAddr,
+                                        const uint32_t *src);
+
+//!@brief Erase all the Serial NOR devices connected on FlexSPI
+status_t flexspi_nor_flash_erase_all(uint32_t instance, flexspi_nor_config_t *config);
+
+//!@brief Erase one sector specified by address
+status_t flexspi_nor_flash_erase_sector(uint32_t instance, flexspi_nor_config_t *config, uint32_t address);
+
+//!@brief Erase one block specified by address
+status_t flexspi_nor_flash_erase_block(uint32_t instance, flexspi_nor_config_t *config, uint32_t address);
+
+//!@brief Get FlexSPI NOR Configuration Block based on specified option
+status_t flexspi_nor_get_config(uint32_t instance, flexspi_nor_config_t *config, serial_nor_config_option_t *option);
+
+//!@brief Erase Flash Region specified by address and length
+status_t flexspi_nor_flash_erase(uint32_t instance, flexspi_nor_config_t *config, uint32_t start, uint32_t length);
+
+//!@brief Read data from Serial NOR
+status_t flexspi_nor_flash_read(
+    uint32_t instance, flexspi_nor_config_t *config, uint32_t *dst, uint32_t start, uint32_t bytes);
+
+//!@brief Set the clock source for FlexSPI NOR
+extern status_t flexspi_nor_set_clock_source(uint32_t clockSource);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // __FLEXSPI_NOR_FLASH_H__
