@@ -383,9 +383,9 @@
           <GroupName>Program Functions</GroupName>
           <Files>
             <File>
-              <FileName>FlashPrg_gd25lx256.c</FileName>
+              <FileName>FlashDev_gd25le128.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashPrg_gd25lx256.c</FilePath>
+              <FilePath>.\FlashDev_gd25le128.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -393,9 +393,9 @@
           <GroupName>Device Description</GroupName>
           <Files>
             <File>
-              <FileName>FlashDev_gd25lx256.c</FileName>
+              <FileName>FlashPrg_gd25le128.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashDev_gd25lx256.c</FilePath>
+              <FilePath>.\FlashPrg_gd25le128.c</FilePath>
             </File>
           </Files>
         </Group>

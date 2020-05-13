@@ -38,7 +38,7 @@
 /** local definitions **/
 
 #define FLASH_BASE_ADDR 0x08000000
-#define CONFIG_OPTION 0xc0000007
+#define CONFIG_OPTION 0xc0000207
 
 #define MEM_WriteU32(addr, value)  (*((volatile uint32_t *)(addr)) = value)
 
