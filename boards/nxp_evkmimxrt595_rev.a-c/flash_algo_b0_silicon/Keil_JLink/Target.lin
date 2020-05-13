@@ -17,6 +17,6 @@ DSCR +0                ; Device Description
 {
   DevDscr +0
   {
-    FlashDev_mx25um51345.o
+    FlashDev_is25wp064.o
   }
 }
