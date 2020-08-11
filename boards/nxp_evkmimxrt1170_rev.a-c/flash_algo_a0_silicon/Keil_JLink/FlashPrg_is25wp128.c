@@ -65,6 +65,7 @@ int Init(unsigned long adr, unsigned long clk, unsigned long fnc)
     CLOCK_InitSysPll3(&sysPll3Config);
 
     CCM->CLOCK_ROOT[kCLOCK_Root_Flexspi1].CONTROL_SET = 0x503;
+    SRC->GPR[9] = 0;
     option.option0.U = CONFIG_OPTION;
 
     status = flexspi_nor_get_config(FLEXSPI_NOR_INSTANCE, &config, &option);
