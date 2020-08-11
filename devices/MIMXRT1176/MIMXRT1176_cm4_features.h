@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 0.1, 2018-03-05
-**     Build:               b200228
+**     Build:               b200804
 **
 **     Abstract:
 **         Chip specific module features.
@@ -48,9 +48,9 @@
 /* @brief DCDC availability on the SoC. */
 #define FSL_FEATURE_SOC_DCDC_COUNT (1)
 /* @brief DMAMUX availability on the SoC. */
-#define FSL_FEATURE_SOC_DMAMUX_COUNT (2)
+#define FSL_FEATURE_SOC_DMAMUX_COUNT (1)
 /* @brief EDMA availability on the SoC. */
-#define FSL_FEATURE_SOC_EDMA_COUNT (2)
+#define FSL_FEATURE_SOC_EDMA_COUNT (1)
 /* @brief EMVSIM availability on the SoC. */
 #define FSL_FEATURE_SOC_EMVSIM_COUNT (2)
 /* @brief ENC availability on the SoC. */
@@ -69,6 +69,8 @@
 #define FSL_FEATURE_SOC_FLEXRAM_COUNT (1)
 /* @brief FLEXSPI availability on the SoC. */
 #define FSL_FEATURE_SOC_FLEXSPI_COUNT (2)
+/* @brief SFA availability on the SoC. */
+#define FSL_FEATURE_SOC_SFA_COUNT (1)
 /* @brief GPT availability on the SoC. */
 #define FSL_FEATURE_SOC_GPT_COUNT (6)
 /* @brief I2S availability on the SoC. */
@@ -111,6 +113,8 @@
 #define FSL_FEATURE_SOC_PWM_COUNT (4)
 /* @brief PXP availability on the SoC. */
 #define FSL_FEATURE_SOC_PXP_COUNT (1)
+/* @brief PUF availability on the SoC. */
+#define FSL_FEATURE_SOC_PUF_COUNT (1)
 /* @brief RDC availability on the SoC. */
 #define FSL_FEATURE_SOC_RDC_COUNT (1)
 /* @brief RDC_SEMAPHORE availability on the SoC. */
@@ -147,6 +151,8 @@
 #define FSL_FEATURE_SOC_XBARA_COUNT (1)
 /* @brief XBARB availability on the SoC. */
 #define FSL_FEATURE_SOC_XBARB_COUNT (2)
+/* @brief ROM API Availability */
+#define FSL_FEATURE_BOOT_ROM_HAS_ROMAPI (1)
 
 /* ADC_ETC module features */
 
@@ -273,13 +279,15 @@
 #define FSL_FEATURE_EDMA_SUPPORT_8_BYTES_TRANSFER (1)
 /* @brief If 16 bytes transfer supported. */
 #define FSL_FEATURE_EDMA_SUPPORT_16_BYTES_TRANSFER (0)
+/* @brief If 32 bytes transfer supported. */
+#define FSL_FEATURE_EDMA_SUPPORT_32_BYTES_TRANSFER (1)
 
 /* DMAMUX module features */
 
 /* @brief Number of DMA channels (related to number of register CHCFGn). */
 #define FSL_FEATURE_DMAMUX_MODULE_CHANNEL (32)
 /* @brief Total number of DMA channels on all modules. */
-#define FSL_FEATURE_DMAMUX_DMAMUX_CHANNELS (FSL_FEATURE_SOC_DMAMUX_COUNT * 32)
+#define FSL_FEATURE_DMAMUX_DMAMUX_CHANNELS (64)
 /* @brief Has the periodic trigger capability for the triggered DMA channel (register bit CHCFG0[TRIG]). */
 #define FSL_FEATURE_DMAMUX_HAS_TRIG (1)
 /* @brief Has DMA Channel Always ON function (register bit CHCFG0[A_ON]). */
@@ -288,7 +296,7 @@
 /* ENET module features */
 
 /* @brief Support Interrupt Coalesce */
-#define FSL_FEATURE_ENET_HAS_INTERRUPT_COALESCE (0)
+#define FSL_FEATURE_ENET_HAS_INTERRUPT_COALESCE (1)
 /* @brief Queue Size. */
 #define FSL_FEATURE_ENET_QUEUE (3)
 /* @brief Has AVB Support. */
@@ -317,6 +325,8 @@
 #define FSL_FEATURE_ENET_INSTANCE_HAS_EXTEND_MDIOn(x) (1)
 /* @brief Has Additional 1588 Timer Channel Interrupt for each instance. */
 #define FSL_FEATURE_ENET_INSTANCE_HAS_ADD_1588_TIMER_CHN_INTn(x) (1)
+/* @brief Has threshold for the number of frames in the receive FIFO (register bit field RSEM[STAT_SECTION_EMPTY]). */
+#define FSL_FEATURE_ENET_HAS_RECEIVE_STATUS_THRESHOLD (1)
 
 /* ENET_QOS module features */
 
@@ -361,7 +371,7 @@
 /* FLEXRAM module features */
 
 /* @brief Bank size */
-#define FSL_FEATURE_FLEXRAM_INTERNAL_RAM_BANK_SIZE (32 * 1024)
+#define FSL_FEATURE_FLEXRAM_INTERNAL_RAM_BANK_SIZE (32768)
 /* @brief Total Bank numbers */
 #define FSL_FEATURE_FLEXRAM_INTERNAL_RAM_TOTAL_BANK_NUMBERS (16)
 /* @brief Has FLEXRAM_MAGIC_ADDR. */
@@ -393,6 +403,17 @@
 /* KEY_MANAGER module features */
 
 /* No feature definitions */
+
+/* PUF module features */
+
+/* @brief PUF need to setup SRAM manually */
+#define FSL_FEATURE_PUF_PWR_HAS_MANUAL_SLEEP_CONTROL (1)
+/* @brief PUF has SHIFT_STATUS register. */
+#define FSL_FEATURE_PUF_HAS_SHIFT_STATUS (0)
+/* @brief PUF has IDXBLK_SHIFT register. */
+#define FSL_FEATURE_PUF_HAS_IDXBLK_SHIFT (1)
+/* @brief SOC has no reset driver. */
+#define FSL_FEATURE_PUF_HAS_NO_RESET (1)
 
 /* LCDIF module features */
 
@@ -433,8 +454,6 @@
 #define FSL_FEATURE_LPADC_HAS_CMDL_CTYPE (0)
 /* @brief Has conversion resolution select  (bitfield CMDLn[MODE]). */
 #define FSL_FEATURE_LPADC_HAS_CMDL_MODE (0)
-/* @brief Has compare function enable (bitfield CMDHn[CMPEN]). */
-#define FSL_FEATURE_LPADC_HAS_CMDH_CMPEN (1)
 /* @brief Has Wait for trigger assertion before execution (bitfield CMDHn[WAIT_TRIG]). */
 #define FSL_FEATURE_LPADC_HAS_CMDH_WAIT_TRIG (0)
 /* @brief Has offset calibration (bitfield CTRL[CALOFS]). */
@@ -500,10 +519,6 @@
 #define FSL_FEATURE_LPUART_IS_SCI (1)
 /* @brief Capacity (number of entries) of the transmit/receive FIFO (or zero if no FIFO is available). */
 #define FSL_FEATURE_LPUART_FIFO_SIZEn(x) (4)
-/* @brief Maximal data width without parity bit. */
-#define FSL_FEATURE_LPUART_MAX_DATA_WIDTH_WITH_NO_PARITY (10)
-/* @brief Maximal data width with parity bit. */
-#define FSL_FEATURE_LPUART_MAX_DATA_WIDTH_WITH_PARITY (9)
 /* @brief Supports two match addresses to filter incoming frames. */
 #define FSL_FEATURE_LPUART_HAS_ADDRESS_MATCHING (1)
 /* @brief Has transmitter/receiver DMA enable bits C5[TDMAE]/C5[RDMAE] (or BAUD[TDMAE]/BAUD[RDMAE] if the registers are 32-bit wide). */
@@ -593,6 +608,8 @@
 #define FSL_FEATURE_PDM_FIFO_WIDTH (2)
 /* @brief PDM FIFO DEPTH Size */
 #define FSL_FEATURE_PDM_FIFO_DEPTH (8)
+/* @brief PDM has RANGE_CTRL register */
+#define FSL_FEATURE_PDM_HAS_RANGE_CTRL (1)
 
 /* PGMC_BPC module features */
 
@@ -629,14 +646,18 @@
 
 /* PWM module features */
 
-/* @brief If EflexPWM has module A channels (outputs). */
+/* @brief If (e)FlexPWM has module A channels (outputs). */
 #define FSL_FEATURE_PWM_HAS_CHANNELA (1)
-/* @brief If EflexPWM has module B channels (outputs). */
+/* @brief If (e)FlexPWM has module B channels (outputs). */
 #define FSL_FEATURE_PWM_HAS_CHANNELB (1)
-/* @brief If EflexPWM has module X channels (outputs). */
+/* @brief If (e)FlexPWM has module X channels (outputs). */
 #define FSL_FEATURE_PWM_HAS_CHANNELX (1)
-/* @brief Number of submodules in each EflexPWM module. */
+/* @brief If (e)FlexPWM has fractional feature. */
+#define FSL_FEATURE_PWM_HAS_FRACTIONAL (1)
+/* @brief Number of submodules in each (e)FlexPWM module. */
 #define FSL_FEATURE_PWM_SUBMODULE_COUNT (4U)
+/* @brief Number of fault channel in each (e)FlexPWM module. */
+#define FSL_FEATURE_PWM_FAULT_CH_COUNT (1)
 
 /* PXP module features */
 
@@ -699,8 +720,16 @@
 
 /* @brief Has WDH time in NOR controller (register bit field NORCR2[WDH]). */
 #define FSL_FEATURE_SEMC_HAS_NOR_WDH_TIME (0)
-/* @brief Has WDS time in NOR controller (register bit field NORCR2[WDS]).) */
+/* @brief Has WDS time in NOR controller (register bit field NORCR2[WDS]). */
 #define FSL_FEATURE_SEMC_HAS_NOR_WDS_TIME (0)
+/* @brief SRAM count SEMC can support (register BRx). */
+#define FSL_FEATURE_SEMC_SUPPORT_SRAM_COUNT (4)
+/* @brief If SEMC support delay chain control (register DCCR). */
+#define FSL_FEATURE_SEMC_HAS_DELAY_CHAIN_CONTROL (1)
+/* @brief Has read hold time feature (register bit field SRAMCR6[RDH]). */
+#define FSL_FEATURE_SEMC_HAS_SRAM_RDH_TIME (1)
+/* @brief Width of SDRAMCR0[PS] bitfields. */
+#define FSL_FEATURE_SEMC_SUPPORT_SDRAM_PS_BITWIDTH (2)
 
 /* SNVS module features */
 
@@ -728,6 +757,8 @@
 #define FSL_FEATURE_USBPHY_HAS_DCD_ANALOG (0)
 /* @brief USBPHY has register TRIM_OVERRIDE_EN */
 #define FSL_FEATURE_USBPHY_HAS_TRIM_OVERRIDE_EN (1)
+/* @brief USBPHY is 28FDSOI */
+#define FSL_FEATURE_USBPHY_28FDSOI (1)
 
 /* USDHC module features */
 
