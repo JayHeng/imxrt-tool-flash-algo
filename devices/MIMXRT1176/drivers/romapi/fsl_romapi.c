@@ -17,6 +17,7 @@ typedef status_t (*clearCacheCommand_t)(uint32_t instance);
  *
  * @ingroup bl_core
  */
+#pragma anon_unions
 typedef union _standard_version
 {
     struct

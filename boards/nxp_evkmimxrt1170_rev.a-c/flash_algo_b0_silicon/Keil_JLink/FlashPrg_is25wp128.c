@@ -9,7 +9,7 @@
 /***********************************************************************/
 
 #include "FlashOS.H" // FlashOS Structures
-#include "bl_api.h"
+#include "fsl_romapi.h"
 #include "clock_config.h"
 
 #define FLEXSPI_NOR_INSTANCE 1
@@ -66,14 +66,18 @@ int Init(unsigned long adr, unsigned long clk, unsigned long fnc)
 
     CCM->CLOCK_ROOT[kCLOCK_Root_Flexspi1].CONTROL_SET = 0x503;
     option.option0.U = CONFIG_OPTION;
+    SRC->GPR[9] = 0;
 
-    status = flexspi_nor_get_config(FLEXSPI_NOR_INSTANCE, &config, &option);
+    ROM_API_Init();
+    option.option0.U = 0xc0000007;
+
+    status = ROM_FLEXSPI_NorFlash_GetConfig(FLEXSPI_NOR_INSTANCE, &config, &option);
     if (status != kStatus_Success)
     {
         return (1);
     }
 
-    status = flexspi_nor_flash_init(FLEXSPI_NOR_INSTANCE, &config);
+    status = ROM_FLEXSPI_NorFlash_Init(FLEXSPI_NOR_INSTANCE, &config);
     if (status != kStatus_Success)
     {
         return (1);
@@ -104,7 +108,7 @@ int UnInit(unsigned long fnc)
 int EraseChip(void)
 {
     status_t status;
-    status = flexspi_nor_flash_erase_all(FLEXSPI_NOR_INSTANCE, &config); // Erase all
+    status = ROM_FLEXSPI_NorFlash_EraseAll(FLEXSPI_NOR_INSTANCE, &config); // Erase all
     if (status != kStatus_Success)
     {
         return (1);
@@ -125,7 +129,7 @@ int EraseSector(unsigned long adr)
 {
     status_t status;
     adr    = adr - BASE_ADDRESS;
-    status = flexspi_nor_flash_erase(FLEXSPI_NOR_INSTANCE, &config, adr, SECTOR_SIZE); // Erase 1 sector
+    status = ROM_FLEXSPI_NorFlash_Erase(FLEXSPI_NOR_INSTANCE, &config, adr, SECTOR_SIZE); // Erase 1 sector
     if (status != kStatus_Success)
     {
         return (1);
@@ -149,7 +153,7 @@ int ProgramPage(unsigned long adr, unsigned long sz, unsigned char *buf)
     status_t status;
     adr = adr - BASE_ADDRESS;
     // Program data to destination
-    status = flexspi_nor_flash_page_program(FLEXSPI_NOR_INSTANCE, &config, adr, (uint32_t *)buf); // program 1 page
+    status = ROM_FLEXSPI_NorFlash_ProgramPage(FLEXSPI_NOR_INSTANCE, &config, adr, (const uint32_t *)buf); // program 1 page
     if (status != kStatus_Success)
     {
         return (1);
