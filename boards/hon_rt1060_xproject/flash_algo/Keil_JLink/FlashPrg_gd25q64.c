@@ -29,7 +29,7 @@ int Init(unsigned long adr, unsigned long clk, unsigned long fnc)
 {
     status_t status;
     serial_nor_config_option_t option;
-    option.option0.U = 0xc0000006;
+    option.option0.U = 0xc0000405;
     /* Disable Watchdog Power Down Counter */
     WDOG1->WMCR &= ~WDOG_WMCR_PDE_MASK;
     WDOG2->WMCR &= ~WDOG_WMCR_PDE_MASK;
