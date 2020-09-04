@@ -316,8 +316,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\FlashPrg_is25lp256_w25q256.c</PathWithFileName>
-      <FilenameWithoutPath>FlashPrg_is25lp256_w25q256.c</FilenameWithoutPath>
+      <PathWithFileName>.\FlashPrg_w25q64_QEn_2nd.c</PathWithFileName>
+      <FilenameWithoutPath>FlashPrg_w25q64_QEn_2nd.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -336,8 +336,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\FlashDev_is25lp256.c</PathWithFileName>
-      <FilenameWithoutPath>FlashDev_is25lp256.c</FilenameWithoutPath>
+      <PathWithFileName>.\FlashDev_w25q64.c</PathWithFileName>
+      <FilenameWithoutPath>FlashDev_w25q64.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

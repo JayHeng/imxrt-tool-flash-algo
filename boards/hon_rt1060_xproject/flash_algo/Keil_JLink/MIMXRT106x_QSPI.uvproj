@@ -422,9 +422,9 @@
           <GroupName>Program Functions</GroupName>
           <Files>
             <File>
-              <FileName>FlashPrg_is25lp256_w25q256.c</FileName>
+              <FileName>FlashPrg_w25q64_QEn_2nd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashPrg_is25lp256_w25q256.c</FilePath>
+              <FilePath>.\FlashPrg_w25q64_QEn_2nd.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -432,9 +432,9 @@
           <GroupName>Device Description</GroupName>
           <Files>
             <File>
-              <FileName>FlashDev_is25lp256.c</FileName>
+              <FileName>FlashDev_w25q64.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashDev_is25lp256.c</FilePath>
+              <FilePath>.\FlashDev_w25q64.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -900,9 +900,9 @@
           <GroupName>Program Functions</GroupName>
           <Files>
             <File>
-              <FileName>FlashPrg_is25lp256_w25q256.c</FileName>
+              <FileName>FlashPrg_w25q64_QEn_2nd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashPrg_is25lp256_w25q256.c</FilePath>
+              <FilePath>.\FlashPrg_w25q64_QEn_2nd.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -910,9 +910,9 @@
           <GroupName>Device Description</GroupName>
           <Files>
             <File>
-              <FileName>FlashDev_is25lp256.c</FileName>
+              <FileName>FlashDev_w25q64.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FlashDev_is25lp256.c</FilePath>
+              <FilePath>.\FlashDev_w25q64.c</FilePath>
             </File>
           </Files>
         </Group>
