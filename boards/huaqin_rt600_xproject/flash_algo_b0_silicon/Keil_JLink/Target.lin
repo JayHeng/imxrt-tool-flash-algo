@@ -1,0 +1,22 @@
+; Linker Control File (scatter-loading)
+;
+
+PRG 0x2c000 PI               ; Programming Functions
+{
+  PrgCode +0           ; Code
+  {
+    * (+RO)
+  }
+  PrgData +0           ; Data
+  {
+    * (+RW,+ZI)
+  }
+}
+
+DSCR +0                ; Device Description
+{
+  DevDscr +0
+  {
+    FlashDev_w25q16.o
+  }
+}
