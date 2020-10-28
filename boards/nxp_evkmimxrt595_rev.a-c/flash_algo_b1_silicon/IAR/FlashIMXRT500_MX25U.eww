@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\FlashIMXRT500_MX25U.ewp</path>
+  </project>
+  <batchBuild>
+    <batchDefinition>
+      <name>All</name>
+      <member>
+        <project>FlashIMXRT500_MX25U</project>
+        <configuration>FlashIMXRT500_MX25U</configuration>
+      </member>
+    </batchDefinition>
+  </batchBuild>
+</workspace>
+
+

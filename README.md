@@ -1,9 +1,9 @@
 # imxrt-tool-flash-algo
 Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发工具的flash算法源工程
 
-> * IAR EWARM v8.40.2  
+> * IAR EWARM v8.40.2 
 > * Keil MDK v5.27  
-> * J-Link v6.52e、v6.72b  
+> * J-Link v6.52e、v6.72b、v6.87e
 > * MCUXpresso IDE v11.0.0_2495_alpha  
 
 <table><tbody>
@@ -53,10 +53,12 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
         <td rowspan="4">i.MXRT500<br>
                         B0/B1</td>
         <td>IAR</td>
-        <td>/</td>
-        <td>/</td>
-        <td>/</td>
-        <td>/</td>
+        <td>NXP EVK_Rev.C</td>
+        <td>U38<br>
+            MX25UM51345</td>
+        <td>PIO1[27:20]<br>
+            FLEXSPI0_PortA</td>
+        <td>Done</td>
     </tr>
     <tr>
         <td rowspan="2">Keil<br>
@@ -126,7 +128,7 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
         <td>/</td>
     </tr>
     <tr>
-        <td rowspan="5">i.MXRT600<br>
+        <td rowspan="6">i.MXRT600<br>
                         B0</td>
         <td>IAR</td>
         <td>/</td>
@@ -377,6 +379,7 @@ Build tool (IAR, Keil, J-Link) flash algo for i.MXRT | 收集i.MXRT主流开发�
         <td>/</td>
     </tr>
 </table>
+
 
 ### 一、用于Segger J-Link
 #### 1.1 安装Segger J-Link驱动
