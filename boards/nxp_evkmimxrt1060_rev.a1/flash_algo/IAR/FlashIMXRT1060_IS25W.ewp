@@ -353,8 +353,6 @@
                     <state>$PROJ_DIR$\rom_api\</state>
                     <state>$PROJ_DIR$\</state>
                     <state>$PROJ_DIR$\..\..\..\..\CMSIS\Include\</state>
-                    <state>$PROJ_DIR$\..\..\..\..\devices\MIMXRT1062\</state>
-                    <state>$PROJ_DIR$\..\..\..\..\devices\MIMXRT1062\drivers\</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
