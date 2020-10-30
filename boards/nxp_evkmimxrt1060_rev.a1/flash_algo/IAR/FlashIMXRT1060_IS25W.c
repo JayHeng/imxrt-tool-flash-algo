@@ -31,7 +31,6 @@
 #include "flash_loader_extra.h"
 #include "bl_api.h"
 
-
 /** local definitions **/
 
 #define FLEXSPI_NOR_INSTANCE 0
@@ -72,9 +71,12 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
                    uint32_t link_address, uint32_t flags)
 #endif /* USE_ARGC_ARGV */
 {
-    status_t status;
-    serial_nor_config_option_t option;
-    option.option0.U = 0xc0000006;
+    status_t status = RESULT_OK;
+    serial_nor_config_option_t configOption;
+    
+    configOption.option0.U = 0xc0000006;
+    configOption.option1.U = 0x00000000;
+    
     /* Disable Watchdog Power Down Counter */
     WDOG1->WMCR &= ~WDOG_WMCR_PDE_MASK;
     WDOG2->WMCR &= ~WDOG_WMCR_PDE_MASK;
@@ -92,7 +94,6 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
     RTWDOG->TOVAL = 0xFFFF;
     RTWDOG->CS    = (uint32_t)((RTWDOG->CS) & ~RTWDOG_CS_EN_MASK) | RTWDOG_CS_UPDATE_MASK;
     
-    bl_api_init();
     if (CCM_ANALOG->PLL_ARM & CCM_ANALOG_PLL_ARM_BYPASS_MASK)
     {
         // Configure ARM_PLL
@@ -149,45 +150,47 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
         CCM_ANALOG->PLL_USB1 &= ~CCM_ANALOG_PLL_USB1_BYPASS_MASK;
     }
     
+    bl_api_init();
+    
 #if USE_ARGC_ARGV
     for(int i = 0; i < argc; /*i++*/)
     {
         if((strcmp("--Opt0", argv[i]) == 0) && ((i+1) < argc))
         {
             /* Flash clock init */
-            option.option0.U = strToUint(argv[++i]);
+            configOption.option0.U = strToUint(argv[++i]);
             i+=2;
         }
         else if((strcmp("--Opt1", argv[i]) == 0) && ((i+1) < argc))
         {
             /* Flash clock init */
-            option.option1.U = strToUint(argv[++i]);
+            configOption.option1.U = strToUint(argv[++i]);
             i+=2;
         }
         else
         {
             if(strcmp("--Qspi", argv[i]) == 0 )
-            {//default option setting
+            {//default configOption setting
             }
             else if(strcmp("--QspiDDR", argv[i]) == 0 )
             {
-                option.option0.U = 0xc0100000;
+                configOption.option0.U = 0xc0100000;
             }
             else if(strcmp("--Hyper1V8", argv[i]) == 0 )
             {
-                option.option0.U = 0xc0233001;
+                configOption.option0.U = 0xc0233001;
             }
             else if(strcmp("--Hyper3V0", argv[i]) == 0 )
             {
-                option.option0.U = 0xc0333000;
+                configOption.option0.U = 0xc0333000;
             }
             else if(strcmp("--MxicOpiDDR", argv[i]) == 0 )
             {
-                option.option0.U = 0xc0433000;
+                configOption.option0.U = 0xc0433000;
             }
             else if(strcmp("--MxicOct", argv[i]) == 0 )
             {
-                option.option0.U = 0xc0403004;
+                configOption.option0.U = 0xc0403004;
                 flash_run_context_t flashCtx = {.U = 0};
                 flashCtx.B.current_mode = kFlashInstMode_OPI_DDR;
                 flashCtx.B.restore_sequence = kRestoreSequence_Send_6699_9966;
@@ -196,11 +199,11 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
             }
             else if(strcmp("--McrnOct", argv[i]) == 0 )
             {
-                option.option0.U = 0xc0600000;
+                configOption.option0.U = 0xc0600000;
             }
             else if(strcmp("--McrnOpi", argv[i]) == 0 )
             {
-                option.option0.U = 0xc0603000;
+                configOption.option0.U = 0xc0603000;
                 flash_run_context_t flashCtx = {.U = 0};
                 flashCtx.B.current_mode = kFlashInstMode_OPI_DDR;
                 flashCtx.B.restore_sequence = kRestoreSequence_Send_66_99;
@@ -209,11 +212,11 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
             }
             else if(strcmp("--McrnOpiDDR", argv[i]) == 0 )
             {
-                option.option0.U = 0xc0633000;
+                configOption.option0.U = 0xc0633000;
             }
             else if(strcmp("--AdstOpi", argv[i]) == 0 )
             {
-                option.option0.U = 0xc0803000;
+                configOption.option0.U = 0xc0803000;
                 flash_run_context_t flashCtx = {.U = 0};
                 flashCtx.B.current_mode = kFlashInstMode_OPI_DDR;
                 flashCtx.B.restore_sequence = kRestoreSequence_Send_06_FF;
@@ -225,25 +228,15 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
         }
     }
 #endif
-
-
-  
- /****************************************************************************************************************/
-    status = flexspi_nor_get_config(FLEXSPI_NOR_INSTANCE, &config, &option);
-    if (status != kStatus_Success)
+    status = flexspi_nor_get_config(FLEXSPI_NOR_INSTANCE, &config, &configOption);
+    if (status != 0)
     {
-        return (1);
+        return status;
     }
+    
     status = flexspi_nor_flash_init(FLEXSPI_NOR_INSTANCE, &config);
-    if (status != kStatus_Success)
-    {
-        return (1);
-    }
-    else
-    {
-        return (0); // Finished without Errors
-    }
-
+    
+    return status; 
 }
 
 /*************************************************************************
@@ -266,7 +259,7 @@ uint32_t FlashWrite(void *block_start,
                                        buffer+=config.pageSize,
                                        addr+=config.pageSize)
   {
-    if(flexspi_nor_flash_page_program(1, &config, addr, (uint32_t *)buffer) != RESULT_OK)
+    if(flexspi_nor_flash_page_program(FLEXSPI_NOR_INSTANCE, &config, addr, (uint32_t *)buffer) != RESULT_OK)
     {
       status = RESULT_ERROR;
       break;
@@ -290,11 +283,26 @@ uint32_t FlashErase(void *block_start,
 
   /*Erase Sector*/
   status_t status = RESULT_OK;
-  if(flexspi_nor_flash_erase(1, &config, addr, block_size) != RESULT_OK)
+  if(flexspi_nor_flash_erase(FLEXSPI_NOR_INSTANCE, &config, addr, block_size) != RESULT_OK)
   {
     status = RESULT_ERROR;
   }
   return status;
+}
+
+/*************************************************************************
+ * Function Name: FlashChecksum
+ * Parameters:  none
+ *
+ * Return: 0
+ *
+ * Description: Restore the performance mode.
+ *************************************************************************/
+OPTIONAL_CHECKSUM
+
+uint32_t FlashChecksum(void const *begin, uint32_t count)
+{
+  return Crc16((uint8_t const *)begin, count);
 }
 
 OPTIONAL_SIGNOFF

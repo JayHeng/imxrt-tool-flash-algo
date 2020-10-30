@@ -157,8 +157,6 @@ typedef union
     uint32_t U;
 } run_bootloader_ctx_t;
 
-#define g_bootloaderTree (*(bootloader_api_entry_t **)0x0020001c)
-
 void bl_api_init(void);
 
 #endif //__BL_API_H__
