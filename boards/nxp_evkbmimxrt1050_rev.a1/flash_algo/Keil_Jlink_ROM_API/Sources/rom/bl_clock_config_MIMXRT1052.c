@@ -10,7 +10,7 @@
 #include "bootloader_common.h"
 #include "fsl_device_registers.h"
 #include "microseconds.h"
-#include "property.h"
+//#include "property.h"
 #include "target_config.h"
 #if BL_FEATURE_SEMC_NAND_MODULE || BL_FEATURE_SEMC_NOR_MODULE
 //#include "bl_semc.h"
