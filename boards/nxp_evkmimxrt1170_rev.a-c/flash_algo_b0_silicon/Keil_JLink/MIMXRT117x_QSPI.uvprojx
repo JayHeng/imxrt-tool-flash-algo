@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>CPU_MIMXRT1176DVMAA_cm7,USE_ROM_API</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Sources;.\Sources\rom;..\..\..\..\CMSIS\Include</IncludePath>
+              <IncludePath>.\Sources;.\rom;..\..\..\..\CMSIS\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
