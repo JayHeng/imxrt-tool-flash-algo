@@ -27,11 +27,17 @@
 #ifdef USE_ROM_API
 /* Init this global variable to workaround of the issue to running this flash algo in Segger */
 static flexspi_nor_config_t *config = (flexspi_nor_config_t *)0x20230000;
+#include "fsl_clock.h"
 #else
 #include "fsl_clock.h"
 #include "fsl_flexspi.h"
 #include "app.h"
-
+extern status_t flexspi_nor_flash_erase_sector(FLEXSPI_Type *base, uint32_t address);
+extern status_t flexspi_nor_flash_page_program(FLEXSPI_Type *base, uint32_t dstAddr, const uint32_t *src);
+extern status_t flexspi_nor_get_vendor_id(FLEXSPI_Type *base, uint8_t *vendorId);
+extern status_t flexspi_nor_enable_quad_mode(FLEXSPI_Type *base);
+extern status_t flexspi_nor_erase_chip(FLEXSPI_Type *base);
+extern void flexspi_nor_flash_init(FLEXSPI_Type *base);
 #define SECTOR_MIN_SIZE 0x1000
 
 /*${function:start}*/

@@ -17,7 +17,6 @@ typedef status_t (*clearCacheCommand_t)(uint32_t instance);
  *
  * @ingroup bl_core
  */
-#pragma anon_unions
 typedef union _standard_version
 {
     struct
@@ -244,7 +243,7 @@ void ROM_FLEXSPI_NorFlash_ClearCache(uint32_t instance)
     uint32_t clearCacheFunctionAddress;
     if ((ANADIG_MISC->MISC_DIFPROG & ANADIG_MISC_MISC_DIFPROG_CHIPID(0x10U)) != 0U)
     {
-        clearCacheFunctionAddress = 0x0021a3afU;
+        clearCacheFunctionAddress = 0x0021a3b7U;
     }
     else
     {

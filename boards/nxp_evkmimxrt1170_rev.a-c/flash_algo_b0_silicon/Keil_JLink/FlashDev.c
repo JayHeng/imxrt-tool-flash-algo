@@ -10,7 +10,7 @@
 #include "FlashOS.H" // FlashOS Structures
 
 struct FlashDevice const FlashDevice = {FLASH_DRV_VERS,                      // Driver Version, do not modify!
-                                        "MIMXRT117x 16mB QuadSPI NOR Flash", // Device Name
+                                        "MIMXRT117x_QuadSPI_4KB_SEC",        // Device Name
                                         EXTSPI,                              // Device Type
                                         FLASH_BASE_ADDRESS,                          // Device Start Address of Alias
                                         FLASH_BASE_SIZE,                           // Device Size in Bytes (16mB)

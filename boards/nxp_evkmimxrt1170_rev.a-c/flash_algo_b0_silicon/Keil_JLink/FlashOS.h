@@ -20,6 +20,15 @@
 #define SECTOR_NUM 512 // Max Number of Sector Items
 #define PAGE_MAX 65536 // Max Page Size for Programming
 
+#ifndef ALIAS_PROGRAM
+#define FLASH_BASE_ADDRESS 0x30000000
+#else
+#define FLASH_BASE_ADDRESS 0x08000000
+#endif
+#define FLASH_BASE_SIZE 0x1000000
+#define FLASH_PAGE_SIZE 256
+#define FLASH_SECTOR_SIZE 0x1000
+
 struct FlashSectors
 {
     unsigned long szSector;   // Sector Size in Bytes
@@ -63,3 +72,6 @@ extern int ProgramPage(unsigned long adr,  // Program Page Function
 extern unsigned long Verify(unsigned long adr, // Verify Function
                             unsigned long sz,
                             unsigned char *buf);
+                            
+                            
+                            
