@@ -33,6 +33,9 @@ EW*.tmp.c
 release
 *_release
 *.nxa07314
+settings
+BrowseInfo
+Exe
 
 */*/*/*/out/
 */*/*/*/Output/
