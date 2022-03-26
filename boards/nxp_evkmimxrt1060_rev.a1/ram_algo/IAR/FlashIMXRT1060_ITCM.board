@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flash_board>
+    <pass>
+        <loader>$TOOLKIT_DIR$\config\flashloader\NXP\FlashIMXRT1060_ITCM.flash</loader>
+        <range>CODE 0x00000000 0x0007ffff</range>
+    </pass>
+</flash_board>

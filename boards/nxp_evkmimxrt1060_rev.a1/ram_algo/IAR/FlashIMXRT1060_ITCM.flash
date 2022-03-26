@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<flash_device>
+  <exe>$TOOLKIT_DIR$\config\flashloader\NXP\FlashIMXRT1060_RAM.out</exe>
+  <page>256</page>
+  <block>1 0x00080000</block>
+  <flash_base>0x00000000</flash_base>
+</flash_device>
