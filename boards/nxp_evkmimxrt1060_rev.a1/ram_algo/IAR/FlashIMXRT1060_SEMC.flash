@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<flash_device>
+  <exe>$TOOLKIT_DIR$\config\flashloader\NXP\FlashIMXRT1060_RAM.out</exe>
+  <page>256</page>
+  <block>1 0x02000000</block>
+  <flash_base>0x80000000</flash_base>
+  <macro>$TOOLKIT_DIR$\config\flashloader\NXP\FlashIMXRT1060_SEMC.mac</macro>
+</flash_device>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspace>
+    <project>
+        <path>$WS_DIR$\FlashIMXRT1060_RAM.ewp</path>
+    </project>
+    <batchBuild>
+        <batchDefinition>
+            <name>All</name>
+            <member>
+                <project>FlashIMXRT1060_IS25W</project>
+                <configuration>FlashIMXRT1060_IS25W</configuration>
+            </member>
+        </batchDefinition>
+    </batchBuild>
+</workspace>

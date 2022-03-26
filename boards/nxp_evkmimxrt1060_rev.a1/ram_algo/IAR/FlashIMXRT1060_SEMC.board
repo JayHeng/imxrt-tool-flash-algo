@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flash_board>
+    <pass>
+        <loader>$TOOLKIT_DIR$\config\flashloader\NXP\RT1060\FlashIMXRT1060_SEMC.flash</loader>
+        <range>CODE 0x80000000 0x81ffffff</range>
+    </pass>
+</flash_board>
