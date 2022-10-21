@@ -10,7 +10,7 @@
 #include "FlashOS.H" // FlashOS Structures
 
 struct FlashDevice const FlashDevice = {FLASH_DRV_VERS,                      // Driver Version, do not modify!
-                                        "MIMXRT117x_QuadSPI_4KB_SEC",        // Device Name
+                                        "MIMXRT117x_S26KS256S_512B_256KB_SEC",        // Device Name
                                         EXTSPI,                              // Device Type
                                         FLASH_BASE_ADDRESS,                          // Device Start Address of Alias
                                         FLASH_BASE_SIZE,                           // Device Size in Bytes (16mB)
@@ -18,7 +18,7 @@ struct FlashDevice const FlashDevice = {FLASH_DRV_VERS,                      // 
                                         0,                                   // Reserved, must be 0
                                         0xFF,                                // Initial Content of Erased Memory
                                         100,                                 // Program Page Timeout 100 mSec
-                                        15000,                                // Erase Sector Timeout 5000 mSec
+                                        5000,                                // Erase Sector Timeout 5000 mSec
 
                                         // Specify Size and Address of Sectors
                                         FLASH_SECTOR_SIZE, 0x00000000, // Sector Size  64kB (256 Sectors)

@@ -10,6 +10,12 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
+
+/* Component ID definition, used by tools. */
+#ifndef FSL_COMPONENT_ID
+#define FSL_COMPONENT_ID "driver.romapi"
+#endif
+
 typedef status_t (*clearCacheCommand_t)(uint32_t instance);
 
 /*!
@@ -128,7 +134,7 @@ status_t ROM_FLEXSPI_NorFlash_GetConfig(uint32_t instance,
 /*!
  * @brief Initialize Serial NOR devices via FLEXSPI.
  *
- * @param instance storge the instance of FLEXSPI.
+ * @param instance storage the instance of FLEXSPI.
  * @param config A pointer to the storage for the driver runtime state.
  */
 status_t ROM_FLEXSPI_NorFlash_Init(uint32_t instance, flexspi_nor_config_t *config)
@@ -139,7 +145,7 @@ status_t ROM_FLEXSPI_NorFlash_Init(uint32_t instance, flexspi_nor_config_t *conf
 /*!
  * @brief Program data to Serial NOR via FLEXSPI.
  *
- * @param instance storge the instance of FLEXSPI.
+ * @param instance storage the instance of FLEXSPI.
  * @param config  A pointer to the storage for the driver runtime state.
  * @param dst_addr A pointer to the desired flash memory to be programmed.
  * @param src A pointer to the source buffer of data that is to be programmed
@@ -157,22 +163,22 @@ status_t ROM_FLEXSPI_NorFlash_ProgramPage(uint32_t instance,
 /*!
  * @brief Read data from Serial NOR
  *
- * @param instance storge the instance of FLEXSPI.
+ * @param instance storage the instance of FLEXSPI.
  * @param config  A pointer to the storage for the driver runtime state.
  * @param dst     A pointer to the dest buffer of data that is to be read from the NOR flash.
  * @param lengthInBytes The length, given in bytes to be read.
  */
 status_t ROM_FLEXSPI_NorFlash_Read(
-    uint32_t instance, flexspi_nor_config_t *config, uint32_t *dst, uint32_t addr, uint32_t lengthInBytes)
+    uint32_t instance, flexspi_nor_config_t *config, uint32_t *dst, uint32_t start, uint32_t lengthInBytes)
 {
-    return g_bootloaderTree->flexSpiNorDriver->read(instance, config, dst, addr, lengthInBytes);
+    return g_bootloaderTree->flexSpiNorDriver->read(instance, config, dst, start, lengthInBytes);
 }
 #endif /* FSL_ROM_FLEXSPINOR_API_HAS_FEATURE_READ */
 
 /*!
  * @brief Erase Flash Region specified by address and length.
  *
- * @param instance storge the index of FLEXSPI.
+ * @param instance storage the index of FLEXSPI.
  * @param config A pointer to the storage for the driver runtime state.
  * @param start The start address of the desired NOR flash memory to be erased.
  * @param length The length, given in bytes to be erased.
@@ -186,7 +192,7 @@ status_t ROM_FLEXSPI_NorFlash_Erase(uint32_t instance, flexspi_nor_config_t *con
 /*!
  * @brief Erase one sector specified by address.
  *
- * @param instance storge the index of FLEXSPI.
+ * @param instance storage the index of FLEXSPI.
  * @param config A pointer to the storage for the driver runtime state.
  * @param start The start address of the desired NOR flash memory to be erased.
  */
@@ -200,7 +206,7 @@ status_t ROM_FLEXSPI_NorFlash_EraseSector(uint32_t instance, flexspi_nor_config_
 /*!
  * @brief Erase one block specified by address.
  *
- * @param instance storge the index of FLEXSPI.
+ * @param instance storage the index of FLEXSPI.
  * @param config A pointer to the storage for the driver runtime state.
  * @param start The start address of the desired NOR flash memory to be erased.
  */
@@ -249,8 +255,9 @@ void ROM_FLEXSPI_NorFlash_ClearCache(uint32_t instance)
     {
         clearCacheFunctionAddress = 0x0020426bU;
     }
-    clearCacheCommand_t clearCacheCommand = (clearCacheCommand_t)(clearCacheFunctionAddress);
-    clearCacheCommand(instance);
+    clearCacheCommand_t clearCacheCommand;
+    MISRA_CAST(clearCacheCommand_t, clearCacheCommand, uint32_t, clearCacheFunctionAddress);
+    (void)clearCacheCommand(instance);
 }
 
 /*! @brief Wait until device is idle*/

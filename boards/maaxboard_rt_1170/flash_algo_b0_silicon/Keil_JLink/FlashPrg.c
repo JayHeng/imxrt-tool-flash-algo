@@ -18,7 +18,7 @@
 
 #define FLEXSPI_NOR_INSTANCE   1
 #define FLEXSPIx               ((FLEXSPI_NOR_INSTANCE == 1) ? FLEXSPI1 : FLEXSPI2)
-#define FLASH_ALGO_SECTOR_SIZE (0x1000)
+#define FLASH_ALGO_SECTOR_SIZE (256u * 1024u)
 
 #ifndef LOG_ENABLE
 #define LOG_ENABLE 0
@@ -26,7 +26,7 @@
 
 #ifdef USE_ROM_API
 /* Init this global variable to workaround of the issue to running this flash algo in Segger */
-static flexspi_nor_config_t *config = (flexspi_nor_config_t *)0x20230000;
+static flexspi_nor_config_t norConfig;
 #include "fsl_clock.h"
 #else
 #include "fsl_clock.h"
@@ -213,7 +213,7 @@ int Init(unsigned long adr, unsigned long clk, unsigned long fnc)
     unsigned int state        = 0;
     log_result(ERROR_LOG_ADDR + INIT_OFF, index++);
 
-    if ((*(unsigned int *)0x40C84800) == 0x1170A0)
+    if ((*(unsigned int *)0x40C84800) == 0x1170B0)
     {
 #if __CORTEX_M == 7
         if (SCB_CCR_DC_Msk == (SCB_CCR_DC_Msk & SCB->CCR))
@@ -248,16 +248,18 @@ int Init(unsigned long adr, unsigned long clk, unsigned long fnc)
 #ifdef USE_ROM_API
     ROM_API_Init();
     serial_nor_config_option_t option;
-    option.option0.U = 0xc0000007U;
-
-    status = ROM_FLEXSPI_NorFlash_GetConfig(FLEXSPI_NOR_INSTANCE, config, &option);
+    option.option0.U = 0xc0233007;  // HyperFLASH 1V8, Query pads: Octal, CMD pads: 8, Frequency: 133MHz
+    option.option1.U = 0x0;
+    /* Clean up FLEXSPI NOR flash driver Structure */
+    memset(&norConfig, 0U, sizeof(flexspi_nor_config_t));
+    status = ROM_FLEXSPI_NorFlash_GetConfig(FLEXSPI_NOR_INSTANCE, &norConfig, &option);
     log_result(ERROR_LOG_ADDR + INIT_OFF + (state++) * 4, status);
     if (status != kStatus_Success)
     {
         return (1);
     }
 
-    status = ROM_FLEXSPI_NorFlash_Init(FLEXSPI_NOR_INSTANCE, config);
+    status = ROM_FLEXSPI_NorFlash_Init(FLEXSPI_NOR_INSTANCE, &norConfig);
     log_result(ERROR_LOG_ADDR + INIT_OFF + (state++) * 4, status);
     if (status != kStatus_Success)
     {
@@ -303,7 +305,7 @@ int EraseChip(void)
 {
     status_t status;
 #ifdef USE_ROM_API
-    status = ROM_FLEXSPI_NorFlash_EraseAll(FLEXSPI_NOR_INSTANCE, config); // Erase all
+    status = ROM_FLEXSPI_NorFlash_EraseAll(FLEXSPI_NOR_INSTANCE, &norConfig); // Erase all
 #else
     status = flexspi_nor_erase_chip(FLEXSPIx);
 #endif
@@ -336,7 +338,7 @@ int EraseSector(unsigned long adr)
     }
 
 #ifdef USE_ROM_API
-    status = ROM_FLEXSPI_NorFlash_Erase(FLEXSPI_NOR_INSTANCE, config, adr, FLASH_ALGO_SECTOR_SIZE); // Erase 1 sector
+    status = ROM_FLEXSPI_NorFlash_Erase(FLEXSPI_NOR_INSTANCE, &norConfig, adr, FLASH_ALGO_SECTOR_SIZE); // Erase 1 sector
 #else
     for (i = 0; i < FLASH_ALGO_SECTOR_SIZE / FLASH_SECTOR_SIZE; i++)
     {
@@ -382,7 +384,7 @@ int ProgramPage(unsigned long adr, unsigned long sz, unsigned char *buf)
         memcpy(page_buf, (const void*)(adr + FLASH_BASE_ADDRESS), adr % FLASH_PAGE_SIZE);
         memcpy(page_buf + adr % FLASH_PAGE_SIZE, (const void *)(buf), FLASH_PAGE_SIZE - adr % FLASH_PAGE_SIZE);
 #ifdef USE_ROM_API
-        status = ROM_FLEXSPI_NorFlash_ProgramPage(FLEXSPI_NOR_INSTANCE, config, adr - adr % FLASH_PAGE_SIZE, (const uint32_t *)page_buf); // program 1 page
+        status = ROM_FLEXSPI_NorFlash_ProgramPage(FLEXSPI_NOR_INSTANCE, &norConfig, adr - adr % FLASH_PAGE_SIZE, (const uint32_t *)page_buf); // program 1 page
 #else
         status = flexspi_nor_flash_page_program(FLEXSPIx, adr - adr % FLASH_PAGE_SIZE, (const uint32_t*)page_buf);
 #endif
@@ -398,7 +400,7 @@ int ProgramPage(unsigned long adr, unsigned long sz, unsigned char *buf)
     for (i = 0; i < sz / FLASH_PAGE_SIZE; i++)
     {
 #ifdef USE_ROM_API
-        status = ROM_FLEXSPI_NorFlash_ProgramPage(FLEXSPI_NOR_INSTANCE, config, adr + i * FLASH_PAGE_SIZE, (const uint32_t *)(buf + i * FLASH_PAGE_SIZE)); // program 1 page
+        status = ROM_FLEXSPI_NorFlash_ProgramPage(FLEXSPI_NOR_INSTANCE, &norConfig, adr + i * FLASH_PAGE_SIZE, (const uint32_t *)(buf + i * FLASH_PAGE_SIZE)); // program 1 page
 #else
         status =
             flexspi_nor_flash_page_program(FLEXSPIx, adr + i * FLASH_PAGE_SIZE, (void *)(buf + i * FLASH_PAGE_SIZE));
@@ -414,7 +416,7 @@ int ProgramPage(unsigned long adr, unsigned long sz, unsigned char *buf)
         memcpy(page_buf, buf + i * FLASH_PAGE_SIZE, sz % FLASH_PAGE_SIZE);
         memcpy(page_buf + sz % FLASH_PAGE_SIZE, (const void *)(adr + i * FLASH_PAGE_SIZE + FLASH_BASE_ADDRESS + sz % FLASH_PAGE_SIZE), FLASH_PAGE_SIZE - sz % FLASH_PAGE_SIZE);
 #ifdef USE_ROM_API
-        status = ROM_FLEXSPI_NorFlash_ProgramPage(FLEXSPI_NOR_INSTANCE, config, adr + i * FLASH_PAGE_SIZE, (const uint32_t *)page_buf); // program 1 page
+        status = ROM_FLEXSPI_NorFlash_ProgramPage(FLEXSPI_NOR_INSTANCE, &norConfig, adr + i * FLASH_PAGE_SIZE, (const uint32_t *)page_buf); // program 1 page
 #else
         status = flexspi_nor_flash_page_program(FLEXSPIx, adr + i * FLASH_PAGE_SIZE, (void *)page_buf);
 #endif
