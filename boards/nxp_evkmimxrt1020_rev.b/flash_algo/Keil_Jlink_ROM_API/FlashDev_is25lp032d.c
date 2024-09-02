@@ -7,13 +7,13 @@
 /*                                                                     */
 /***********************************************************************/
 
-#include "FlashOS.H" // FlashOS Structures
+#include "FlashOS.h" // FlashOS Structures
 
 struct FlashDevice const FlashDevice = {FLASH_DRV_VERS,                     // Driver Version, do not modify!
-                                        "MIMXRT1020 8MB QuadSPI NOR Flash", // Device Name
+                                        "MIMXRT1020 4MB QuadSPI NOR Flash", // Device Name
                                         EXTSPI,                             // Device Type
                                         0x60000000,                         // Device Start Address
-                                        0x800000,                           // Device Size in Bytes (8mB)
+                                        0x400000,                           // Device Size in Bytes (4mB)
                                         256,                                // Programming Page Size
                                         0,                                  // Reserved, must be 0
                                         0xFF,                               // Initial Content of Erased Memory

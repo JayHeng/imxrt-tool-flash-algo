@@ -8,7 +8,7 @@
 /*                                                                     */
 /***********************************************************************/
 
-#include "FlashOS.H" // FlashOS Structures
+#include "FlashOS.h" // FlashOS Structures
 #include "flexspi_nor_flash.h"
 
 #define FLEXSPI_NOR_INSTANCE 0
@@ -30,7 +30,18 @@ int Init(unsigned long adr, unsigned long clk, unsigned long fnc)
 {
     status_t status;
     serial_nor_config_option_t option;
-    option.option0.U = 0xc0000006; // QuadSPI NOR, Frequency: 100MHz
+/*
+        # bit [11: 08] Quad Mode Entry Setting
+        #             0 - Not Configured, apply to devices:
+        #                 - With Quad Mode enabled by default or
+        #                 - Compliant with JESD216A/B or later revision
+        #             1 - Set bit 6 in Status Register 1
+        #             2 - Set bit 1 in Status Register 2
+        #             3 - Set bit 7 in Status Register 2
+        #             4 - Set bit 1 in Status Register 2 by 0x31 command
+*/
+
+    option.option0.U = 0xc0000106; // QuadSPI NOR, Frequency: 100MHz
                                    /* Disable Watchdog Power Down Counter */
     WDOG1->WMCR &= ~WDOG_WMCR_PDE_MASK;
     WDOG2->WMCR &= ~WDOG_WMCR_PDE_MASK;
