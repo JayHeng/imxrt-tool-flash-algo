@@ -116,7 +116,22 @@ status_t flexspi_nor_enable_quad_mode(FLEXSPI_Type *base)
     flashXfer.SeqNumber     = 1;
     flashXfer.seqIndex      = NOR_CMD_LUT_SEQ_IDX_WRITESTATUSREG;
     flashXfer.data          = &writeValue;
-    flashXfer.dataSize      = 1;
+    if (writeValue < 0x100u)
+    {
+        flashXfer.dataSize      = 1;
+    }
+    else if (writeValue < 0x10000u)
+    {
+        flashXfer.dataSize      = 2;
+    }
+    else if (writeValue < 0x1000000u)
+    {
+        flashXfer.dataSize      = 3;
+    }
+    else
+    {
+        flashXfer.dataSize      = 4;
+    }
 
     status = FLEXSPI_TransferBlocking(base, &flashXfer);
     if (status != kStatus_Success)
@@ -230,7 +245,7 @@ status_t flexspi_nor_flash_page_program(FLEXSPI_Type *base, uint32_t dstAddr, co
     flashXfer.port          = kFLEXSPI_PortA1;
     flashXfer.cmdType       = kFLEXSPI_Write;
     flashXfer.SeqNumber     = 1;
-    flashXfer.seqIndex      = NOR_CMD_LUT_SEQ_IDX_PAGEPROGRAM_QUAD;
+    flashXfer.seqIndex      = NOR_CMD_LUT_SEQ_IDX_PAGEPROGRAM_SINGLE;
     flashXfer.data          = (uint32_t *)src;
     flashXfer.dataSize      = FLASH_PAGE_SIZE;
     status                  = FLEXSPI_TransferBlocking(base, &flashXfer);

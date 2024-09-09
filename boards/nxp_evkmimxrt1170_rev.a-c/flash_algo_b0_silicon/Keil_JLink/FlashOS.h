@@ -8,6 +8,9 @@
 /*                                                                     */
 /***********************************************************************/
 
+#ifndef _FLASHOS_H_
+#define _FLASHOS_H_
+
 #define VERS 1 // Interface Version 1.01
 
 #define UNKNOWN 0  // Unknown
@@ -74,4 +77,4 @@ extern unsigned long Verify(unsigned long adr, // Verify Function
                             unsigned char *buf);
                             
                             
-                            
+#endif /* _FLASHOS_H_ */                            
