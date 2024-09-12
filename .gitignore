@@ -40,6 +40,7 @@ Exe
 */*/*/*/out/
 */*/*/*/Output/
 */*/*/out/
+*/*/*/Output/
 
 # flash algo exe file
 *.FLM

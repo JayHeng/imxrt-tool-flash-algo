@@ -565,8 +565,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\platform\drivers\flexspi\fsl_flexspi.c</PathWithFileName>
-      <FilenameWithoutPath>fsl_flexspi.c</FilenameWithoutPath>
+      <PathWithFileName>.\Sources\flexspi_nor_flash_ops.c</PathWithFileName>
+      <FilenameWithoutPath>flexspi_nor_flash_ops.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -577,8 +577,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\src\driver_examples\flexspi\nor\polling_transfer\flexspi_nor_flash_ops.c</PathWithFileName>
-      <FilenameWithoutPath>flexspi_nor_flash_ops.c</FilenameWithoutPath>
+      <PathWithFileName>.\Sources\fsl_flexspi.c</PathWithFileName>
+      <FilenameWithoutPath>fsl_flexspi.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

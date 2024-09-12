@@ -212,6 +212,7 @@ int Init(unsigned long adr, unsigned long clk, unsigned long fnc)
     unsigned int state        = 0;
     log_result(ERROR_LOG_ADDR + INIT_OFF, index++);
 
+#ifdef USE_ROM_API
     ROM_API_Init();
     serial_nor_config_option_t option;
     option.option0.U = 0xc0000007U;
@@ -233,6 +234,20 @@ int Init(unsigned long adr, unsigned long clk, unsigned long fnc)
     {
         return (0); // Finished without Errors
     }
+#else
+
+    init_flexspi_pins(FLEXSPI_NOR_INSTANCE);
+    flexspi_nor_flash_init(FLEXSPIx);
+
+    /* Enter quad mode. */
+    status = flexspi_nor_enable_quad_mode(FLEXSPIx);
+    log_result(ERROR_LOG_ADDR + INIT_OFF + (state++) * 4, status);
+    if (status != kStatus_Success)
+    {
+        return 1;
+    }
+    return 0;
+#endif
 }
 
 /*
@@ -327,11 +342,15 @@ int ProgramPage(unsigned long adr, unsigned long sz, unsigned char *buf)
 		
 		    status_t status = 0;
 
-    for(uint32_t size = 0; size < sz; size+=config->pageSize,
-            buf+=config->pageSize,
-            adr+=config->pageSize)
+    for(uint32_t size = 0; size < sz; size+=FLASH_PAGE_SIZE,
+            buf+=FLASH_PAGE_SIZE,
+            adr+=FLASH_PAGE_SIZE)
     {
-        status =  ROM_FLEXSPI_NorFlash_ProgramPage(FLEXSPI_NOR_INSTANCE, config, adr - FLASH_BASE_ADDRESS, (uint32_t *)buf);
+#ifdef USE_ROM_API
+        status = ROM_FLEXSPI_NorFlash_ProgramPage(FLEXSPI_NOR_INSTANCE, config, adr - FLASH_BASE_ADDRESS, (uint32_t *)buf);
+#else
+        status = flexspi_nor_flash_page_program(FLEXSPIx, adr - FLASH_BASE_ADDRESS, (void *)buf);
+#endif
     }
 
   return (int)status;
