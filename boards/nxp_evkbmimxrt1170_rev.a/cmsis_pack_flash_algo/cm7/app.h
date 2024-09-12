@@ -64,7 +64,7 @@
 #define FLASH_QENABLE_CMD        0x01
 #define FLASH_QPROG_CMD          0xFF  // doesn't support
 #define FLASH_SECERASE_CMD       0xD8
-#define FLASH_QREAD_DUMMY        0x08
+#define FLASH_QREAD_DUMMY        0x0A  // MODE bit cycles + dummy cycles
 
 
 #define FLASH_BUSY_STATUS_POL    1
