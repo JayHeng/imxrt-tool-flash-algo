@@ -8,16 +8,16 @@
 #ifndef _APP_H_
 #define _APP_H_
 
+#include "FlashOS.h" // FlashOS Structures
+
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
 /*${macro:start}*/
 #define EXAMPLE_FLEXSPI           FLEXSPI1
-#define FLASH_SIZE                0x4000 /* 16Mb/KByte */
+#define FLASH_SIZE                (FLASH_BASE_SIZE/0x400)
 #define EXAMPLE_FLEXSPI_AMBA_BASE FlexSPI1_AMBA_BASE
-#define FLASH_PAGE_SIZE           256
-#define EXAMPLE_SECTOR            20
-#define SECTOR_SIZE               0x1000 /* 4K */
+
 #define EXAMPLE_FLEXSPI_CLOCK     kCLOCK_Flexspi1
 
 #define NOR_CMD_LUT_SEQ_IDX_READ_NORMAL        7
@@ -48,24 +48,24 @@
 */
 
 ///////////////////////////////////////////////
-
+/*
 // W25Q128JW, SR2[1]
 #define FLASH_QUAD_ENABLE        0x02
 #define FLASH_QENABLE_CMD        0x31
 #define FLASH_QPROG_CMD          0x32
 #define FLASH_SECERASE_CMD       0xD7
 #define FLASH_QREAD_DUMMY        0x06
-
+*/
 
 ///////////////////////////////////////////////
 // S25HS512T, CFR1[1]
-/*
+
 #define FLASH_QUAD_ENABLE        0x0200
 #define FLASH_QENABLE_CMD        0x01
 #define FLASH_QPROG_CMD          0xFF  // doesn't support
 #define FLASH_SECERASE_CMD       0xD8
 #define FLASH_QREAD_DUMMY        0x08
-*/
+
 
 #define FLASH_BUSY_STATUS_POL    1
 #define FLASH_BUSY_STATUS_OFFSET 0

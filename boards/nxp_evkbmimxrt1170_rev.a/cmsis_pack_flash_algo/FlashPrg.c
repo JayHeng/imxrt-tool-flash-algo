@@ -18,7 +18,7 @@
 
 #define FLEXSPI_NOR_INSTANCE   1
 #define FLEXSPIx               ((FLEXSPI_NOR_INSTANCE == 1) ? FLEXSPI1 : FLEXSPI2)
-#define FLASH_ALGO_SECTOR_SIZE (0x1000)
+#define FLASH_ALGO_SECTOR_SIZE (FLASH_SECTOR_SIZE)
 
 #ifndef LOG_ENABLE
 #define LOG_ENABLE 0
@@ -37,7 +37,6 @@ extern status_t flexspi_nor_get_vendor_id(FLEXSPI_Type *base, uint8_t *vendorId)
 extern status_t flexspi_nor_enable_quad_mode(FLEXSPI_Type *base);
 extern status_t flexspi_nor_erase_chip(FLEXSPI_Type *base);
 extern void flexspi_nor_flash_init(FLEXSPI_Type *base);
-#define SECTOR_MIN_SIZE 0x1000
 
 /*${function:start}*/
 flexspi_device_config_t deviceconfig = {

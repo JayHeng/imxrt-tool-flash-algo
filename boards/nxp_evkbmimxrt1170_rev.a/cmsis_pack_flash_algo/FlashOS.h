@@ -8,6 +8,9 @@
 /*                                                                     */
 /***********************************************************************/
 
+#ifndef _FLASHOS_H_
+#define _FLASHOS_H_
+
 #define VERS 1           // Interface Version 1.01
 
 #define UNKNOWN  0       // Unknown
@@ -25,9 +28,9 @@
 #else
 #define FLASH_BASE_ADDRESS 0x08000000
 #endif
-#define FLASH_BASE_SIZE   0x1000000
+#define FLASH_BASE_SIZE   0x4000000
 #define FLASH_PAGE_SIZE   256
-#define FLASH_SECTOR_SIZE 0x1000
+#define FLASH_SECTOR_SIZE 0x40000
 
 struct FlashSectors
 {
@@ -72,3 +75,5 @@ extern int ProgramPage(unsigned long adr,  // Program Page Function
 extern unsigned long Verify(unsigned long adr, // Verify Function
                             unsigned long sz,
                             unsigned char *buf);
+
+#endif /* _FLASHOS_H_ */    
