@@ -497,8 +497,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\devices\MIMXRT1176\drivers\fsl_clock.c</PathWithFileName>
-      <FilenameWithoutPath>fsl_clock.c</FilenameWithoutPath>
+      <PathWithFileName>.\Sources\fsl_common.c</PathWithFileName>
+      <FilenameWithoutPath>fsl_common.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -509,8 +509,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\devices\MIMXRT1176\drivers\fsl_anatop_ai.c</PathWithFileName>
-      <FilenameWithoutPath>fsl_anatop_ai.c</FilenameWithoutPath>
+      <PathWithFileName>.\Sources\fsl_common_arm.c</PathWithFileName>
+      <FilenameWithoutPath>fsl_common_arm.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -521,8 +521,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\platform\drivers\common\fsl_common.c</PathWithFileName>
-      <FilenameWithoutPath>fsl_common.c</FilenameWithoutPath>
+      <PathWithFileName>.\Sources\fsl_anatop_ai.c</PathWithFileName>
+      <FilenameWithoutPath>fsl_anatop_ai.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -533,8 +533,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\devices\MIMXRT1176\drivers\fsl_pmu.c</PathWithFileName>
-      <FilenameWithoutPath>fsl_pmu.c</FilenameWithoutPath>
+      <PathWithFileName>.\Sources\fsl_clock.c</PathWithFileName>
+      <FilenameWithoutPath>fsl_clock.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -545,8 +545,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\platform\drivers\common\fsl_common_arm.c</PathWithFileName>
-      <FilenameWithoutPath>fsl_common_arm.c</FilenameWithoutPath>
+      <PathWithFileName>.\Sources\fsl_pmu.c</PathWithFileName>
+      <FilenameWithoutPath>fsl_pmu.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -593,24 +593,24 @@
     <File>
       <GroupNumber>5</GroupNumber>
       <FileNumber>10</FileNumber>
-      <FileType>5</FileType>
+      <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\devices\MIMXRT1176\drivers\romapi\fsl_romapi.h</PathWithFileName>
-      <FilenameWithoutPath>fsl_romapi.h</FilenameWithoutPath>
+      <PathWithFileName>.\Sources\fsl_romapi.c</PathWithFileName>
+      <FilenameWithoutPath>fsl_romapi.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
       <FileNumber>11</FileNumber>
-      <FileType>1</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\devices\MIMXRT1176\drivers\romapi\fsl_romapi.c</PathWithFileName>
-      <FilenameWithoutPath>fsl_romapi.c</FilenameWithoutPath>
+      <PathWithFileName>.\Sources\fsl_romapi.h</PathWithFileName>
+      <FilenameWithoutPath>fsl_romapi.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

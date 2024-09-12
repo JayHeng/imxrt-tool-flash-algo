@@ -380,7 +380,7 @@
               <MiscControls></MiscControls>
               <Define>CPU_MIMXRT1176DVMAA_cm7,USE_ROM_API</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Sources;..\..\..\CMSIS\Include;..\..\..\devices\MIMXRT1176\drivers\romapi;..\..\..\devices\MIMXRT1176\drivers;..\..\..\devices\MIMXRT1176;..\..\..\platform\drivers\common;..\..\..\devices\MIMXRT1176\drivers;..\;..\..\..\platform\drivers\igpio;..\..\..\platform\drivers\flexspi;..\..\src\driver_examples\flexspi\nor\polling_transfer;.\cm7;..\..\..\CMSIS\Core\Include;..\cmsis_pack_flash_algo</IncludePath>
+              <IncludePath>.\Sources;.\cm7;..\cmsis_pack_flash_algo</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -445,29 +445,29 @@
           <GroupName>Sources</GroupName>
           <Files>
             <File>
-              <FileName>fsl_clock.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\fsl_clock.c</FilePath>
-            </File>
-            <File>
-              <FileName>fsl_anatop_ai.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\fsl_anatop_ai.c</FilePath>
-            </File>
-            <File>
               <FileName>fsl_common.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\platform\drivers\common\fsl_common.c</FilePath>
-            </File>
-            <File>
-              <FileName>fsl_pmu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\fsl_pmu.c</FilePath>
+              <FilePath>.\Sources\fsl_common.c</FilePath>
             </File>
             <File>
               <FileName>fsl_common_arm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\platform\drivers\common\fsl_common_arm.c</FilePath>
+              <FilePath>.\Sources\fsl_common_arm.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_anatop_ai.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\fsl_anatop_ai.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\fsl_clock.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_pmu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\fsl_pmu.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -559,14 +559,14 @@
           <GroupName>ROMAPI</GroupName>
           <Files>
             <File>
-              <FileName>fsl_romapi.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\romapi\fsl_romapi.h</FilePath>
-            </File>
-            <File>
               <FileName>fsl_romapi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\romapi\fsl_romapi.c</FilePath>
+              <FilePath>.\Sources\fsl_romapi.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_romapi.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Sources\fsl_romapi.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1009,29 +1009,29 @@
           <GroupName>Sources</GroupName>
           <Files>
             <File>
-              <FileName>fsl_clock.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\fsl_clock.c</FilePath>
-            </File>
-            <File>
-              <FileName>fsl_anatop_ai.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\fsl_anatop_ai.c</FilePath>
-            </File>
-            <File>
               <FileName>fsl_common.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\platform\drivers\common\fsl_common.c</FilePath>
-            </File>
-            <File>
-              <FileName>fsl_pmu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\fsl_pmu.c</FilePath>
+              <FilePath>.\Sources\fsl_common.c</FilePath>
             </File>
             <File>
               <FileName>fsl_common_arm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\platform\drivers\common\fsl_common_arm.c</FilePath>
+              <FilePath>.\Sources\fsl_common_arm.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_anatop_ai.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\fsl_anatop_ai.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\fsl_clock.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_pmu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\fsl_pmu.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1054,14 +1054,14 @@
           <GroupName>ROMAPI</GroupName>
           <Files>
             <File>
-              <FileName>fsl_romapi.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\romapi\fsl_romapi.h</FilePath>
-            </File>
-            <File>
               <FileName>fsl_romapi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\romapi\fsl_romapi.c</FilePath>
+              <FilePath>.\Sources\fsl_romapi.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_romapi.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Sources\fsl_romapi.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1505,29 +1505,29 @@
           <GroupName>Sources</GroupName>
           <Files>
             <File>
-              <FileName>fsl_clock.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\fsl_clock.c</FilePath>
-            </File>
-            <File>
-              <FileName>fsl_anatop_ai.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\fsl_anatop_ai.c</FilePath>
-            </File>
-            <File>
               <FileName>fsl_common.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\platform\drivers\common\fsl_common.c</FilePath>
-            </File>
-            <File>
-              <FileName>fsl_pmu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\fsl_pmu.c</FilePath>
+              <FilePath>.\Sources\fsl_common.c</FilePath>
             </File>
             <File>
               <FileName>fsl_common_arm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\platform\drivers\common\fsl_common_arm.c</FilePath>
+              <FilePath>.\Sources\fsl_common_arm.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_anatop_ai.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\fsl_anatop_ai.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\fsl_clock.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_pmu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\fsl_pmu.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1619,65 +1619,14 @@
           <GroupName>ROMAPI</GroupName>
           <Files>
             <File>
-              <FileName>fsl_romapi.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\romapi\fsl_romapi.h</FilePath>
-            </File>
-            <File>
               <FileName>fsl_romapi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\devices\MIMXRT1176\drivers\romapi\fsl_romapi.c</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>0</RVCTCodeConst>
-                  <RVCTZI>0</RVCTZI>
-                  <RVCTOtherData>0</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>1</IncludeInBuild>
-                  <AlwaysBuild>2</AlwaysBuild>
-                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                </CommonProperty>
-                <FileArmAds>
-                  <Cads>
-                    <interw>2</interw>
-                    <Optim>0</Optim>
-                    <oTime>2</oTime>
-                    <SplitLS>2</SplitLS>
-                    <OneElfS>2</OneElfS>
-                    <Strict>2</Strict>
-                    <EnumInt>2</EnumInt>
-                    <PlainCh>2</PlainCh>
-                    <Ropi>2</Ropi>
-                    <Rwpi>2</Rwpi>
-                    <wLevel>0</wLevel>
-                    <uThumb>2</uThumb>
-                    <uSurpInc>2</uSurpInc>
-                    <uC99>2</uC99>
-                    <uGnu>2</uGnu>
-                    <useXO>2</useXO>
-                    <v6Lang>0</v6Lang>
-                    <v6LangP>0</v6LangP>
-                    <vShortEn>2</vShortEn>
-                    <vShortWch>2</vShortWch>
-                    <v6Lto>2</v6Lto>
-                    <v6WtE>2</v6WtE>
-                    <v6Rtti>2</v6Rtti>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
+              <FilePath>.\Sources\fsl_romapi.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_romapi.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Sources\fsl_romapi.h</FilePath>
             </File>
           </Files>
         </Group>

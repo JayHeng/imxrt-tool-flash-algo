@@ -7,7 +7,7 @@
 /*                                                                     */
 /***********************************************************************/
 
-#include "FlashOS.H"                                                         // FlashOS Structures
+#include "FlashOS.h"                                                         // FlashOS Structures
 
 struct FlashDevice const FlashDevice = {FLASH_DRV_VERS,                      // Driver Version, do not modify!
                                         "MIMXRT117x 16mB QuadSPI NOR Flash", // Device Name
