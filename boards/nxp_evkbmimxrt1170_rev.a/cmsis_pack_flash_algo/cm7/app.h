@@ -36,7 +36,37 @@
 #define NOR_CMD_LUT_SEQ_IDX_ERASECHIP          5
 
 #define CUSTOM_LUT_LENGTH        60
+
+///////////////////////////////////////////////
+// IS25WP128, SR1[6]
+/*
 #define FLASH_QUAD_ENABLE        0x40
+#define FLASH_QENABLE_CMD        0x01
+#define FLASH_QPROG_CMD          0x32
+#define FLASH_SECERASE_CMD       0xD7
+#define FLASH_QREAD_DUMMY        0x06
+*/
+
+///////////////////////////////////////////////
+
+// W25Q128JW, SR2[1]
+#define FLASH_QUAD_ENABLE        0x02
+#define FLASH_QENABLE_CMD        0x31
+#define FLASH_QPROG_CMD          0x32
+#define FLASH_SECERASE_CMD       0xD7
+#define FLASH_QREAD_DUMMY        0x06
+
+
+///////////////////////////////////////////////
+// S25HS512T, CFR1[1]
+/*
+#define FLASH_QUAD_ENABLE        0x0200
+#define FLASH_QENABLE_CMD        0x01
+#define FLASH_QPROG_CMD          0xFF  // doesn't support
+#define FLASH_SECERASE_CMD       0xD8
+#define FLASH_QREAD_DUMMY        0x08
+*/
+
 #define FLASH_BUSY_STATUS_POL    1
 #define FLASH_BUSY_STATUS_OFFSET 0
 
