@@ -1,0 +1,590 @@
+Component: Arm Compiler for Embedded 6.19 Tool: armlink [5e73cb00]
+
+==============================================================================
+
+Removing Unused exception sections from the image.
+
+    Removing flashprg.o(.ARM.exidx), (48 bytes).
+    Removing fsl_clock.o(.ARM.exidx), (496 bytes).
+    Removing fsl_anatop_ai.o(.ARM.exidx), (32 bytes).
+    Removing fsl_common.o(.ARM.exidx), (16 bytes).
+    Removing fsl_pmu.o(.ARM.exidx), (280 bytes).
+    Removing fsl_common_arm.o(.ARM.exidx), (24 bytes).
+    Removing fsl_romapi.o(.ARM.exidx), (112 bytes).
+
+7 unused section(s) (total 1008 bytes) removed from the image.
+
+==============================================================================
+
+Image Symbol Table
+
+    Local Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_idiv0.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_idiv0_sigfpe.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_ldiv0.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_ldiv0_sigfpe.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_heap_descriptor.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_heap_descriptor_intlibspace.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_div0.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  mutex_dummy.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch_hlt.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command_hlt.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit_hlt.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  _get_argv.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
+    ../clib/assert.c                         0x00000000   Number         0  assert.o ABSOLUTE
+    ../clib/assert.c                         0x00000000   Number         0  assert_puts.o ABSOLUTE
+    ../clib/division.c                       0x00000000   Number         0  lludiv.o ABSOLUTE
+    ../clib/division.s                       0x00000000   Number         0  aeabi_sdivfast.o ABSOLUTE
+    ../clib/division.s                       0x00000000   Number         0  aeabi_sdivfast_div0.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_alloc.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_free.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_alloc_threads.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_free_threads.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_init.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_init_threads.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_extend.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_extend_threads.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_final.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_final_threads.o ABSOLUTE
+    ../clib/heap2.c                          0x00000000   Number         0  heap2.o ABSOLUTE
+    ../clib/heap2.c                          0x00000000   Number         0  heap2_threads.o ABSOLUTE
+    ../clib/heap2.c                          0x00000000   Number         0  fdtree.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  malloc.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  free.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  hguard.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  init_alloc.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  heapstubs.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  term_alloc.o ABSOLUTE
+    ../clib/heapaux.c                        0x00000000   Number         0  heapauxa.o ABSOLUTE
+    ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
+    ../clib/longlong.c                       0x00000000   Number         0  llmul.o ABSOLUTE
+    ../clib/maybe.s                          0x00000000   Number         0  maybetermalloc1.o ABSOLUTE
+    ../clib/maybe.s                          0x00000000   Number         0  maybetermalloc2.o ABSOLUTE
+    ../clib/memcpset.c                       0x00000000   Number         0  rt_memcpy.o ABSOLUTE
+    ../clib/memcpset.c                       0x00000000   Number         0  rt_memcpy.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
+    ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
+    ../clib/stdlib.c                         0x00000000   Number         0  abort.o ABSOLUTE
+    ../fplib/cfplib/daddsub.c                0x00000000   Number         0  daddsub.o ABSOLUTE
+    ../fplib/cfplib/ddiv.c                   0x00000000   Number         0  ddiv.o ABSOLUTE
+    ../fplib/cfplib/dmul.c                   0x00000000   Number         0  dmul.o ABSOLUTE
+    ../fplib/cfplib/ffix.c                   0x00000000   Number         0  dfixui.o ABSOLUTE
+    ../fplib/cfplib/fflt.c                   0x00000000   Number         0  dflti.o ABSOLUTE
+    ../fplib/cfplib/fpinit.c                 0x00000000   Number         0  fpinit.o ABSOLUTE
+    ../fplib/usenofp.s                       0x00000000   Number         0  usenofp.o ABSOLUTE
+    FlashDev.c                               0x00000000   Number         0  flashdev.o ABSOLUTE
+    FlashPrg.c                               0x00000000   Number         0  flashprg.o ABSOLUTE
+    dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
+    fsl_anatop_ai.c                          0x00000000   Number         0  fsl_anatop_ai.o ABSOLUTE
+    fsl_clock.c                              0x00000000   Number         0  fsl_clock.o ABSOLUTE
+    fsl_common.c                             0x00000000   Number         0  fsl_common.o ABSOLUTE
+    fsl_common_arm.c                         0x00000000   Number         0  fsl_common_arm.o ABSOLUTE
+    fsl_pmu.c                                0x00000000   Number         0  fsl_pmu.o ABSOLUTE
+    fsl_romapi.c                             0x00000000   Number         0  fsl_romapi.o ABSOLUTE
+    [Anonymous Symbol]                       0x00000000   Section        0  flashprg.o(.text)
+    .ARM.Collect$$libinit$$0000000C          0x00000000   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000000C)
+    [Anonymous Symbol]                       0x000000d0   Section        0  fsl_clock.o(.text)
+    ANATOP_PllConfigure                      0x00000b0d   Thumb Code   152  fsl_clock.o(.text)
+    CLOCK_GetAvPllFreq                       0x000014ad   Thumb Code   156  fsl_clock.o(.text)
+    [Anonymous Symbol]                       0x00001c50   Section        0  fsl_anatop_ai.o(.text)
+    [Anonymous Symbol]                       0x00002028   Section        0  fsl_common.o(.text)
+    [Anonymous Symbol]                       0x00002084   Section        0  fsl_pmu.o(.text)
+    [Anonymous Symbol]                       0x0000298c   Section        0  fsl_common_arm.o(.text)
+    loop0                                    0x00002a3c   Number         0  fsl_common_arm.o(.text)
+    [Anonymous Symbol]                       0x00002a70   Section        0  fsl_romapi.o(.text)
+    .text                                    0x00002bb4   Section        0  h1_alloc.o(.text)
+    .text                                    0x00002c16   Section        0  h1_free.o(.text)
+    .text                                    0x00002c62   Section        0  llmul.o(.text)
+    .text                                    0x00002c92   Section        0  lludiv.o(.text)
+    .text                                    0x00002da4   Section        0  assert.o(.text)
+    .text                                    0x00002e20   Section      504  aeabi_sdivfast.o(.text)
+    _dadd1                                   0x00003019   Thumb Code   290  daddsub.o(.text)
+    .text                                    0x00003018   Section        0  daddsub.o(.text)
+    _dsub1                                   0x0000313b   Thumb Code   470  daddsub.o(.text)
+    .text                                    0x00003370   Section        0  ddiv.o(.text)
+    .text                                    0x000037b8   Section        0  dfixui.o(.text)
+    .text                                    0x00003800   Section        0  dflti.o(.text)
+    .text                                    0x00003858   Section        0  dmul.o(.text)
+    .text                                    0x00003aa0   Section       12  rt_heap_descriptor.o(.text)
+    .text                                    0x00003aac   Section        0  hguard.o(.text)
+    .text                                    0x00003ab0   Section        0  init_alloc.o(.text)
+    .text                                    0x00003b38   Section        0  h1_init.o(.text)
+    .text                                    0x00003b46   Section        0  abort.o(.text)
+    .text                                    0x00003b5a   Section        0  assert_puts.o(.text)
+    .text                                    0x00003b6e   Section        0  sys_wrch.o(.text)
+    .text                                    0x00003b7c   Section        0  sys_exit.o(.text)
+    .text                                    0x00003b88   Section        0  maybetermalloc1.o(.text)
+    .text                                    0x00003b88   Section        0  h1_extend.o(.text)
+    .text                                    0x00003bbc   Section        0  defsig_abrt_outer.o(.text)
+    .text                                    0x00003bc8   Section        0  defsig_rtmem_outer.o(.text)
+    .text                                    0x00003bd4   Section        0  heapauxa.o(.text)
+    .text                                    0x00003c28   Section        2  use_no_semi.o(.text)
+    .text                                    0x00003c2a   Section        0  indicate_semi.o(.text)
+    .text                                    0x00003c2a   Section        0  defsig_exit.o(.text)
+    .text                                    0x00003c38   Section        0  defsig_abrt_inner.o(.text)
+    .text                                    0x00003c68   Section        0  defsig_rtmem_inner.o(.text)
+    .text                                    0x00003cb8   Section        0  defsig_general.o(.text)
+    .text_divfast                            0x00003cec   Section      502  aeabi_sdivfast.o(.text_divfast)
+    ddiv_reciptbl                            0x00003ee2   Data         128  ddiv.o(.constdata)
+    .constdata                               0x00003ee2   Section      128  ddiv.o(.constdata)
+    x$fpl$usenofp                            0x00003ee2   Section        0  usenofp.o(x$fpl$usenofp)
+    .L__const.PMU_GPCSetLdoOperateMode.ldoLpModeRegArray 0x00003f64   Data          16  fsl_pmu.o(.rodata.cst16)
+    .L.str.11                                0x000041ec   Data          45  fsl_clock.o(.rodata.str1.1)
+    [Anonymous Symbol]                       0x000041ec   Section        0  fsl_clock.o(.rodata.str1.1)
+    .L.str.10                                0x00004219   Data          47  fsl_clock.o(.rodata.str1.1)
+    .L.str                                   0x00004248   Data         113  fsl_clock.o(.rodata.str1.1)
+    .L.str                                   0x000042b9   Data          15  fsl_clock.o(.rodata.str1.1)
+    .L.str.9                                 0x000042b9   Data          15  fsl_clock.o(.rodata.str1.1)
+    .L.str.12                                0x000042c8   Data          12  fsl_clock.o(.rodata.str1.1)
+    .L.str.7                                 0x000042d4   Data          31  fsl_clock.o(.rodata.str1.1)
+    .L.str.8                                 0x000042f3   Data          31  fsl_clock.o(.rodata.str1.1)
+    .L.str.1                                 0x00004312   Data          48  fsl_clock.o(.rodata.str1.1)
+    .L.str.5                                 0x00004342   Data           6  fsl_clock.o(.rodata.str1.1)
+    .L.str.16                                0x00004348   Data          48  fsl_clock.o(.rodata.str1.1)
+    .L.str.1                                 0x00004378   Data          46  fsl_pmu.o(.rodata.str1.1)
+    [Anonymous Symbol]                       0x00004378   Section        0  fsl_pmu.o(.rodata.str1.1)
+    .L.str.4                                 0x000043a6   Data          23  fsl_pmu.o(.rodata.str1.1)
+    .L.str.2                                 0x000043bd   Data          24  fsl_pmu.o(.rodata.str1.1)
+    .L.str.3                                 0x000043d5   Data          19  fsl_pmu.o(.rodata.str1.1)
+    .L.str.1                                 0x000043e8   Data          50  fsl_common_arm.o(.rodata.str1.1)
+    [Anonymous Symbol]                       0x000043e8   Section        0  fsl_common_arm.o(.rodata.str1.1)
+    __rt_heap_escrow_base                    0x00004420   Data           4  heapauxa.o(.data)
+    .data                                    0x00004420   Section        4  heapauxa.o(.data)
+    __rt_heap_descriptor_data                0x00004424   Data           4  rt_heap_descriptor.o(.bss)
+    .bss                                     0x00004424   Section        4  rt_heap_descriptor.o(.bss)
+    Init.index                               0x00004428   Data           4  flashprg.o(.bss.Init.index)
+    g_bootloaderTree                         0x0000442c   Data           4  fsl_romapi.o(.bss.g_bootloaderTree)
+
+    Global Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    BuildAttributes$$THM_ISAv3M$S$PE$A:L22$X:L11$S22$IEEE1$IW$RWPI$~STKCKD$USESV7$~SHL$OTIME$ROPI$STANDARDLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    __rt_lib_init_heap_2                     0x00000001   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000000C)
+    log_result                               0x00000001   Thumb Code     2  flashprg.o(.text)
+    __ARM_exceptions_init                     - Undefined Weak Reference
+    __alloca_initialize                       - Undefined Weak Reference
+    __arm_preinit_                            - Undefined Weak Reference
+    __arm_relocate_pie_                       - Undefined Weak Reference
+    __cpp_initialize__aeabi_                  - Undefined Weak Reference
+    __cxa_finalize                            - Undefined Weak Reference
+    __rt_lib_shutdown                         - Undefined Weak Reference
+    __rt_locale                               - Undefined Weak Reference
+    __sigvec_lookup                           - Undefined Weak Reference
+    __user_heap_extent                        - Undefined Weak Reference
+    _atexit_init                              - Undefined Weak Reference
+    _clock_init                               - Undefined Weak Reference
+    _fp_trap_init                             - Undefined Weak Reference
+    _fp_trap_shutdown                         - Undefined Weak Reference
+    _get_lc_collate                           - Undefined Weak Reference
+    _get_lc_ctype                             - Undefined Weak Reference
+    _get_lc_monetary                          - Undefined Weak Reference
+    _get_lc_numeric                           - Undefined Weak Reference
+    _get_lc_time                              - Undefined Weak Reference
+    _getenv_init                              - Undefined Weak Reference
+    _handle_redirection                       - Undefined Weak Reference
+    _initio                                   - Undefined Weak Reference
+    _mutex_acquire                            - Undefined Weak Reference
+    _mutex_free                               - Undefined Weak Reference
+    _mutex_release                            - Undefined Weak Reference
+    _rand_init                                - Undefined Weak Reference
+    _signal_finish                            - Undefined Weak Reference
+    _signal_init                              - Undefined Weak Reference
+    _terminateio                              - Undefined Weak Reference
+    Init                                     0x00000005   Thumb Code    60  flashprg.o(.text)
+    UnInit                                   0x0000004d   Thumb Code     4  flashprg.o(.text)
+    EraseChip                                0x00000051   Thumb Code    16  flashprg.o(.text)
+    EraseSector                              0x00000065   Thumb Code    36  flashprg.o(.text)
+    ProgramPage                              0x00000091   Thumb Code    56  flashprg.o(.text)
+    CLOCK_InitArmPll                         0x000000d1   Thumb Code   212  fsl_clock.o(.text)
+    CLOCK_DeinitArmPll                       0x000001c9   Thumb Code    20  fsl_clock.o(.text)
+    CLOCK_CalcPllSpreadSpectrum              0x000001e5   Thumb Code    52  fsl_clock.o(.text)
+    CLOCK_InitSysPll2                        0x0000022d   Thumb Code   252  fsl_clock.o(.text)
+    CLOCK_DeinitSysPll2                      0x00000351   Thumb Code    40  fsl_clock.o(.text)
+    CLOCK_IsSysPll2PfdEnabled                0x00000385   Thumb Code    20  fsl_clock.o(.text)
+    CLOCK_InitPfd                            0x0000039d   Thumb Code   224  fsl_clock.o(.text)
+    CLOCK_DeinitPfd                          0x000004d1   Thumb Code    44  fsl_clock.o(.text)
+    CLOCK_GetPfdFreq                         0x00000509   Thumb Code   128  fsl_clock.o(.text)
+    CLOCK_InitSysPll3                        0x000005e5   Thumb Code   144  fsl_clock.o(.text)
+    CLOCK_DeinitSysPll3                      0x00000689   Thumb Code    32  fsl_clock.o(.text)
+    CLOCK_IsSysPll3PfdEnabled                0x000006b5   Thumb Code    20  fsl_clock.o(.text)
+    CLOCK_SetPllBypass                       0x000006cd   Thumb Code   188  fsl_clock.o(.text)
+    CLOCK_InitAudioPllWithFreq               0x00000795   Thumb Code   280  fsl_clock.o(.text)
+    CLOCK_CalcAvPllFreq                      0x000008dd   Thumb Code   256  fsl_clock.o(.text)
+    CLOCK_InitAudioPll                       0x00000a15   Thumb Code   232  fsl_clock.o(.text)
+    CLOCK_DeinitAudioPll                     0x00000ba9   Thumb Code    76  fsl_clock.o(.text)
+    CLOCK_GPC_SetAudioPllOutputFreq          0x00000bf9   Thumb Code    72  fsl_clock.o(.text)
+    CLOCK_CalcArmPllFreq                     0x00000c51   Thumb Code   148  fsl_clock.o(.text)
+    CLOCK_InitArmPllWithFreq                 0x00000d01   Thumb Code   152  fsl_clock.o(.text)
+    CLOCK_InitVideoPllWithFreq               0x00000dad   Thumb Code   280  fsl_clock.o(.text)
+    CLOCK_InitVideoPll                       0x00000ef5   Thumb Code   232  fsl_clock.o(.text)
+    CLOCK_DeinitVideoPll                     0x00000fed   Thumb Code    76  fsl_clock.o(.text)
+    CLOCK_GPC_SetVideoPllOutputFreq          0x0000103d   Thumb Code    72  fsl_clock.o(.text)
+    CLOCK_InitSysPll1                        0x00001095   Thumb Code   180  fsl_clock.o(.text)
+    CLOCK_DeinitSysPll1                      0x0000115d   Thumb Code    88  fsl_clock.o(.text)
+    CLOCK_GPC_SetSysPll1OutputFreq           0x000011b9   Thumb Code    76  fsl_clock.o(.text)
+    CLOCK_OSC_EnableOsc24M                   0x00001215   Thumb Code    48  fsl_clock.o(.text)
+    CLOCK_OSC_SetOsc24MWorkMode              0x00001249   Thumb Code    20  fsl_clock.o(.text)
+    CLOCK_OSC_SetOsc16MConfig                0x00001261   Thumb Code    36  fsl_clock.o(.text)
+    CLOCK_OSC_SetOscRc400MRefClkDiv          0x00001289   Thumb Code    38  fsl_clock.o(.text)
+    CLOCK_OSC_SetOscRc400MFastClkCount       0x000012af   Thumb Code    32  fsl_clock.o(.text)
+    CLOCK_OSC_SetOscRc400MHysteresisValue    0x000012d1   Thumb Code    48  fsl_clock.o(.text)
+    CLOCK_OSC_BypassOscRc400MTuneLogic       0x00001309   Thumb Code    24  fsl_clock.o(.text)
+    CLOCK_OSC_EnableOscRc400MTuneLogic       0x00001321   Thumb Code    24  fsl_clock.o(.text)
+    CLOCK_OSC_FreezeOscRc400MTuneValue       0x00001339   Thumb Code    24  fsl_clock.o(.text)
+    CLOCK_OSC_SetOscRc400MTuneValue          0x00001351   Thumb Code    36  fsl_clock.o(.text)
+    CLOCK_OSC_Set1MHzOutputBehavior          0x00001375   Thumb Code    52  fsl_clock.o(.text)
+    CLOCK_OSC_SetLocked1MHzCount             0x000013a9   Thumb Code    46  fsl_clock.o(.text)
+    CLOCK_OSC_CheckLocked1MHzErrorFlag       0x000013d7   Thumb Code    16  fsl_clock.o(.text)
+    CLOCK_OSC_ClearLocked1MHzErrorFlag       0x000013e7   Thumb Code    14  fsl_clock.o(.text)
+    CLOCK_OSC_GetCurrentOscRc400MFastClockCount 0x000013f5   Thumb Code    14  fsl_clock.o(.text)
+    CLOCK_OSC_GetCurrentOscRc400MTuneValue   0x00001403   Thumb Code    14  fsl_clock.o(.text)
+    CLOCK_GetPllFreq                         0x00001411   Thumb Code   112  fsl_clock.o(.text)
+    CLOCK_GetFreq                            0x0000158d   Thumb Code   352  fsl_clock.o(.text)
+    CLOCK_SetGroupConfig                     0x0000175d   Thumb Code    40  fsl_clock.o(.text)
+    CLOCK_OSC_TrimOscRc400M                  0x000017ad   Thumb Code    48  fsl_clock.o(.text)
+    CLOCK_OSC_EnableOscRc400M                0x000017e5   Thumb Code    20  fsl_clock.o(.text)
+    CLOCK_GetFreqFromObs                     0x000017fd   Thumb Code    84  fsl_clock.o(.text)
+    CLOCK_EnableUsbhs0Clock                  0x00001861   Thumb Code     4  fsl_clock.o(.text)
+    CLOCK_EnableUsbhs0PhyPllClock            0x00001865   Thumb Code   228  fsl_clock.o(.text)
+    CLOCK_DisableUsbhs0PhyPllClock           0x00001959   Thumb Code    20  fsl_clock.o(.text)
+    CLOCK_EnableUsbhs1Clock                  0x00001971   Thumb Code     4  fsl_clock.o(.text)
+    CLOCK_EnableUsbhs1PhyPllClock            0x00001975   Thumb Code   228  fsl_clock.o(.text)
+    CLOCK_DisableUsbhs1PhyPllClock           0x00001a69   Thumb Code    20  fsl_clock.o(.text)
+    CLOCK_OSCPLL_ControlBySetPointMode       0x00001a81   Thumb Code    36  fsl_clock.o(.text)
+    CLOCK_OSCPLL_ControlByCpuLowPowerMode    0x00001aa9   Thumb Code    68  fsl_clock.o(.text)
+    CLOCK_ROOT_ControlBySetPointMode         0x00001af5   Thumb Code   212  fsl_clock.o(.text)
+    CLOCK_LPCG_ControlBySetPointMode         0x00001bdd   Thumb Code    36  fsl_clock.o(.text)
+    CLOCK_LPCG_ControlByCpuLowPowerMode      0x00001c05   Thumb Code    68  fsl_clock.o(.text)
+    ANATOP_AI_Access                         0x00001c51   Thumb Code   884  fsl_anatop_ai.o(.text)
+    ANATOP_AI_Write                          0x00001fdd   Thumb Code    14  fsl_anatop_ai.o(.text)
+    ANATOP_AI_Read                           0x00001feb   Thumb Code    14  fsl_anatop_ai.o(.text)
+    ANATOP_AI_WriteWithMaskShift             0x00001ff9   Thumb Code    46  fsl_anatop_ai.o(.text)
+    SDK_Malloc                               0x00002029   Thumb Code    60  fsl_common.o(.text)
+    SDK_Free                                 0x00002069   Thumb Code    24  fsl_common.o(.text)
+    PMU_SetPllLdoControlMode                 0x00002085   Thumb Code    24  fsl_pmu.o(.text)
+    PMU_SwitchPllLdoToGPCMode                0x0000209d   Thumb Code    26  fsl_pmu.o(.text)
+    PMU_StaticEnablePllLdo                   0x000020b9   Thumb Code    76  fsl_pmu.o(.text)
+    PMU_StaticDisablePllLdo                  0x00002109   Thumb Code    14  fsl_pmu.o(.text)
+    PMU_SetLpsrAnaLdoControlMode             0x00002117   Thumb Code    24  fsl_pmu.o(.text)
+    PMU_StaticEnableLpsrAnaLdoBypassMode     0x00002131   Thumb Code   120  fsl_pmu.o(.text)
+    PMU_StaticGetLpsrAnaLdoDefaultConfig     0x000021ad   Thumb Code    36  fsl_pmu.o(.text)
+    PMU_StaticLpsrAnaLdoInit                 0x000021d9   Thumb Code    80  fsl_pmu.o(.text)
+    PMU_StaticLpsrAnaLdoDeinit               0x00002235   Thumb Code    14  fsl_pmu.o(.text)
+    PMU_SetLpsrDigLdoControlMode             0x00002243   Thumb Code    24  fsl_pmu.o(.text)
+    PMU_StaticEnableLpsrDigLdoBypassMode     0x0000225d   Thumb Code    96  fsl_pmu.o(.text)
+    PMU_StaticGetLpsrDigLdoDefaultConfig     0x000022c5   Thumb Code    36  fsl_pmu.o(.text)
+    PMU_StaticLpsrDigLdoInit                 0x000022f1   Thumb Code    92  fsl_pmu.o(.text)
+    PMU_StaticLpsrDigLdoDeinit               0x0000235d   Thumb Code    28  fsl_pmu.o(.text)
+    PMU_GPCSetLpsrDigLdoTargetVoltage        0x0000237d   Thumb Code   272  fsl_pmu.o(.text)
+    PMU_GetSnvsDigLdoDefaultConfig           0x0000249d   Thumb Code    36  fsl_pmu.o(.text)
+    PMU_SnvsDigLdoInit                       0x000024cd   Thumb Code    24  fsl_pmu.o(.text)
+    PMU_GPCEnableLdo                         0x000024e5   Thumb Code    32  fsl_pmu.o(.text)
+    PMU_GPCSetLdoOperateMode                 0x00002521   Thumb Code    76  fsl_pmu.o(.text)
+    PMU_GPCEnableLdoTrackingMode             0x00002585   Thumb Code    52  fsl_pmu.o(.text)
+    PMU_GPCEnableLdoBypassMode               0x000025d9   Thumb Code    48  fsl_pmu.o(.text)
+    PMU_GPCEnableLdoStandbyMode              0x0000262d   Thumb Code    28  fsl_pmu.o(.text)
+    PMU_SetBandgapControlMode                0x00002665   Thumb Code    24  fsl_pmu.o(.text)
+    PMU_SwitchBandgapToGPCMode               0x0000267d   Thumb Code    28  fsl_pmu.o(.text)
+    PMU_DisableBandgapSelfBiasAfterPowerUp   0x00002699   Thumb Code    40  fsl_pmu.o(.text)
+    PMU_EnableBandgapSelfBiasBeforePowerDown 0x000026c1   Thumb Code    30  fsl_pmu.o(.text)
+    PMU_StaticBandgapInit                    0x000026e1   Thumb Code    80  fsl_pmu.o(.text)
+    PMU_WellBiasInit                         0x00002741   Thumb Code    64  fsl_pmu.o(.text)
+    PMU_GetWellBiasDefaultConfig             0x00002791   Thumb Code    28  fsl_pmu.o(.text)
+    PMU_SetBodyBiasControlMode               0x000027b9   Thumb Code    40  fsl_pmu.o(.text)
+    PMU_EnableBodyBias                       0x000027f9   Thumb Code   188  fsl_pmu.o(.text)
+    PMU_GPCEnableBodyBias                    0x000028cd   Thumb Code    12  fsl_pmu.o(.text)
+    PMU_GPCEnableBodyBiasStandbyMode         0x000028e5   Thumb Code    12  fsl_pmu.o(.text)
+    PMU_GPCGetBodyBiasDefaultConfig          0x000028fd   Thumb Code    36  fsl_pmu.o(.text)
+    PMU_GPCSetBodyBiasConfig                 0x0000292d   Thumb Code    68  fsl_pmu.o(.text)
+    MSDK_EnableCpuCycleCounter               0x0000298d   Thumb Code    52  fsl_common_arm.o(.text)
+    MSDK_GetCpuCycleCount                    0x00002a0d   Thumb Code     8  fsl_common_arm.o(.text)
+    SDK_DelayAtLeastUs                       0x00002a19   Thumb Code    56  fsl_common_arm.o(.text)
+    ROM_API_Init                             0x00002a71   Thumb Code    24  fsl_romapi.o(.text)
+    ROM_RunBootloader                        0x00002a99   Thumb Code    16  fsl_romapi.o(.text)
+    ROM_FLEXSPI_NorFlash_GetConfig           0x00002aad   Thumb Code    16  fsl_romapi.o(.text)
+    ROM_FLEXSPI_NorFlash_Init                0x00002ac1   Thumb Code    16  fsl_romapi.o(.text)
+    ROM_FLEXSPI_NorFlash_ProgramPage         0x00002ad5   Thumb Code    16  fsl_romapi.o(.text)
+    ROM_FLEXSPI_NorFlash_Read                0x00002ae9   Thumb Code    24  fsl_romapi.o(.text)
+    ROM_FLEXSPI_NorFlash_Erase               0x00002b05   Thumb Code    16  fsl_romapi.o(.text)
+    ROM_FLEXSPI_NorFlash_EraseSector         0x00002b19   Thumb Code    16  fsl_romapi.o(.text)
+    ROM_FLEXSPI_NorFlash_EraseBlock          0x00002b2d   Thumb Code    16  fsl_romapi.o(.text)
+    ROM_FLEXSPI_NorFlash_EraseAll            0x00002b41   Thumb Code    16  fsl_romapi.o(.text)
+    ROM_FLEXSPI_NorFlash_CommandXfer         0x00002b55   Thumb Code    16  fsl_romapi.o(.text)
+    ROM_FLEXSPI_NorFlash_UpdateLut           0x00002b69   Thumb Code    16  fsl_romapi.o(.text)
+    ROM_FLEXSPI_NorFlash_ClearCache          0x00002b7d   Thumb Code    24  fsl_romapi.o(.text)
+    ROM_FLEXSPI_NorFlash_WaitBusy            0x00002ba1   Thumb Code    16  fsl_romapi.o(.text)
+    malloc                                   0x00002bb5   Thumb Code    98  h1_alloc.o(.text)
+    free                                     0x00002c17   Thumb Code    76  h1_free.o(.text)
+    __aeabi_lmul                             0x00002c63   Thumb Code    48  llmul.o(.text)
+    _ll_mul                                  0x00002c63   Thumb Code     0  llmul.o(.text)
+    __aeabi_uldivmod                         0x00002c93   Thumb Code   272  lludiv.o(.text)
+    _ll_udiv                                 0x00002c93   Thumb Code     0  lludiv.o(.text)
+    __aeabi_assert                           0x00002da5   Thumb Code    82  assert.o(.text)
+    __assert                                 0x00002da5   Thumb Code     0  assert.o(.text)
+    __aeabi_uidivmod                         0x00002e21   Thumb Code    28  aeabi_sdivfast.o(.text)
+    __aeabi_idivmod                          0x00002e3d   Thumb Code   472  aeabi_sdivfast.o(.text)
+    __aeabi_dadd                             0x00003311   Thumb Code     0  daddsub.o(.text)
+    _dadd                                    0x00003311   Thumb Code    26  daddsub.o(.text)
+    __aeabi_dsub                             0x0000332b   Thumb Code     0  daddsub.o(.text)
+    _dsub                                    0x0000332b   Thumb Code    22  daddsub.o(.text)
+    __aeabi_drsub                            0x00003341   Thumb Code     0  daddsub.o(.text)
+    _drsb                                    0x00003341   Thumb Code    28  daddsub.o(.text)
+    __aeabi_ddiv                             0x00003371   Thumb Code     0  ddiv.o(.text)
+    _ddiv                                    0x00003371   Thumb Code  1072  ddiv.o(.text)
+    _drdiv                                   0x000037a1   Thumb Code    20  ddiv.o(.text)
+    __aeabi_d2uiz                            0x000037b9   Thumb Code     0  dfixui.o(.text)
+    _dfixu                                   0x000037b9   Thumb Code    68  dfixui.o(.text)
+    __aeabi_i2d_normalise                    0x00003801   Thumb Code    66  dflti.o(.text)
+    __aeabi_i2d                              0x00003843   Thumb Code    16  dflti.o(.text)
+    _dflt                                    0x00003843   Thumb Code     0  dflti.o(.text)
+    __aeabi_ui2d                             0x00003853   Thumb Code     6  dflti.o(.text)
+    _dfltu                                   0x00003853   Thumb Code     0  dflti.o(.text)
+    __aeabi_dmul                             0x00003859   Thumb Code     0  dmul.o(.text)
+    _dmul                                    0x00003859   Thumb Code   558  dmul.o(.text)
+    __rt_heap_descriptor                     0x00003aa1   Thumb Code    12  rt_heap_descriptor.o(.text)
+    __use_no_heap                            0x00003aad   Thumb Code     2  hguard.o(.text)
+    __heap$guard                             0x00003aaf   Thumb Code     2  hguard.o(.text)
+    _terminate_user_alloc                    0x00003ab1   Thumb Code     2  init_alloc.o(.text)
+    _init_user_alloc                         0x00003ab3   Thumb Code     2  init_alloc.o(.text)
+    __Heap_Full                              0x00003ab5   Thumb Code    32  init_alloc.o(.text)
+    __Heap_Broken                            0x00003ad5   Thumb Code    10  init_alloc.o(.text)
+    _init_alloc                              0x00003adf   Thumb Code    90  init_alloc.o(.text)
+    __Heap_Initialize                        0x00003b39   Thumb Code    10  h1_init.o(.text)
+    __Heap_DescSize                          0x00003b43   Thumb Code     4  h1_init.o(.text)
+    abort                                    0x00003b47   Thumb Code    20  abort.o(.text)
+    __assert_puts                            0x00003b5b   Thumb Code    20  assert_puts.o(.text)
+    _ttywrch                                 0x00003b6f   Thumb Code    12  sys_wrch.o(.text)
+    _sys_exit                                0x00003b7d   Thumb Code     8  sys_exit.o(.text)
+    __Heap_ProvideMemory                     0x00003b89   Thumb Code    52  h1_extend.o(.text)
+    _maybe_terminate_alloc                   0x00003b89   Thumb Code     0  maybetermalloc1.o(.text)
+    __rt_SIGABRT                             0x00003bbd   Thumb Code    12  defsig_abrt_outer.o(.text)
+    __rt_SIGRTMEM                            0x00003bc9   Thumb Code    12  defsig_rtmem_outer.o(.text)
+    __rt_heap_escrow                         0x00003bd5   Thumb Code    26  heapauxa.o(.text)
+    __rt_heap_expand                         0x00003bef   Thumb Code    54  heapauxa.o(.text)
+    __I$use$semihosting                      0x00003c29   Thumb Code     0  use_no_semi.o(.text)
+    __use_no_semihosting_swi                 0x00003c29   Thumb Code     2  use_no_semi.o(.text)
+    __semihosting_library_function           0x00003c2b   Thumb Code     0  indicate_semi.o(.text)
+    __sig_exit                               0x00003c2b   Thumb Code    12  defsig_exit.o(.text)
+    __rt_SIGABRT_inner                       0x00003c39   Thumb Code    14  defsig_abrt_inner.o(.text)
+    __rt_SIGRTMEM_inner                      0x00003c69   Thumb Code    22  defsig_rtmem_inner.o(.text)
+    __default_signal_display                 0x00003cb9   Thumb Code    52  defsig_general.o(.text)
+    __aeabi_uidiv                            0x00003ced   Thumb Code    68  aeabi_sdivfast.o(.text_divfast)
+    __aeabi_idiv                             0x00003d31   Thumb Code   434  aeabi_sdivfast.o(.text_divfast)
+    __I$use$fp                               0x00003ee2   Number         0  usenofp.o(x$fpl$usenofp)
+    s_clockSourceName                        0x00003f74   Data         632  fsl_clock.o(.rodata.s_clockSourceName)
+    FlashDevice                              0x00004424   Data        4256  flashdev.o(.rodata.FlashDevice)
+
+
+
+==============================================================================
+
+Memory Map of the image
+
+  Image entry point : Not specified.
+
+  Load Region PRG (Base: 0x00000000, Size: 0x00004424, Max: 0xffffffff, PI)
+
+    Execution Region PrgCode (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x0000441c, Max: 0xffffffff, PI)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x00000000   0x00000000   0x00000000   Code   RO          211    .ARM.Collect$$libinit$$0000000C  c_pe.l(libinit2.o)
+    0x00000000   0x00000000   0x000000d0   Code   RO            1    .text               flashprg.o
+    0x000000d0   0x000000d0   0x00001b80   Code   RO           16    .text               fsl_clock.o
+    0x00001c50   0x00001c50   0x000003d6   Code   RO           27    .text               fsl_anatop_ai.o
+    0x00002026   0x00002026   0x00000002   PAD
+    0x00002028   0x00002028   0x0000005c   Code   RO           35    .text               fsl_common.o
+    0x00002084   0x00002084   0x00000908   Code   RO           43    .text               fsl_pmu.o
+    0x0000298c   0x0000298c   0x000000e4   Code   RO           53    .text               fsl_common_arm.o
+    0x00002a70   0x00002a70   0x00000144   Code   RO           62    .text               fsl_romapi.o
+    0x00002bb4   0x00002bb4   0x00000062   Code   RO           77    .text               c_pe.l(h1_alloc.o)
+    0x00002c16   0x00002c16   0x0000004c   Code   RO           79    .text               c_pe.l(h1_free.o)
+    0x00002c62   0x00002c62   0x00000030   Code   RO          135    .text               c_pe.l(llmul.o)
+    0x00002c92   0x00002c92   0x00000110   Code   RO          137    .text               c_pe.l(lludiv.o)
+    0x00002da2   0x00002da2   0x00000002   PAD
+    0x00002da4   0x00002da4   0x0000007c   Code   RO          139    .text               c_pe.l(assert.o)
+    0x00002e20   0x00002e20   0x000001f8   Code   RO          141    .text               c_pe.l(aeabi_sdivfast.o)
+    0x00003018   0x00003018   0x00000358   Code   RO          149    .text               fz_ps.l(daddsub.o)
+    0x00003370   0x00003370   0x00000448   Code   RO          151    .text               fz_ps.l(ddiv.o)
+    0x000037b8   0x000037b8   0x00000048   Code   RO          154    .text               fz_ps.l(dfixui.o)
+    0x00003800   0x00003800   0x00000058   Code   RO          156    .text               fz_ps.l(dflti.o)
+    0x00003858   0x00003858   0x00000248   Code   RO          158    .text               fz_ps.l(dmul.o)
+    0x00003aa0   0x00003aa0   0x0000000c   Code   RO          170    .text               c_pe.l(rt_heap_descriptor.o)
+    0x00003aac   0x00003aac   0x00000004   Code   RO          175    .text               c_pe.l(hguard.o)
+    0x00003ab0   0x00003ab0   0x00000088   Code   RO          177    .text               c_pe.l(init_alloc.o)
+    0x00003b38   0x00003b38   0x0000000e   Code   RO          181    .text               c_pe.l(h1_init.o)
+    0x00003b46   0x00003b46   0x00000014   Code   RO          193    .text               c_pe.l(abort.o)
+    0x00003b5a   0x00003b5a   0x00000014   Code   RO          195    .text               c_pe.l(assert_puts.o)
+    0x00003b6e   0x00003b6e   0x0000000c   Code   RO          251    .text               c_pe.l(sys_wrch.o)
+    0x00003b7a   0x00003b7a   0x00000002   PAD
+    0x00003b7c   0x00003b7c   0x0000000c   Code   RO          255    .text               c_pe.l(sys_exit.o)
+    0x00003b88   0x00003b88   0x00000000   Code   RO          270    .text               c_pe.l(maybetermalloc1.o)
+    0x00003b88   0x00003b88   0x00000034   Code   RO          272    .text               c_pe.l(h1_extend.o)
+    0x00003bbc   0x00003bbc   0x0000000c   Code   RO          276    .text               c_pe.l(defsig_abrt_outer.o)
+    0x00003bc8   0x00003bc8   0x0000000c   Code   RO          280    .text               c_pe.l(defsig_rtmem_outer.o)
+    0x00003bd4   0x00003bd4   0x00000054   Code   RO          284    .text               c_pe.l(heapauxa.o)
+    0x00003c28   0x00003c28   0x00000002   Code   RO          293    .text               c_pe.l(use_no_semi.o)
+    0x00003c2a   0x00003c2a   0x00000000   Code   RO          295    .text               c_pe.l(indicate_semi.o)
+    0x00003c2a   0x00003c2a   0x0000000c   Code   RO          300    .text               c_pe.l(defsig_exit.o)
+    0x00003c36   0x00003c36   0x00000002   PAD
+    0x00003c38   0x00003c38   0x00000030   Code   RO          302    .text               c_pe.l(defsig_abrt_inner.o)
+    0x00003c68   0x00003c68   0x00000050   Code   RO          308    .text               c_pe.l(defsig_rtmem_inner.o)
+    0x00003cb8   0x00003cb8   0x00000034   Code   RO          320    .text               c_pe.l(defsig_general.o)
+    0x00003cec   0x00003cec   0x000001f6   Code   RO          142    .text_divfast       c_pe.l(aeabi_sdivfast.o)
+    0x00003ee2   0x00003ee2   0x00000000   Code   RO          250    x$fpl$usenofp       fz_ps.l(usenofp.o)
+    0x00003ee2   0x00003ee2   0x00000080   Data   RO          152    .constdata          fz_ps.l(ddiv.o)
+    0x00003f62   0x00003f62   0x00000002   PAD
+    0x00003f64   0x00003f64   0x00000010   Data   RO           46    .rodata.cst16       fsl_pmu.o
+    0x00003f74   0x00003f74   0x00000278   Data   RO           18    .rodata.s_clockSourceName  fsl_clock.o
+    0x000041ec   0x000041ec   0x0000018c   Data   RO           19    .rodata.str1.1      fsl_clock.o
+    0x00004378   0x00004378   0x00000070   Data   RO           45    .rodata.str1.1      fsl_pmu.o
+    0x000043e8   0x000043e8   0x00000032   Data   RO           55    .rodata.str1.1      fsl_common_arm.o
+
+
+    Execution Region PrgData (Exec base: 0x0000441c, Load base: 0x0000441c, Size: 0x00000014, Max: 0xffffffff, PI)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x0000441c   0x0000441c   0x00000004   Data   RW          355    PDT$$ptr            anon$$obj.o
+    0x00004420   0x00004420   0x00000004   Data   RW          285    .data               c_pe.l(heapauxa.o)
+    0x00004424        -       0x00000004   Zero   RW          171    .bss                c_pe.l(rt_heap_descriptor.o)
+    0x00004428        -       0x00000004   Zero   RW            3    .bss.Init.index     flashprg.o
+    0x0000442c        -       0x00000004   Zero   RW           64    .bss.g_bootloaderTree  fsl_romapi.o
+
+
+
+  Load Region DSCR (Base: 0x00004424, Size: 0x000010a0, Max: 0xffffffff, PI)
+
+    Execution Region DevDscr (Exec base: 0x00004424, Load base: 0x00004424, Size: 0x000010a0, Max: 0xffffffff, PI)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x00004424   0x00004424   0x00000000   Code   RO           10    .text               flashdev.o
+    0x00004424   0x00004424   0x000010a0   Data   RO           11    .rodata.FlashDevice  flashdev.o
+
+
+==============================================================================
+
+Image component sizes
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
+
+         0          0       4256          0          0        836   flashdev.o
+       208         32          0          0          4       5211   flashprg.o
+       982         52          0          0          0      10448   fsl_anatop_ai.o
+      7040       1166       1028          0          0      48954   fsl_clock.o
+        92          8          0          0          0       1530   fsl_common.o
+       228        112         50          0          0       2217   fsl_common_arm.o
+      2312        396        128          0          0      21295   fsl_pmu.o
+       324         76          0          0          4      10008   fsl_romapi.o
+
+    ----------------------------------------------------------------------
+     11188       1842       5464          4          8     100499   Object Totals
+         0          0          0          4          0          0   (incl. Generated)
+         2          0          2          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Member Name
+
+        20          0          0          0          0         68   abort.o
+      1006          4          0          0          0        176   aeabi_sdivfast.o
+       124         42          0          0          0         68   assert.o
+        20          0          0          0          0         68   assert_puts.o
+        48         34          0          0          0         68   defsig_abrt_inner.o
+        12          0          0          0          0         68   defsig_abrt_outer.o
+        12          0          0          0          0         68   defsig_exit.o
+        52          0          0          0          0         72   defsig_general.o
+        80         58          0          0          0         68   defsig_rtmem_inner.o
+        12          0          0          0          0         68   defsig_rtmem_outer.o
+        98          0          0          0          0         72   h1_alloc.o
+        52          0          0          0          0         68   h1_extend.o
+        76          0          0          0          0         72   h1_free.o
+        14          0          0          0          0         76   h1_init.o
+        84          4          0          4          0         88   heapauxa.o
+         4          0          0          0          0        120   hguard.o
+         0          0          0          0          0          0   indicate_semi.o
+       136          0          0          0          0        160   init_alloc.o
+         0          0          0          0          0          0   libinit2.o
+        48          0          0          0          0         72   llmul.o
+       272          0          0          0          0         88   lludiv.o
+         0          0          0          0          0          0   maybetermalloc1.o
+        12          4          0          0          4         64   rt_heap_descriptor.o
+        12          4          0          0          0         60   sys_exit.o
+        12          0          0          0          0         68   sys_wrch.o
+         2          0          0          0          0         64   use_no_semi.o
+       856         20          0          0          0        208   daddsub.o
+      1096         26        128          0          0        112   ddiv.o
+        72          4          0          0          0         68   dfixui.o
+        88          0          0          0          0         92   dflti.o
+       584         26          0          0          0         84   dmul.o
+         0          0          0          0          0          0   usenofp.o
+
+    ----------------------------------------------------------------------
+      4910        226        130          4          4       2428   Library Totals
+         6          0          2          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
+
+      2208        150          0          4          4       1864   c_pe.l
+      2696         76        128          0          0        564   fz_ps.l
+
+    ----------------------------------------------------------------------
+      4910        226        130          4          4       2428   Library Totals
+
+    ----------------------------------------------------------------------
+
+==============================================================================
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
+
+     16098       2068       5594          8         12     101607   Grand Totals
+     16098       2068       5594          8         12     101607   ELF Image Totals
+     16098       2068       5594          8          0          0   ROM Totals
+
+==============================================================================
+
+    Total RO  Size (Code + RO Data)                21692 (  21.18kB)
+    Total RW  Size (RW Data + ZI Data)                20 (   0.02kB)
+    Total ROM Size (Code + RO Data + RW Data)      21700 (  21.19kB)
+
+==============================================================================
+
