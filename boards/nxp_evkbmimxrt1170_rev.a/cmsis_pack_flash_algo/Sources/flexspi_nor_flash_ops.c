@@ -251,7 +251,7 @@ status_t flexspi_nor_flash_page_program(FLEXSPI_Type *base, uint32_t dstAddr, co
     flashXfer.port          = kFLEXSPI_PortA1;
     flashXfer.cmdType       = kFLEXSPI_Write;
     flashXfer.SeqNumber     = 1;
-    flashXfer.seqIndex      = NOR_CMD_LUT_SEQ_IDX_PAGEPROGRAM_QUAD;
+    flashXfer.seqIndex      = NOR_CMD_LUT_SEQ_IDX_PAGEPROGRAM_SINGLE;
     flashXfer.data          = (uint32_t *)src;
     flashXfer.dataSize      = FLASH_PAGE_SIZE;
     status                  = FLEXSPI_TransferBlocking(base, &flashXfer);
