@@ -92,11 +92,12 @@ static bootloader_api_entry_t *g_bootloaderTree = NULL;
  */
 void ROM_API_Init(void)
 {
-    if ((ANADIG_MISC->MISC_DIFPROG & ANADIG_MISC_MISC_DIFPROG_CHIPID(0x10U)) != 0U)
+	  uint32_t chipid = ANADIG_MISC->MISC_DIFPROG;
+    if ((chipid == 0x1170B0U)) or (chipid == 0x1170C0U))
     {
         g_bootloaderTree = ((bootloader_api_entry_t *)*(uint32_t *)0x0021001cU);
     }
-    else
+    else // 0x1170A0
     {
         g_bootloaderTree = ((bootloader_api_entry_t *)*(uint32_t *)0x0020001cU);
     }
