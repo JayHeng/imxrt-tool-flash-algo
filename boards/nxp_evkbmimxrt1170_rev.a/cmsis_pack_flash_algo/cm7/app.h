@@ -64,23 +64,35 @@
 */
 
 ///////////////////////////////////////////////
+// MX25L25645G, SR1[6]
+#define FLASH_QUAD_ENABLE        0x40
+#define FLASH_QENABLE_CMD        0x01
+#define FLASH_ADDR_BITS          (0x20)
+#define FLASH_SPROG_CMD          0x12
+#define FLASH_QPROG_CMD          0x3E
+#define FLASH_SECERASE_CMD       0xDC
+#define FLASH_QREAD_CMD          0xEC
+#define FLASH_QREAD_DUMMY        0x06
+
+///////////////////////////////////////////////
 // S25HS512T, CFR1[1]
+/*
 #define FLASH_QUAD_ENABLE        0x0200
 #define FLASH_QENABLE_CMD        0x01
-/*
+
 #define FLASH_ADDR_BITS          (0x18)
 #define FLASH_SPROG_CMD          0x02
 #define FLASH_QPROG_CMD          0xFF  // doesn't support
 #define FLASH_SECERASE_CMD       0xD8
 #define FLASH_QREAD_CMD          0xEB
-*/
+
 #define FLASH_ADDR_BITS          (0x20)
 #define FLASH_SPROG_CMD          0x12
 #define FLASH_QPROG_CMD          0xFF  // doesn't support
 #define FLASH_SECERASE_CMD       0xDC
 #define FLASH_QREAD_CMD          0xEC
 #define FLASH_QREAD_DUMMY        0x0A  // MODE bit cycles + dummy cycles
-
+*/
 
 #define FLASH_BUSY_STATUS_POL    1
 #define FLASH_BUSY_STATUS_OFFSET 0
