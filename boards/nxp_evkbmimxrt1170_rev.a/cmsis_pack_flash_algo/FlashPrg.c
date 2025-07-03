@@ -17,7 +17,6 @@
 #endif
 
 #define FLEXSPI_NOR_INSTANCE   1
-#define FLEXSPIx               ((FLEXSPI_NOR_INSTANCE == 1) ? FLEXSPI1 : FLEXSPI2)
 #define FLASH_ALGO_SECTOR_SIZE (FLASH_SECTOR_SIZE)
 
 #ifndef LOG_ENABLE
@@ -103,51 +102,75 @@ const uint32_t customLUT[CUSTOM_LUT_LENGTH] = {
         FLEXSPI_LUT_SEQ(kFLEXSPI_Command_SDR, kFLEXSPI_1PAD, 0xC7, kFLEXSPI_Command_STOP, kFLEXSPI_1PAD, 0),
 };
 
-void init_flexspi_pins(unsigned int instance)
+void init_flexspi_pins(void)
 {
-    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B2_05_FLEXSPI1_A_DQS, /* GPIO_SD_B2_05 is configured as FLEXSPI1_A_DQS */
-                     1U); /* Software Input On Field: Force input path of pad GPIO_SD_B2_05 */
-    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B2_06_FLEXSPI1_A_SS0_B, /* GPIO_SD_B2_06 is configured as FLEXSPI1_A_SS0_B */
-                     1U); /* Software Input On Field: Force input path of pad GPIO_SD_B2_06 */
-    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B2_07_FLEXSPI1_A_SCLK, /* GPIO_SD_B2_07 is configured as FLEXSPI1_A_SCLK */
-                     1U); /* Software Input On Field: Force input path of pad GPIO_SD_B2_07 */
-    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B2_08_FLEXSPI1_A_DATA00, /* GPIO_SD_B2_08 is configured as FLEXSPI1_A_DATA00 */
-                     1U); /* Software Input On Field: Force input path of pad GPIO_SD_B2_08 */
-    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B2_09_FLEXSPI1_A_DATA01, /* GPIO_SD_B2_09 is configured as FLEXSPI1_A_DATA01 */
-                     1U); /* Software Input On Field: Force input path of pad GPIO_SD_B2_09 */
-    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B2_10_FLEXSPI1_A_DATA02, /* GPIO_SD_B2_10 is configured as FLEXSPI1_A_DATA02 */
-                     1U); /* Software Input On Field: Force input path of pad GPIO_SD_B2_10 */
-    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B2_11_FLEXSPI1_A_DATA03, /* GPIO_SD_B2_11 is configured as FLEXSPI1_A_DATA03 */
-                     1U); /* Software Input On Field: Force input path of pad GPIO_SD_B2_11 */
+#if (EXAMPLE_FLEXSPI_AMBA_BASE == FlexSPI1_AMBA_BASE)
+#if (EXAMPLE_FLEXSPI_PIN_SEL == 0)
+    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B2_05_FLEXSPI1_A_DQS, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B2_06_FLEXSPI1_A_SS0_B, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B2_07_FLEXSPI1_A_SCLK, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B2_08_FLEXSPI1_A_DATA00, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B2_09_FLEXSPI1_A_DATA01, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B2_10_FLEXSPI1_A_DATA02, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B2_11_FLEXSPI1_A_DATA03, 1U);
 
-    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B2_05_FLEXSPI1_A_DQS,    /* GPIO_SD_B2_05 PAD functional properties : */
-                        0x0AU);                                 /* PDRV Field: normal driver
-                                                                   Pull Down Pull Up Field: PD
-                                                                   Open Drain Field: Disabled */
-    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B2_06_FLEXSPI1_A_SS0_B,  /* GPIO_SD_B2_06 PAD functional properties : */
-                        0x0AU);                                 /* PDRV Field: normal driver
-                                                                   Pull Down Pull Up Field: PD
-                                                                   Open Drain Field: Disabled */
-    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B2_07_FLEXSPI1_A_SCLK,   /* GPIO_SD_B2_07 PAD functional properties : */
-                        0x0AU);                                 /* PDRV Field: normal driver
-                                                                   Pull Down Pull Up Field: PD
-                                                                   Open Drain Field: Disabled */
-    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B2_08_FLEXSPI1_A_DATA00, /* GPIO_SD_B2_08 PAD functional properties : */
-                        0x0AU);                                 /* PDRV Field: normal driver
-                                                                   Pull Down Pull Up Field: PD
-                                                                   Open Drain Field: Disabled */
-    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B2_09_FLEXSPI1_A_DATA01, /* GPIO_SD_B2_09 PAD functional properties : */
-                        0x0AU);                                 /* PDRV Field: normal driver
-                                                                   Pull Down Pull Up Field: PD
-                                                                   Open Drain Field: Disabled */
-    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B2_10_FLEXSPI1_A_DATA02, /* GPIO_SD_B2_10 PAD functional properties : */
-                        0x0AU);                                 /* PDRV Field: normal driver
-                                                                   Pull Down Pull Up Field: PD
-                                                                   Open Drain Field: Disabled */
-    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B2_11_FLEXSPI1_A_DATA03, /* GPIO_SD_B2_11 PAD functional properties : */
-                        0x0AU);                                 /* PDRV Field: normal driver
-                                                                   Pull Down Pull Up Field: PD
-                                                                   Open Drain Field: Disabled */
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B2_05_FLEXSPI1_A_DQS, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B2_06_FLEXSPI1_A_SS0_B, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B2_07_FLEXSPI1_A_SCLK, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B2_08_FLEXSPI1_A_DATA00, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B2_09_FLEXSPI1_A_DATA01, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B2_10_FLEXSPI1_A_DATA02, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B2_11_FLEXSPI1_A_DATA03, 0x0AU);
+#elif (EXAMPLE_FLEXSPI_PIN_SEL == 1)
+    IOMUXC_SetPinMux(IOMUXC_GPIO_AD_17_FLEXSPI1_A_DQS, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_AD_18_FLEXSPI1_A_SS0_B, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_AD_19_FLEXSPI1_A_SCLK, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_AD_20_FLEXSPI1_A_DATA00, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_AD_21_FLEXSPI1_A_DATA01, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_AD_22_FLEXSPI1_A_DATA02, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_AD_23_FLEXSPI1_A_DATA03, 1U);
+
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_17_FLEXSPI1_A_DQS, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_18_FLEXSPI1_A_SS0_B, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_19_FLEXSPI1_A_SCLK, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_20_FLEXSPI1_A_DATA00, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_21_FLEXSPI1_A_DATA01, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_22_FLEXSPI1_A_DATA02, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_23_FLEXSPI1_A_DATA03, 0x0AU);
+#endif
+#elif (EXAMPLE_FLEXSPI_AMBA_BASE == FlexSPI2_AMBA_BASE)
+#if (EXAMPLE_FLEXSPI_PIN_SEL == 0)
+    IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_B2_10_FLEXSPI2_A_SCLK, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_B2_11_FLEXSPI2_A_SS0_B, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_B2_12_FLEXSPI2_A_DQS, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_B2_13_FLEXSPI2_A_DATA00, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_B2_14_FLEXSPI2_A_DATA01, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_B2_15_FLEXSPI2_A_DATA02, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_B2_16_FLEXSPI2_A_DATA03, 1U);
+
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_B2_10_FLEXSPI2_A_SCLK, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_B2_11_FLEXSPI2_A_SS0_B, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_B2_12_FLEXSPI2_A_DQS, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_B2_13_FLEXSPI2_A_DATA00, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_B2_14_FLEXSPI2_A_DATA01, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_B2_15_FLEXSPI2_A_DATA02, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_B2_16_FLEXSPI2_A_DATA03, 0x0AU);
+#elif (EXAMPLE_FLEXSPI_PIN_SEL == 1)
+    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B1_00_FLEXSPI2_A_SS0_B, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B1_01_FLEXSPI2_A_SCLK, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B1_02_FLEXSPI2_A_DATA00, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B1_03_FLEXSPI2_A_DATA01, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B1_04_FLEXSPI2_A_DATA02, 1U);
+    IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B1_05_FLEXSPI2_A_DATA03, 1U);
+
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B1_00_FLEXSPI2_A_SS0_B, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B1_01_FLEXSPI2_A_SCLK, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B1_02_FLEXSPI2_A_DATA00, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B1_03_FLEXSPI2_A_DATA01, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B1_04_FLEXSPI2_A_DATA02, 0x0AU);
+    IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B1_05_FLEXSPI2_A_DATA03, 0x0AU);
+#endif
+#endif
 }
 #endif
 
@@ -213,11 +236,11 @@ int Init(unsigned long adr, unsigned long clk, unsigned long fnc)
     }
 #else
 
-    init_flexspi_pins(FLEXSPI_NOR_INSTANCE);
-    flexspi_nor_flash_init(FLEXSPIx);
+    init_flexspi_pins();
+    flexspi_nor_flash_init(EXAMPLE_FLEXSPI);
 
     /* Enter quad mode. */
-    status = flexspi_nor_enable_quad_mode(FLEXSPIx);
+    status = flexspi_nor_enable_quad_mode(EXAMPLE_FLEXSPI);
     log_result(ERROR_LOG_ADDR + INIT_OFF + (state++) * 4, status);
     if (status != kStatus_Success)
     {
@@ -249,7 +272,7 @@ int EraseChip(void)
 #ifdef USE_ROM_API
     status = ROM_FLEXSPI_NorFlash_EraseAll(FLEXSPI_NOR_INSTANCE, config); // Erase all
 #else
-    status = flexspi_nor_erase_chip(FLEXSPIx);
+    status = flexspi_nor_erase_chip(EXAMPLE_FLEXSPI);
 #endif
     if (status != kStatus_Success)
     {
@@ -284,7 +307,7 @@ int EraseSector(unsigned long adr)
 #else
     for (i = 0; i < FLASH_ALGO_SECTOR_SIZE / FLASH_SECTOR_SIZE; i++)
     {
-        status = flexspi_nor_flash_erase_sector(FLEXSPIx, adr + (i * FLASH_SECTOR_SIZE));
+        status = flexspi_nor_flash_erase_sector(EXAMPLE_FLEXSPI, adr + (i * FLASH_SECTOR_SIZE));
 #endif
 
 #ifdef USE_ROM_API
@@ -326,7 +349,7 @@ int ProgramPage(unsigned long adr, unsigned long sz, unsigned char *buf)
 #ifdef USE_ROM_API
         status = ROM_FLEXSPI_NorFlash_ProgramPage(FLEXSPI_NOR_INSTANCE, config, adr - FLASH_BASE_ADDRESS, (uint32_t *)buf);
 #else
-        status = flexspi_nor_flash_page_program(FLEXSPIx, adr - FLASH_BASE_ADDRESS, (void *)buf);
+        status = flexspi_nor_flash_page_program(EXAMPLE_FLEXSPI, adr - FLASH_BASE_ADDRESS, (void *)buf);
 #endif
     }
 

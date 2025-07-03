@@ -33,7 +33,7 @@ status_t flexspi_nor_write_enable(FLEXSPI_Type *base, uint32_t baseAddr)
 
     /* Write enable */
     flashXfer.deviceAddress = baseAddr;
-    flashXfer.port          = kFLEXSPI_PortA1;
+    flashXfer.port          = EXAMPLE_FLEXSPI_PORT;
     flashXfer.cmdType       = kFLEXSPI_Command;
     flashXfer.SeqNumber     = 1;
     flashXfer.seqIndex      = NOR_CMD_LUT_SEQ_IDX_WRITEENABLE;
@@ -52,7 +52,7 @@ status_t flexspi_nor_wait_bus_busy(FLEXSPI_Type *base)
     flexspi_transfer_t flashXfer;
 
     flashXfer.deviceAddress = 0;
-    flashXfer.port          = kFLEXSPI_PortA1;
+    flashXfer.port          = EXAMPLE_FLEXSPI_PORT;
     flashXfer.cmdType       = kFLEXSPI_Read;
     flashXfer.SeqNumber     = 1;
     flashXfer.seqIndex      = NOR_CMD_LUT_SEQ_IDX_READSTATUSREG;
@@ -111,7 +111,7 @@ status_t flexspi_nor_enable_quad_mode(FLEXSPI_Type *base)
 
     /* Enable quad mode. */
     flashXfer.deviceAddress = 0;
-    flashXfer.port          = kFLEXSPI_PortA1;
+    flashXfer.port          = EXAMPLE_FLEXSPI_PORT;
     flashXfer.cmdType       = kFLEXSPI_Write;
     flashXfer.SeqNumber     = 1;
     flashXfer.seqIndex      = NOR_CMD_LUT_SEQ_IDX_WRITESTATUSREG;
@@ -154,7 +154,7 @@ status_t flexspi_nor_flash_erase_sector(FLEXSPI_Type *base, uint32_t address)
 
     /* Write enable */
     flashXfer.deviceAddress = address;
-    flashXfer.port          = kFLEXSPI_PortA1;
+    flashXfer.port          = EXAMPLE_FLEXSPI_PORT;
     flashXfer.cmdType       = kFLEXSPI_Command;
     flashXfer.SeqNumber     = 1;
     flashXfer.seqIndex      = NOR_CMD_LUT_SEQ_IDX_WRITEENABLE;
@@ -167,7 +167,7 @@ status_t flexspi_nor_flash_erase_sector(FLEXSPI_Type *base, uint32_t address)
     }
 
     flashXfer.deviceAddress = address;
-    flashXfer.port          = kFLEXSPI_PortA1;
+    flashXfer.port          = EXAMPLE_FLEXSPI_PORT;
     flashXfer.cmdType       = kFLEXSPI_Command;
     flashXfer.SeqNumber     = 1;
     flashXfer.seqIndex      = NOR_CMD_LUT_SEQ_IDX_ERASESECTOR;
@@ -201,7 +201,7 @@ status_t flexspi_nor_flash_program(FLEXSPI_Type *base, uint32_t dstAddr, const u
 
     /* Prepare page program command */
     flashXfer.deviceAddress = dstAddr;
-    flashXfer.port          = kFLEXSPI_PortA1;
+    flashXfer.port          = EXAMPLE_FLEXSPI_PORT;
     flashXfer.cmdType       = kFLEXSPI_Write;
     flashXfer.SeqNumber     = 1;
     flashXfer.seqIndex      = NOR_CMD_LUT_SEQ_IDX_PAGEPROGRAM_QUAD;
@@ -248,7 +248,7 @@ status_t flexspi_nor_flash_page_program(FLEXSPI_Type *base, uint32_t dstAddr, co
 
     /* Prepare page program command */
     flashXfer.deviceAddress = dstAddr;
-    flashXfer.port          = kFLEXSPI_PortA1;
+    flashXfer.port          = EXAMPLE_FLEXSPI_PORT;
     flashXfer.cmdType       = kFLEXSPI_Write;
     flashXfer.SeqNumber     = 1;
     flashXfer.seqIndex      = NOR_CMD_LUT_SEQ_IDX_PAGEPROGRAM_SINGLE;
@@ -285,7 +285,7 @@ status_t flexspi_nor_get_vendor_id(FLEXSPI_Type *base, uint8_t *vendorId)
     uint32_t temp;
     flexspi_transfer_t flashXfer;
     flashXfer.deviceAddress = 0;
-    flashXfer.port          = kFLEXSPI_PortA1;
+    flashXfer.port          = EXAMPLE_FLEXSPI_PORT;
     flashXfer.cmdType       = kFLEXSPI_Read;
     flashXfer.SeqNumber     = 1;
     flashXfer.seqIndex      = NOR_CMD_LUT_SEQ_IDX_READID;
@@ -327,7 +327,7 @@ status_t flexspi_nor_erase_chip(FLEXSPI_Type *base)
     }
 
     flashXfer.deviceAddress = 0;
-    flashXfer.port          = kFLEXSPI_PortA1;
+    flashXfer.port          = EXAMPLE_FLEXSPI_PORT;
     flashXfer.cmdType       = kFLEXSPI_Command;
     flashXfer.SeqNumber     = 1;
     flashXfer.seqIndex      = NOR_CMD_LUT_SEQ_IDX_ERASECHIP;
@@ -368,11 +368,11 @@ void flexspi_nor_flash_init(FLEXSPI_Type *base)
     config.ahbConfig.enableAHBBufferable  = true;
     config.ahbConfig.enableReadAddressOpt = true;
     config.ahbConfig.enableAHBCachable    = true;
-    config.rxSampleClock                  = kFLEXSPI_ReadSampleClkLoopbackFromDqsPad;
+    config.rxSampleClock                  = EXAMPLE_FLEXSPI_SAMP_SRC;
     FLEXSPI_Init(base, &config);
 
     /* Configure flash settings according to serial flash feature. */
-    FLEXSPI_SetFlashConfig(base, &deviceconfig, kFLEXSPI_PortA1);
+    FLEXSPI_SetFlashConfig(base, &deviceconfig, EXAMPLE_FLEXSPI_PORT);
 
     /* Update LUT table. */
     FLEXSPI_UpdateLUT(base, 0, customLUT, CUSTOM_LUT_LENGTH);
