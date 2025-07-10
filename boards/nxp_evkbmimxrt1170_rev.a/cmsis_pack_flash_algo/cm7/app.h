@@ -21,7 +21,7 @@
 #define EXAMPLE_FLEXSPI_CLOCK     kCLOCK_Flexspi1
 #define EXAMPLE_FLEXSPI_PORT      kFLEXSPI_PortA1
 #define EXAMPLE_FLEXSPI_SAMP_SRC  kFLEXSPI_ReadSampleClkLoopbackFromDqsPad
-#define EXAMPLE_FLEXSPI_PIN_SEL   1
+#define EXAMPLE_FLEXSPI_PIN_SEL   0
 
 #define FLASH_MODEL_IS25WP128                   (0x00)
 #define FLASH_MODEL_W25Q128JW                   (0x10)
@@ -31,8 +31,8 @@
 #define FLASH_MODEL_MX25L25645G_ADDR4B          (0x20)
 #define FLASH_MODEL_S25HS512T_ADDR3B            (0x30)
 #define FLASH_MODEL_S25HS512T_ADDR4B            (0x31)
-#define CONFIG_FLASH_MODEL                      FLASH_MODEL_W25Q40CV_QUAD
-#define CONFIG_FLASH_FREQ_MHz                   (60)
+#define CONFIG_FLASH_MODEL                      FLASH_MODEL_MX25L25645G_ADDR4B
+#define CONFIG_FLASH_FREQ_MHz                   (80)
 
 #define NOR_CMD_LUT_SEQ_IDX_READ_NORMAL        7
 #define NOR_CMD_LUT_SEQ_IDX_READ_FAST          13
