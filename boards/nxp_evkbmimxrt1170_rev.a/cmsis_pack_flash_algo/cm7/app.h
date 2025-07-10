@@ -23,14 +23,15 @@
 #define EXAMPLE_FLEXSPI_SAMP_SRC  kFLEXSPI_ReadSampleClkLoopbackInternally // kFLEXSPI_ReadSampleClkLoopbackFromDqsPad
 #define EXAMPLE_FLEXSPI_PIN_SEL   1
 
-#define FLASH_MODEL_IS25WP128                   (0)
-#define FLASH_MODEL_W25Q128JW                   (1)
-#define FLASH_MODEL_W25Q512NW_ADDR4B            (2)
-#define FLASH_MODEL_MX25L25645G_ADDR4B          (3)
-#define FLASH_MODEL_S25HS512T_ADDR3B            (4)
-#define FLASH_MODEL_S25HS512T_ADDR4B            (5)
-#define CONFIG_FLASH_MODEL                      FLASH_MODEL_W25Q128JW
-#define CONFIG_FLASH_FREQ_MHz                   (60)
+#define FLASH_MODEL_IS25WP128                   (0x00)
+#define FLASH_MODEL_W25Q128JW                   (0x10)
+#define FLASH_MODEL_W25Q512NW_ADDR4B            (0x11)
+#define FLASH_MODEL_W25Q40CV                    (0x12)
+#define FLASH_MODEL_MX25L25645G_ADDR4B          (0x20)
+#define FLASH_MODEL_S25HS512T_ADDR3B            (0x30)
+#define FLASH_MODEL_S25HS512T_ADDR4B            (0x31)
+#define CONFIG_FLASH_MODEL                      FLASH_MODEL_W25Q40CV
+#define CONFIG_FLASH_FREQ_MHz                   (30)
 
 #define NOR_CMD_LUT_SEQ_IDX_READ_NORMAL        7
 #define NOR_CMD_LUT_SEQ_IDX_READ_FAST          13
@@ -57,18 +58,19 @@
 #define FLASH_ADDR_BITS          (0x18)
 #define FLASH_SPROG_CMD          0x02
 #define FLASH_QPROG_CMD          0x32
-#define FLASH_SECERASE_CMD       0xD7
+#define FLASH_SECERASE_CMD       0xD8
 #define FLASH_QREAD_CMD          0xEB
 #define FLASH_QREAD_DUMMY        0x06
 ///////////////////////////////////////////////
 // W25Q128JW, SR2[1]
+// W25Q128JV, SR2[1]
 #elif (CONFIG_FLASH_MODEL == FLASH_MODEL_W25Q128JW)
 #define FLASH_QUAD_ENABLE        0x02
 #define FLASH_QENABLE_CMD        0x31
 #define FLASH_ADDR_BITS          (0x18)
 #define FLASH_SPROG_CMD          0x02
 #define FLASH_QPROG_CMD          0x32
-#define FLASH_SECERASE_CMD       0xD7
+#define FLASH_SECERASE_CMD       0xD8
 #define FLASH_QREAD_CMD          0xEB
 #define FLASH_QREAD_DUMMY        0x06
 ///////////////////////////////////////////////
@@ -82,6 +84,17 @@
 #define FLASH_SECERASE_CMD       0xDC
 #define FLASH_QREAD_CMD          0xEC
 #define FLASH_QREAD_DUMMY        0x06
+///////////////////////////////////////////////
+// W25Q40CV
+#elif (CONFIG_FLASH_MODEL == FLASH_MODEL_W25Q40CV)
+#define FLASH_QUAD_ENABLE        0xFF  // doesn't support
+#define FLASH_QENABLE_CMD        0xFF  // doesn't support
+#define FLASH_ADDR_BITS          (0x18)
+#define FLASH_SPROG_CMD          0x02
+#define FLASH_QPROG_CMD          0xFF  // doesn't support
+#define FLASH_SECERASE_CMD       0xD8
+#define FLASH_QREAD_CMD          0xFF  // doesn't support
+#define FLASH_QREAD_DUMMY        0xFF  // doesn't support
 ///////////////////////////////////////////////
 // MX25L25645G, SR1[6]
 // MX25U25643G, SR1[6]
@@ -146,6 +159,11 @@ static inline void flexspi_clock_init(void)
 #elif (CONFIG_FLASH_FREQ_MHz == 60)
     /*Clock setting for flexspi1*/
     CLOCK_SetRootClockDiv(root, 9);
+	  // SysPLL2 - 528MHz
+    CLOCK_SetRootClockMux(root, 5);
+#elif (CONFIG_FLASH_FREQ_MHz == 30)
+    /*Clock setting for flexspi1*/
+    CLOCK_SetRootClockDiv(root, 18);
 	  // SysPLL2 - 528MHz
     CLOCK_SetRootClockMux(root, 5);
 #endif

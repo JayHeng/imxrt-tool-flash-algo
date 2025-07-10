@@ -50,7 +50,11 @@ flexspi_device_config_t deviceconfig = {
     .enableWordAddress    = 0,
     .AWRSeqIndex          = 0,
     .AWRSeqNumber         = 0,
+#if (FLASH_QREAD_CMD == 0xFF)
+    .ARDSeqIndex          = NOR_CMD_LUT_SEQ_IDX_READ_NORMAL,
+#else
     .ARDSeqIndex          = NOR_CMD_LUT_SEQ_IDX_READ_FAST_QUAD,
+#endif
     .ARDSeqNumber         = 1,
     .AHBWriteWaitUnit     = kFLEXSPI_AhbWriteWaitUnit2AhbCycle,
     .AHBWriteWaitInterval = 0,
@@ -239,6 +243,7 @@ int Init(unsigned long adr, unsigned long clk, unsigned long fnc)
     init_flexspi_pins();
     flexspi_nor_flash_init(EXAMPLE_FLEXSPI);
 
+#if (FLASH_QUAD_ENABLE != 0xFF)
     /* Enter quad mode. */
     status = flexspi_nor_enable_quad_mode(EXAMPLE_FLEXSPI);
     log_result(ERROR_LOG_ADDR + INIT_OFF + (state++) * 4, status);
@@ -246,6 +251,7 @@ int Init(unsigned long adr, unsigned long clk, unsigned long fnc)
     {
         return 1;
     }
+#endif
     return 0;
 #endif
 }
