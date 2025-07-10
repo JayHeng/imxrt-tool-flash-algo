@@ -7,7 +7,7 @@
 /*                                                                     */
 /***********************************************************************/
 
-#include "FlashOS.h"                                                         // FlashOS Structures
+#include "app.h"                                                         // FlashOS Structures
 
 struct FlashDevice const FlashDevice = {FLASH_DRV_VERS,                      // Driver Version, do not modify!
                                         "MIMXRT117x 64mB QuadSPI NOR Flash", // Device Name
@@ -21,5 +21,5 @@ struct FlashDevice const FlashDevice = {FLASH_DRV_VERS,                      // 
                                         15000,                               // Erase Sector Timeout 5000 mSec
 
                                         // Specify Size and Address of Sectors
-                                        FLASH_SECTOR_SIZE, 0x00000000, // Sector Size  64kB (256 Sectors)
+                                        FLASH_SECTOR_SIZE, 0x00000000, // Sector Size  64/256kB (256 Sectors)
                                         SECTOR_END};

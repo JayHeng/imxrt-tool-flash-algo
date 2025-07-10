@@ -8,7 +8,7 @@
 /*                                                                     */
 /***********************************************************************/
 
-#include "FlashOS.h" // FlashOS Structures
+#include "app.h" // FlashOS Structures
 #ifdef USE_ROM_API
 #include "fsl_romapi.h"
 #else

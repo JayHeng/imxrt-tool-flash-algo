@@ -20,18 +20,19 @@
 #define EXAMPLE_FLEXSPI_AMBA_BASE FlexSPI1_AMBA_BASE
 #define EXAMPLE_FLEXSPI_CLOCK     kCLOCK_Flexspi1
 #define EXAMPLE_FLEXSPI_PORT      kFLEXSPI_PortA1
-#define EXAMPLE_FLEXSPI_SAMP_SRC  kFLEXSPI_ReadSampleClkLoopbackInternally // kFLEXSPI_ReadSampleClkLoopbackFromDqsPad
+#define EXAMPLE_FLEXSPI_SAMP_SRC  kFLEXSPI_ReadSampleClkLoopbackFromDqsPad
 #define EXAMPLE_FLEXSPI_PIN_SEL   1
 
 #define FLASH_MODEL_IS25WP128                   (0x00)
 #define FLASH_MODEL_W25Q128JW                   (0x10)
 #define FLASH_MODEL_W25Q512NW_ADDR4B            (0x11)
-#define FLASH_MODEL_W25Q40CV                    (0x12)
+#define FLASH_MODEL_W25Q40CV_SINGLE             (0x12)
+#define FLASH_MODEL_W25Q40CV_QUAD               (0x13)
 #define FLASH_MODEL_MX25L25645G_ADDR4B          (0x20)
 #define FLASH_MODEL_S25HS512T_ADDR3B            (0x30)
 #define FLASH_MODEL_S25HS512T_ADDR4B            (0x31)
-#define CONFIG_FLASH_MODEL                      FLASH_MODEL_W25Q40CV
-#define CONFIG_FLASH_FREQ_MHz                   (30)
+#define CONFIG_FLASH_MODEL                      FLASH_MODEL_W25Q40CV_QUAD
+#define CONFIG_FLASH_FREQ_MHz                   (60)
 
 #define NOR_CMD_LUT_SEQ_IDX_READ_NORMAL        7
 #define NOR_CMD_LUT_SEQ_IDX_READ_FAST          13
@@ -59,6 +60,7 @@
 #define FLASH_SPROG_CMD          0x02
 #define FLASH_QPROG_CMD          0x32
 #define FLASH_SECERASE_CMD       0xD8
+#define FLASH_SECTOR_SIZE        0x10000
 #define FLASH_QREAD_CMD          0xEB
 #define FLASH_QREAD_DUMMY        0x06
 ///////////////////////////////////////////////
@@ -71,6 +73,7 @@
 #define FLASH_SPROG_CMD          0x02
 #define FLASH_QPROG_CMD          0x32
 #define FLASH_SECERASE_CMD       0xD8
+#define FLASH_SECTOR_SIZE        0x10000
 #define FLASH_QREAD_CMD          0xEB
 #define FLASH_QREAD_DUMMY        0x06
 ///////////////////////////////////////////////
@@ -82,19 +85,31 @@
 #define FLASH_SPROG_CMD          0x12
 #define FLASH_QPROG_CMD          0x34
 #define FLASH_SECERASE_CMD       0xDC
+#define FLASH_SECTOR_SIZE        0x10000
 #define FLASH_QREAD_CMD          0xEC
 #define FLASH_QREAD_DUMMY        0x06
 ///////////////////////////////////////////////
 // W25Q40CV
-#elif (CONFIG_FLASH_MODEL == FLASH_MODEL_W25Q40CV)
+#elif (CONFIG_FLASH_MODEL == FLASH_MODEL_W25Q40CV_SINGLE)
 #define FLASH_QUAD_ENABLE        0xFF  // doesn't support
 #define FLASH_QENABLE_CMD        0xFF  // doesn't support
 #define FLASH_ADDR_BITS          (0x18)
 #define FLASH_SPROG_CMD          0x02
 #define FLASH_QPROG_CMD          0xFF  // doesn't support
 #define FLASH_SECERASE_CMD       0xD8
+#define FLASH_SECTOR_SIZE        0x10000
 #define FLASH_QREAD_CMD          0xFF  // doesn't support
 #define FLASH_QREAD_DUMMY        0xFF  // doesn't support
+#elif (CONFIG_FLASH_MODEL == FLASH_MODEL_W25Q40CV_QUAD)
+#define FLASH_QUAD_ENABLE        0x0200
+#define FLASH_QENABLE_CMD        0x01
+#define FLASH_ADDR_BITS          (0x18)
+#define FLASH_SPROG_CMD          0x02
+#define FLASH_QPROG_CMD          0xFF  // doesn't support
+#define FLASH_SECERASE_CMD       0xD8
+#define FLASH_SECTOR_SIZE        0x10000
+#define FLASH_QREAD_CMD          0xEB
+#define FLASH_QREAD_DUMMY        0x06
 ///////////////////////////////////////////////
 // MX25L25645G, SR1[6]
 // MX25U25643G, SR1[6]
@@ -105,6 +120,7 @@
 #define FLASH_SPROG_CMD          0x12
 #define FLASH_QPROG_CMD          0x3E
 #define FLASH_SECERASE_CMD       0xDC
+#define FLASH_SECTOR_SIZE        0x10000
 #define FLASH_QREAD_CMD          0xEC
 #define FLASH_QREAD_DUMMY        0x06
 ///////////////////////////////////////////////
@@ -116,6 +132,7 @@
 #define FLASH_SPROG_CMD          0x02
 #define FLASH_QPROG_CMD          0xFF  // doesn't support
 #define FLASH_SECERASE_CMD       0xD8
+#define FLASH_SECTOR_SIZE        0x40000
 #define FLASH_QREAD_CMD          0xEB
 #elif (CONFIG_FLASH_MODEL == FLASH_MODEL_S25HS512T_ADDR4B)
 #define FLASH_QUAD_ENABLE        0x0200
@@ -124,6 +141,7 @@
 #define FLASH_SPROG_CMD          0x12
 #define FLASH_QPROG_CMD          0xFF  // doesn't support
 #define FLASH_SECERASE_CMD       0xDC
+#define FLASH_SECTOR_SIZE        0x40000
 #define FLASH_QREAD_CMD          0xEC
 #define FLASH_QREAD_DUMMY        0x0A  // MODE bit cycles + dummy cycles
 #endif

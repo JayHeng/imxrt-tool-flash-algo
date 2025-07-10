@@ -30,7 +30,6 @@
 #endif
 #define FLASH_BASE_SIZE   0x4000000
 #define FLASH_PAGE_SIZE   256
-#define FLASH_SECTOR_SIZE 0x40000
 
 struct FlashSectors
 {
