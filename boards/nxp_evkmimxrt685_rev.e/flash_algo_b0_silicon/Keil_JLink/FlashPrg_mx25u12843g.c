@@ -41,8 +41,8 @@
 #define FLASH_BASE_ADDR 0x08000000
 #define FLEXSPI_INSTANCE_0 (0)
 #define FLEXSPI_INSTANCE_SEL FLEXSPI_INSTANCE_0
-#define CONFIG_OPTION0 0xc1503051
-#define CONFIG_OPTION1 0x20000014
+#define CONFIG_OPTION0 0xc0000002
+#define CONFIG_OPTION1 0x00000000
 
 #define MEM_WriteU32(addr, value)  (*((volatile uint32_t *)(addr)) = value)
 

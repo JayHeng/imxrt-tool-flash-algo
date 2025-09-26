@@ -34,10 +34,10 @@
 
 struct FlashDevice const FlashDevice = {
    FLASH_DRV_VERS,             // Driver Version, do not modify!
-   "MIMXRT6XX MX25UM51345 FLEXSPI",  // Device Name 
+   "MIMXRT6XX MX25U12843G FLEXSPI",  // Device Name 
    EXTSPI,                     // Device Type
    0x08000000,                 // Device Start Address
-   0x04000000,                 // Device Size is 64 MB (512 Mb)
+   0x01000000,                 // Device Size is 16 MB (128 Mb)
    256,                        // Programming Page Size
    0,                          // Reserved, must be 0
    0xFF,                       // Initial Content of Erased Memory
