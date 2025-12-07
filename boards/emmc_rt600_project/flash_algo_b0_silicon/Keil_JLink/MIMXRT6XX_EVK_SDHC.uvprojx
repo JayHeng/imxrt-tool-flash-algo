@@ -338,9 +338,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls> -Wno-pedantic -Wno-padded -Wno-cast-align  -Wno-missing-variable-declarations -Wno-unused-parameter  -Wno-missing-prototypes  -Wno-covered-switch-default -Wno-missing-braces</MiscControls>
-              <Define>BOOTLOADER_HOST</Define>
+              <Define>BOOTLOADER_HOST, CPU_MIMXRT685SFVKB_cm33, NDEBUG, CPU_IS_ARM_CORTEX_M33=1, MCUXPRESSO_SDK, SDK_OS_BAREMETAL</Define>
               <Undefine></Undefine>
-              <IncludePath>.</IncludePath>
+              <IncludePath>.;.\emmc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -402,12 +402,82 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>rom_api</GroupName>
+          <GroupName>emmc</GroupName>
           <Files>
             <File>
-              <FileName>bl_api.c</FileName>
+              <FileName>bl_main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\bl_api.c</FilePath>
+              <FilePath>.\emmc\bl_main.c</FilePath>
+            </File>
+            <File>
+              <FileName>bl_usdhc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\emmc\bl_usdhc.c</FilePath>
+            </File>
+            <File>
+              <FileName>clock_config_MIMXRT685S.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\emmc\clock_config_MIMXRT685S.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\emmc\fsl_clock.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\emmc\fsl_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_mmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\emmc\fsl_mmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_reset.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\emmc\fsl_reset.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\emmc\fsl_sdmmc_common.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_host.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\emmc\fsl_sdmmc_host.c</FilePath>
+            </File>
+            <File>
+              <FileName>hardware_init_MIMXRT685S.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\emmc\hardware_init_MIMXRT685S.c</FilePath>
+            </File>
+            <File>
+              <FileName>memory.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\emmc\memory.c</FilePath>
+            </File>
+            <File>
+              <FileName>microseconds_sysclk.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\emmc\microseconds_sysclk.c</FilePath>
+            </File>
+            <File>
+              <FileName>mmc_memory.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\emmc\mmc_memory.c</FilePath>
+            </File>
+            <File>
+              <FileName>sdmmc_config_MIMXRT685S.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\emmc\sdmmc_config_MIMXRT685S.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_common_arm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\emmc\fsl_common_arm.c</FilePath>
             </File>
           </Files>
         </Group>
