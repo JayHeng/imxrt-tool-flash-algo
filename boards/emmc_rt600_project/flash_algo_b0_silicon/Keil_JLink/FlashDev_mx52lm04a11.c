@@ -22,7 +22,7 @@
  * $Revision:    V1.00
  *  
  * Project:      Flash Device Description for
- *               NXP MIMXRT6XX W25Q16FW QSPI Flash
+ *               NXP MIMXRT6XX MX52LM04 eMMC Flash
  * --------------------------------------------------------------------------- */
 
 /* History:
@@ -35,17 +35,17 @@
 struct FlashDevice const FlashDevice = {
    FLASH_DRV_VERS,             // Driver Version, do not modify!
    "MIMXRT6XX MX52LM04A11 SDHC",  // Device Name 
-   EXTSPI,                     // Device Type
-   0x08000000,                 // Device Start Address
-   0x01000000,                 // Device Size is 16 MB (128 Mb)
-   256,                        // Programming Page Size
+   EXTSPI,                       // Device Type
+   0x00000000,                 // Device Start Address
+   0x20000000,                 // Device Size is 512 MB (4Gb)
+   512,                        // Programming Page Size
    0,                          // Reserved, must be 0
    0xFF,                       // Initial Content of Erased Memory
    3000,                        // Program Page Timeout 300 mSec
    3000,                       // Erase Sector Timeout 3000 mSec
 
 // Specify Size and Address of Sectors
-   0x01000, 0x0,               // sectors are 4 KB
+   0x200, 0x0,               // sectors are 512B
    SECTOR_END
 };
 

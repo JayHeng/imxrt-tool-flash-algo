@@ -34,11 +34,28 @@
 #include "FlashOS.H"        // FlashOS Structures
 #include <string.h>
 #include "cmsis_compiler.h"
+#include "bootloader_common.h"
+#include "property.h"
+#include "mmc_memory.h"
 
 /** local definitions **/
 
-extern void bootloader_init(void);
-extern void bootloader_run(void);
+#define BOARD_RT1170_CUSTOMER_2nd_USDHC_FEMDME008G    (0)
+#define BOARD_RT600_NXPVAL_1st_USDHC_THGBMNG5D1LBAIT  (0)
+#define BOARD_RT600_CUSTOMER_1st_USDHC_MX52LM04A11    (1)
+
+#if BOARD_RT1170_CUSTOMER_2nd_USDHC_FEMDME008G
+#define MMC_CFG_OPTION0  (0xc0001200)
+#define MMC_CFG_OPTION1  (0x00040002)
+#elif BOARD_RT600_NXPVAL_1st_USDHC_THGBMNG5D1LBAIT
+#define MMC_CFG_OPTION0  (0xC0010100)
+#define MMC_CFG_OPTION1  (0x00000000)
+#elif BOARD_RT600_CUSTOMER_1st_USDHC_MX52LM04A11
+#define MMC_CFG_OPTION0  (0xC0010100)
+#define MMC_CFG_OPTION1  (0x00000000)
+#endif
+
+uint32_t SystemCoreClock;
 
 /*  Initialize Flash Programming Functions
  *    Parameter:      adr:  Device Base Address
@@ -48,11 +65,35 @@ extern void bootloader_run(void);
  */
 
 int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
+    SystemCoreClock = 12000000;
+    g_externalMemoryMap[0].memoryId = kMemoryMMCCard;
+    g_externalMemoryMap[0].status = kStatus_Success;
+    g_externalMemoryMap[0].basicUnitCount = 0;
+    g_externalMemoryMap[0].basicUnitSize = 512;
+    g_externalMemoryMap[0].memoryInterface = &g_mmcMemoryInterface;
 
-	bootloader_init();
-  bootloader_run();
+    // Init pinmux and other hardware setup.
+    init_hardware();
 
-  return 0;
+    // Configure clocks.
+    configure_clocks(kClockOption_EnterBootloader);
+
+    // Start the lifetime counter
+    microseconds_init();
+    
+    g_mmcMemoryInterface.init();
+
+    status_t status = kStatus_InvalidArgument;
+    
+    mmc_config_t mmcConfig = 
+    {
+       .word0.U = MMC_CFG_OPTION0,
+       .word1.U = MMC_CFG_OPTION1,
+    };
+
+    status = g_mmcMemoryInterface.config((uint32_t *)&mmcConfig);
+
+    return (int)status;
 }
 
 
@@ -75,8 +116,9 @@ int UnInit (unsigned long fnc) {
 int EraseChip (void) {
 
   /*Erase all*/
+	status_t status = g_mmcMemoryInterface.erase_all();
   
-  return 0;
+  return (int)status;
 }
 
 
@@ -88,8 +130,9 @@ int EraseChip (void) {
 int EraseSector (unsigned long adr) {
 
   /*Erase Sector*/
+	status_t status = g_mmcMemoryInterface.erase(adr, FSL_SDMMC_DEFAULT_BLOCK_SIZE);
   
-  return 0;
+  return (int)status;
 }
 
 
@@ -101,7 +144,7 @@ int EraseSector (unsigned long adr) {
  */
 
 int ProgramPage (unsigned long adr, unsigned long sz, unsigned char *buf) {
+    status_t status = g_mmcMemoryInterface.write(adr, sz, (const uint8_t *)buf);
 
-
-  return 0;
+    return (int)status;
 }

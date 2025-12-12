@@ -405,11 +405,6 @@
           <GroupName>emmc</GroupName>
           <Files>
             <File>
-              <FileName>bl_main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\emmc\bl_main.c</FilePath>
-            </File>
-            <File>
               <FileName>bl_usdhc.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\emmc\bl_usdhc.c</FilePath>
