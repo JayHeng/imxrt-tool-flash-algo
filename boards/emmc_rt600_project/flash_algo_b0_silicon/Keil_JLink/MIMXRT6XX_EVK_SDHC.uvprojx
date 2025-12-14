@@ -455,11 +455,6 @@
               <FilePath>.\emmc\memory.c</FilePath>
             </File>
             <File>
-              <FileName>microseconds_sysclk.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\emmc\microseconds_sysclk.c</FilePath>
-            </File>
-            <File>
               <FileName>mmc_memory.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\emmc\mmc_memory.c</FilePath>

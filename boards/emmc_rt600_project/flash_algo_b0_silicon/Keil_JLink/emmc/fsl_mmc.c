@@ -8,7 +8,6 @@
 #include <string.h>
 
 #include "fsl_mmc.h"
-#include "microseconds.h"
 
 /*******************************************************************************
  * Definitons
@@ -695,7 +694,8 @@ static status_t MMC_BL_SendOperationCondition(mmc_card_t *card, uint32_t arg)
     content.command = &command;
     content.data = NULL;
 
-    uint64_t timeoutTicks = microseconds_get_ticks() + microseconds_convert_to_ticks(SDMMC_WAIT_BUSY_TIMEOUT_US);
+    //uint64_t timeoutTicks = microseconds_get_ticks() + microseconds_convert_to_ticks(SDMMC_WAIT_BUSY_TIMEOUT_US);
+    uint32_t delay50usCnt = SDMMC_WAIT_BUSY_TIMEOUT_US / 50;
 
     do
     {
@@ -724,7 +724,9 @@ static status_t MMC_BL_SendOperationCondition(mmc_card_t *card, uint32_t arg)
                 card->flags |= kMMC_SupportHighCapacityFlag;
             }
         }
-    } while ((i--) && (error != kStatus_Success) && (microseconds_get_ticks() < timeoutTicks));
+        SDK_DelayAtLeastUs(50, SystemCoreClock);
+        delay50usCnt--;
+    } while ((i--) && (error != kStatus_Success) && (delay50usCnt > 0));
 
     return error;
 }
@@ -2418,11 +2420,11 @@ status_t MMC_BL_CardInit(mmc_card_t *card)
         /* card power off */
         SDMMCHOST_SET_MMC_RESET(card->host.base, card->userConfig.powerPolarity);
         /* Delay some time to make card stable. */
-        microseconds_delay(card->userConfig.powerDownDelay_US);
+        SDK_DelayAtLeastUs(card->userConfig.powerDownDelay_US, SystemCoreClock);
         /* card power on */
         SDMMCHOST_SET_MMC_RESET(card->host.base, !card->userConfig.powerPolarity);
         /* Delay some time to make card stable. */
-        microseconds_delay(card->userConfig.powerUpDelay_US);
+        SDK_DelayAtLeastUs(card->userConfig.powerUpDelay_US, SystemCoreClock);
     }
     if (card->userConfig.switch1V8)
     {
@@ -3065,11 +3067,11 @@ status_t MMC_BL_StartBoot(mmc_card_t *card, uint8_t *buffer, SDMMCHOST_BOOT_CONF
         /* card power off */
         SDMMCHOST_SET_MMC_RESET(card->host.base, card->userConfig.powerPolarity);
         /* Delay some time to make card stable. */
-        microseconds_delay(card->userConfig.powerDownDelay_US);
+        SDK_DelayAtLeastUs(card->userConfig.powerDownDelay_US, SystemCoreClock);
         /* card power on */
         SDMMCHOST_SET_MMC_RESET(card->host.base, !card->userConfig.powerPolarity);
         /* Delay some time to make card stable. */
-        microseconds_delay(card->userConfig.powerUpDelay_US);
+        SDK_DelayAtLeastUs(card->userConfig.powerUpDelay_US, SystemCoreClock);
     }
     if (card->userConfig.switch1V8)
     {

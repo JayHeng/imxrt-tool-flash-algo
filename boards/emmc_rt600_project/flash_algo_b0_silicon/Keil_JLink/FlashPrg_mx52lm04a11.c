@@ -77,9 +77,6 @@ int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
 
     // Configure clocks.
     configure_clocks(kClockOption_EnterBootloader);
-
-    // Start the lifetime counter
-    microseconds_init();
     
     g_mmcMemoryInterface.init();
 
@@ -115,10 +112,10 @@ int UnInit (unsigned long fnc) {
 
 int EraseChip (void) {
 
-  /*Erase all*/
-	status_t status = g_mmcMemoryInterface.erase_all();
-  
-  return (int)status;
+    /*Erase all*/
+    status_t status = g_mmcMemoryInterface.erase_all();
+
+    return (int)status;
 }
 
 
@@ -129,10 +126,10 @@ int EraseChip (void) {
 
 int EraseSector (unsigned long adr) {
 
-  /*Erase Sector*/
-	status_t status = g_mmcMemoryInterface.erase(adr, FSL_SDMMC_DEFAULT_BLOCK_SIZE);
-  
-  return (int)status;
+    /*Erase Sector*/
+    status_t status = g_mmcMemoryInterface.erase(adr, FSL_SDMMC_DEFAULT_BLOCK_SIZE);
+
+    return (int)status;
 }
 
 

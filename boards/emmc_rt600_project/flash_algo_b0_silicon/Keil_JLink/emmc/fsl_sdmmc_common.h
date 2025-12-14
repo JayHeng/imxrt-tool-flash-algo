@@ -11,7 +11,6 @@
 #include "fsl_common.h"
 #include "fsl_sdmmc_host.h"
 #include "fsl_sdmmc_spec.h"
-#include "microseconds.h"
 #include "sdmmc_init.h"
 #include "stdlib.h"
 

@@ -12,7 +12,6 @@
 #ifdef BOARD_USDHC_CD_PORT_BASE
 #include "fsl_port.h"
 #endif
-#include "microseconds.h"
 #include "sdmmc_init.h"
 
 /*******************************************************************************
@@ -191,7 +190,7 @@ static void SDMMCHOST_CardDetectDeinit(void)
 void SDMMCHOST_Delay(uint32_t milliseconds)
 {
     // SDMMCEVENT_Delay(milliseconds);
-    microseconds_delay(milliseconds * 1000);
+    SDK_DelayAtLeastUs(milliseconds * 1000, SystemCoreClock);
 }
 
 #if 1

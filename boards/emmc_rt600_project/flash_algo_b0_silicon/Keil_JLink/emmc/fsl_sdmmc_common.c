@@ -6,7 +6,6 @@
  */
 
 #include "fsl_sdmmc_common.h"
-#include "microseconds.h"
 
 /*******************************************************************************
  * Variables
@@ -210,14 +209,14 @@ status_t SDMMC_SwitchVoltage(SDMMCHOST_TYPE *base, SDMMCHOST_TRANSFER_FUNCTION t
     SDMMCHOST_SWITCH_VOLTAGE180V(base, true);
 
     /* delay 5ms for 1.8V output stable*/
-    microseconds_delay(5 * 1000U);
+    SDK_DelayAtLeastUs(5 * 1000U, SystemCoreClock);
 
     /*enable sd clock*/
     SDMMCHOST_ENABLE_CARD_CLOCK(base, true);
     /*enable force clock on*/
     SDMMCHOST_FORCE_SDCLOCK_ON(base, true);
     /* delay 1ms*/
-    microseconds_delay(1 * 1000U);
+    SDK_DelayAtLeastUs(1 * 1000U, SystemCoreClock);
 
     /*disable force clock on*/
     SDMMCHOST_FORCE_SDCLOCK_ON(base, false);
