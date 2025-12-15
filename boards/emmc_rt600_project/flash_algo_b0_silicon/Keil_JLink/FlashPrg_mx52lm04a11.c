@@ -38,6 +38,15 @@
 #include "property.h"
 #include "mmc_memory.h"
 
+
+#define NATIVE_READ (false)
+#if NATIVE_READ
+  #define OPEN_READ_FUNC  NULL
+#else
+  #define OPEN_READ_FUNC  SEGGER_OPEN_Read
+#endif
+
+
 /** local definitions **/
 
 #define BOARD_RT1170_CUSTOMER_2nd_USDHC_FEMDME008G    (0)
@@ -145,3 +154,14 @@ int ProgramPage (unsigned long adr, unsigned long sz, unsigned char *buf) {
 
     return (int)status;
 }
+
+int SEGGER_OPEN_Read (unsigned long Addr, unsigned long NumBytes, unsigned char *pDestBuf) {
+    int ReadBytes = -1;
+    status_t status = g_mmcMemoryInterface.read(Addr, NumBytes, pDestBuf);
+    if (status == kStatus_Success)
+    {
+        ReadBytes = NumBytes;
+    }
+    return ReadBytes;
+}
+
