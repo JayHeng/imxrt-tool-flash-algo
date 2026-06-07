@@ -33,7 +33,7 @@
 #include <arm_compat.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include "../FlashOS.H"        // FlashOS Structures
+#include "FlashOS.H"        // FlashOS Structures
 #include "fsl_romapi.h"
 #include <string.h>
 
