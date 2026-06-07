@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>MIMXRT1189XVM8B:cm33</Device>
           <Vendor>NXP</Vendor>
-          <PackID>NXP.MIMXRT1189_DFP.26.03.00</PackID>
+          <PackID>NXP.MIMXRT1189_DFP.19.0.0</PackID>
           <PackURL>https://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
           <Cpu>IRAM(0x20484000,0x07c000) IRAM2(0x20500000,0x040000) IROM(0x00000000,0x028000) CPUTYPE("Cortex-M33") FPU3(SFPU) DSP TZ CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -424,16 +424,16 @@
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
-          <Device>ARMCM33_DSP_FP_TZ</Device>
-          <Vendor>ARM</Vendor>
-          <PackID>ARM.CMSIS.5.9.0</PackID>
-          <PackURL>http://www.keil.com/pack/</PackURL>
-          <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x20200000,0x00020000) IROM(0x00000000,0x00200000) IROM2(0x00200000,0x00200000) CPUTYPE("Cortex-M33") FPU3(SFPU) DSP TZ CLOCK(12000000) ESEL ELITTLE</Cpu>
+          <Device>MIMXRT1189CVM8B:cm33</Device>
+          <Vendor>NXP</Vendor>
+          <PackID>NXP.MIMXRT1189_DFP.19.0.0</PackID>
+          <PackURL>https://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
+          <Cpu>IRAM(0x20484000,0x07c000) IRAM2(0x20500000,0x040000) IROM(0x00000000,0x028000) CPUTYPE("Cortex-M33") FPU3(SFPU) DSP TZ CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2V8M(-S0 -C0 -P0 -FD20000000 -FC1000)</FlashDriverDll>
+          <FlashDriverDll>UL2V8M(-S0 -C0 -P0 -FD20000000 -FC20000 -FN2 -FF0MIMXRT1180_EVK_FSPI1_QSPI_CM33 -FS028000000 -FL01000000 -FF1MIMXRT1180_EVK_FSPI1_QSPI_CM7 -FS128000000 -FL11000000 -FP0($$Device:MIMXRT1189CVM8B$devices\MIMXRT1189\arm\MIMXRT1180_EVK_FSPI1_QSPI_CM33.FLM) -FP1($$Device:MIMXRT1189CVM8B$devices\MIMXRT1189\arm\MIMXRT1180_EVK_FSPI1_QSPI_CM7.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:ARMCM33_DSP_FP_TZ$Device\ARM\ARMCM33\Include\ARMCM33_DSP_FP_TZ.h</RegisterFile>
+          <RegisterFile>$$Device:MIMXRT1189CVM8B$devices\MIMXRT1189\fsl_device_registers.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -443,7 +443,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:ARMCM33_DSP_FP_TZ$Device\ARM\SVD\ARMCM33.svd</SFDFile>
+          <SFDFile>$$Device:MIMXRT1189CVM8B$devices\MIMXRT1189\MIMXRT1189_cm33.xml</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
@@ -548,7 +548,7 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2V8M.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -593,18 +593,18 @@
             <hadIRAM>1</hadIRAM>
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
-            <RvdsVP>1</RvdsVP>
+            <RvdsVP>2</RvdsVP>
             <RvdsMve>0</RvdsMve>
             <RvdsCdeCp>0</RvdsCdeCp>
             <nBranchProt>0</nBranchProt>
             <hadIRAM2>1</hadIRAM2>
-            <hadIROM2>1</hadIROM2>
-            <StupSel>8</StupSel>
+            <hadIROM2>0</hadIROM2>
+            <StupSel>0</StupSel>
             <useUlib>1</useUlib>
-            <EndSel>1</EndSel>
+            <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>0</nSecure>
-            <RoSelD>4</RoSelD>
+            <RoSelD>3</RoSelD>
             <RwSelD>4</RwSelD>
             <CodeSel>0</CodeSel>
             <OptFeed>0</OptFeed>
@@ -622,7 +622,7 @@
             <Ra2Chk>0</Ra2Chk>
             <Ra3Chk>0</Ra3Chk>
             <Im1Chk>1</Im1Chk>
-            <Im2Chk>0</Im2Chk>
+            <Im2Chk>1</Im2Chk>
             <OnChipMemories>
               <Ocm1>
                 <Type>0</Type>
@@ -656,13 +656,13 @@
               </Ocm6>
               <IRAM>
                 <Type>0</Type>
-                <StartAddress>0x20000000</StartAddress>
-                <Size>0x20000</Size>
+                <StartAddress>0x20484000</StartAddress>
+                <Size>0x7c000</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x200000</Size>
+                <Size>0x28000</Size>
               </IROM>
               <XRAM>
                 <Type>0</Type>
@@ -686,13 +686,13 @@
               </OCR_RVCT3>
               <OCR_RVCT4>
                 <Type>1</Type>
-                <StartAddress>0xffc0000</StartAddress>
-                <Size>0x20000</Size>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x28000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
-                <StartAddress>0x200000</StartAddress>
-                <Size>0x200000</Size>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
               </OCR_RVCT5>
               <OCR_RVCT6>
                 <Type>0</Type>
@@ -711,13 +711,13 @@
               </OCR_RVCT8>
               <OCR_RVCT9>
                 <Type>0</Type>
-                <StartAddress>0xffe0000</StartAddress>
-                <Size>0x20000</Size>
+                <StartAddress>0x20484000</StartAddress>
+                <Size>0x7c000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
-                <StartAddress>0x20200000</StartAddress>
-                <Size>0x20000</Size>
+                <StartAddress>0x20500000</StartAddress>
+                <Size>0x40000</Size>
               </OCR_RVCT10>
             </OnChipMemories>
             <RvctStartVector></RvctStartVector>
@@ -2221,7 +2221,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile></SFDFile>
+          <SFDFile>$$Device:MIMXRT1189CVM8B$devices\MIMXRT1189\MIMXRT1189_cm33.xml</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
